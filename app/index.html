@@ -396,7 +396,7 @@ function render(){
   if (view === "lib") { document.getElementById("planview").hidden = true; D.hidden = true; H.innerHTML = ""; document.getElementById("ptitle").innerHTML = "<b>Библиотека</b> упражнений"; Mn.innerHTML = libHtml(); bindLib(); return; }
   document.getElementById("planview").hidden = false; D.hidden = false;
   document.getElementById("ptitle").innerHTML = esc(plan.title).replace(/^([^:]+)/, "<b>$1</b>");
-  document.getElementById("about").innerHTML = `<div class="who">${esc(plan.intro || plan.who)}</div><dl class="spec"><div><dt>Срок</dt><dd>${plan.weeks} нед</dd></div><div><dt>В неделю</dt><dd>${esc(plan.freq)}</dd></div><div><dt>Для кого</dt><dd>${esc(plan.who)}</dd></div></dl>` +
+  document.getElementById("about").innerHTML = `<div class="who">${esc(plan.intro || plan.who)}</div><dl class="spec"><div><dt>Срок</dt><dd>${plan.weeks} нед</dd></div><div><dt>Занятий в неделю</dt><dd>${esc(plan.freq)}</dd></div><div><dt>Для кого</dt><dd>${esc(plan.who)}</dd></div></dl>` +
     (plan.load ? sec(`${plan.id}-load`, false, `<h3>Содержание нагрузки</h3>`, `<ul class="rules">${plan.load.map(r => `<li>${esc(r)}</li>`).join("")}</ul>`) : "") +
     (plan.dose ? sec(`${plan.id}-dose`, false, `<h3>Как дозировать</h3>`, doseHtml(plan.dose)) : "") +
     (plan.edits && isStaff ? sec(`${plan.id}-edits`, false, `<h3>Правки и дополнения<small>${plan.edits.length}</small></h3>`, `<ul class="rules">${plan.edits.map(r => `<li>${esc(r)}</li>`).join("")}</ul><div class="note" style="margin-top:6px">«Правка» — где логичнее поправить исходный план; «(+)» — добавлено к авторской схеме.</div>`) : "") +
