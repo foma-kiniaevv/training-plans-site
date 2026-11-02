@@ -5,6 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="claude:viewport-fit-sides" content="cover">
 <title>Планы Артёма Игнатова</title>
+<meta name="description" content="Тренировочные программы Артёма Игнатова: спринт, бег, пауэрлифтинг, зал, гибридная подготовка и силовая для БЖЖ. Личный кабинет и дневник тренировок.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Планы Артёма Игнатова">
+<meta property="og:description" content="Тренировочные программы Артёма Игнатова: спринт, бег, пауэрлифтинг, зал, гибридная подготовка и силовая для БЖЖ. Личный кабинет и дневник тренировок.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2611f'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%98%3C/text%3E%3C/svg%3E">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* Layout: plan catalog in the athlete-diary manner. Plan chips → phase strip → week pills → sticky day tabs → collapsible sections; the main-work card is dark and carries the athlete's entries. */
@@ -157,7 +163,7 @@ table.dose th{color:var(--muted);font-weight:500}
 <body>
 <div class="wrap">
   <header>
-    <div class="eyebrow"><span>Планы · Артём Игнатов</span><button type="button" id="libbtn">Библиотека упражнений</button></div>
+    <div class="eyebrow"><span>Планы · Артём Игнатов</span><span style="display:flex;gap:14px;flex:none"><button type="button" id="libbtn">Библиотека упражнений</button><button type="button" id="logout" hidden>Выйти</button></span></div>
     <h1 id="ptitle"></h1>
   </header>
   <div class="chips" id="plans" role="group" aria-label="Планы"></div>
@@ -374,6 +380,17 @@ document.getElementById("libbtn").addEventListener("click", () => { view = view 
 /* ---------- data: Supabase ---------- */
 const SUPABASE_URL = "https://selgcdicdtjpcsrfrqdq.supabase.co";
 const SUPABASE_KEY = "sb_publishable_wLlkgxHctEZyUzB0TSlUmQ_R_m-t4ca";
+// ошибка входа приходит в адресе ссылки из письма: читаем и убираем до создания клиента
+const urlAuth = new URLSearchParams(location.hash.slice(1));
+const urlAuthError = urlAuth.get("error_code") || urlAuth.get("error");
+if (urlAuthError) history.replaceState(null, "", location.pathname);
+let authMsg = urlAuthError ? (urlAuthError === "otp_expired" ? "Ссылка устарела или уже использована. Запросите новую." : "Не удалось войти по ссылке. Запросите новую.") : "";
+function authErrorText(e){
+  if (e.code === "over_email_send_rate_limit" || e.status === 429) return "Письмо уже отправляли недавно. Подождите немного и попробуйте снова.";
+  if (e.code === "email_address_invalid") return "Проверьте адрес почты.";
+  if (e.status === 0 || e.name === "AuthRetryableFetchError") return "Нет связи с сервером. Проверьте интернет и попробуйте снова.";
+  return "Не получилось отправить ссылку. Попробуйте ещё раз.";
+}
 const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 function editing(){ const a = document.activeElement; return a && /INPUT|TEXTAREA/.test(a.tagName) && document.getElementById("day").contains(a); }
 let catalog = [];
@@ -391,20 +408,22 @@ function renderGate(){
   document.getElementById("plans").innerHTML = ""; document.getElementById("dayhead").innerHTML = "";
   document.getElementById("ptitle").innerHTML = "<b>Тренировочные</b> планы";
   const list = catalog.map(r => { const p = r.meta || {}; return `<li class="item" style="grid-template-columns:1fr"><div class="txt"><span class="n">${esc(r.title)}</span><span class="h">${esc(p.intro || "")}</span><span class="d">${esc(p.freq || "")} · ${r.weeks} нед</span></div></li>`; }).join("");
-  const box = me ? `<div class="note">Вы вошли как ${esc(me.email || "")}. Программа ещё не назначена — тренер откроет её после оплаты. <button class="tbtn" type="button" id="logout">Выйти</button></div>`
-    : `<div class="form"><div class="field"><label for="em">Почта для входа</label><input id="em" type="email" autocomplete="email" placeholder="you@mail.ru"></div><button class="tbtn" type="button" id="login">Прислать ссылку для входа</button><div class="note" id="lmsg"></div></div>`;
+  const box = me ? `<div class="note">Вы вошли как ${esc(me.email || "")}. Программа ещё не назначена — тренер откроет её после оплаты.</div>`
+    : `<div class="form"><div class="field"><label for="em">Почта для входа</label><input id="em" type="email" autocomplete="email" placeholder="you@mail.ru"></div><button class="tbtn" type="button" id="login">Прислать ссылку для входа</button><div class="note" id="lmsg" role="status">${esc(authMsg)}</div></div>`;
   document.getElementById("day").innerHTML = box + `<ul class="list" style="margin-top:18px">${list}</ul>`;
   const lb = document.getElementById("login");
-  if (lb) lb.onclick = async () => { const em = document.getElementById("em").value.trim(); if (!em) return;
+  if (lb) lb.onclick = async () => { const inp = document.getElementById("em"), em = inp.value.trim(), msg = document.getElementById("lmsg"); authMsg = "";
+    if (!em || !inp.checkValidity()) { msg.textContent = "Проверьте адрес почты."; return; }
+    lb.disabled = true; msg.textContent = "Отправляю…";
     const { error } = await sb.auth.signInWithOtp({ email: em, options: { emailRedirectTo: location.href.split("#")[0] } });
-    document.getElementById("lmsg").textContent = error ? "Не получилось: " + error.message : "Ссылка отправлена, проверьте почту."; };
-  const lo = document.getElementById("logout"); if (lo) lo.onclick = () => sb.auth.signOut().then(() => location.reload());
+    lb.disabled = false; msg.textContent = error ? authErrorText(error) : `Ссылка отправлена на ${em}. Проверьте почту и папку «Спам».`; };
 }
 async function boot(){
   const { data: cat } = await sb.from("program").select("id, slug, title, short, weeks, meta, position").eq("published", true).order("position");
   catalog = cat || [];
   const { data: { session } } = await sb.auth.getSession();
   me = session ? session.user : null; db = me ? sb : null; loaded = true;
+  document.getElementById("logout").hidden = !me;
   if (!me) { render(); return; }
   const { data: prof } = await sb.from("profile").select("role").eq("id", me.id).maybeSingle();
   isStaff = !!prof && (prof.role === "coach" || prof.role === "admin");
@@ -418,6 +437,7 @@ async function boot(){
     (lg || []).forEach(r => logs[`${r.client_program_id}-${r.week_no}-${r.day_no}`] = Object.assign({}, r.data, { updatedAt: r.updated_at })); }
   await loadWeeks(plan); restoreWeek(); render();
 }
+document.getElementById("logout").onclick = () => sb.auth.signOut().then(() => location.reload());
 sb.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_IN" && !me) boot(); });
 document.getElementById("day").innerHTML = '<div class="empty">Загружаю…</div>';
 boot();
