@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="claude:viewport-fit-sides" content="cover">
+<title>Планы Артёма Игнатова</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>
+/* Layout: plan catalog in the athlete-diary manner. Plan chips → phase strip → week pills → sticky day tabs → collapsible sections; the main-work card is dark and carries the athlete's entries. */
+:root{
+  --card:#141414; --card-ink:#ffffff; --card-muted:#9a9aa0; --card-line:#2c2c2e;
+  --bg:#ffffff; --sunk:#f1f1f2; --ink:#141414; --muted:#86868b; --soft:#c7c7cc; --line:#e5e5e7;
+  --accent:#c2611f; --done:#141414; --good:#2f8f5b;
+  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0c0c0d; --sunk:#1c1c1e; --ink:#f2f2f3; --muted:#8e8e93; --soft:#48484a; --line:#2a2a2d;
+  --accent:#e8873f; --done:#f2f2f3; --good:#4cc283; --card:#1c1c1e; --card-line:#2f2f33; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0c0c0d; --sunk:#1c1c1e; --ink:#f2f2f3; --muted:#8e8e93; --soft:#48484a; --line:#2a2a2d;
+  --accent:#e8873f; --done:#f2f2f3; --good:#4cc283; --card:#1c1c1e; --card-line:#2f2f33; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased}
+.wrap{max-width:680px;margin:0 auto;padding-left:max(18px,env(safe-area-inset-left,0px));padding-right:max(18px,env(safe-area-inset-right,0px));padding-block:20px 56px;display:flex;flex-direction:column;gap:18px}
+header{display:flex;flex-direction:column;gap:4px}
+.eyebrow{color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:10px;align-items:center}
+.eyebrow button{border:0;background:none;color:var(--accent);font:500 14px var(--sans);cursor:pointer;padding:0}
+h1{font-family:var(--display);font-size:28px;line-height:1.05;letter-spacing:-.02em;margin:0;font-weight:400}
+h1 b{font-weight:700}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-inline:-18px;padding-inline:18px}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:none;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:500 14px var(--sans);padding:7px 13px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.about{display:flex;flex-direction:column;gap:6px}
+.about .who{font-size:15px}
+.about .freq{font-size:13px;color:var(--muted)}
+.strip{display:flex;gap:3px;height:28px}
+.strip button{border:0;border-radius:6px;background:var(--sunk);color:var(--muted);font:500 11px var(--sans);cursor:pointer;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;padding:0 6px}
+.strip button.on{background:var(--accent);color:#fff}
+.weekline{display:flex;flex-direction:column;gap:8px}
+.weeks{display:flex;gap:5px;flex-wrap:wrap}
+.wk{border:1px solid var(--line);background:var(--bg);color:var(--muted);font:500 13px var(--sans);min-width:34px;padding:5px 9px;border-radius:999px;cursor:pointer;font-variant-numeric:tabular-nums}
+.wk.has{color:var(--ink)}
+.wk[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.focus{font-size:14px;color:var(--muted)}
+.focus b{color:var(--ink);font-weight:600}
+
+.seg{display:grid;gap:2px;align-items:stretch;background:var(--sunk);border-radius:14px;padding:3px;position:sticky;top:env(safe-area-inset-top,0px);z-index:5;box-shadow:0 0 0 8px var(--bg)}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.seg button{border:0;background:transparent;color:var(--muted);font:500 12px var(--sans);padding:8px 2px 7px;border-radius:11px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px;min-width:0}
+.seg button small{font-size:11.5px;hyphens:auto;-webkit-hyphens:auto;font-weight:600;line-height:1.2;color:var(--ink);text-align:center;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;max-width:100%}
+.seg .off{display:flex;align-items:center;justify-content:center;writing-mode:vertical-rl;transform:rotate(180deg);font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.seg button[aria-selected="false"] small{color:var(--muted);font-weight:500}
+.seg button .ok{color:var(--good)}
+.seg .bar{display:block;width:60%;height:3px;border-radius:2px;margin-top:auto;background:var(--line)}
+.seg .bar.part{background:linear-gradient(90deg,var(--accent) var(--p),var(--line) var(--p))}
+.seg .bar.full{background:var(--good)}
+.seg button[aria-selected="true"]{background:var(--bg);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.12)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+.dayhead{display:flex;flex-direction:column;gap:6px;padding-top:6px}
+.dayhead .top{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.dayhead h2{font-family:var(--display);font-size:30px;line-height:1.05;letter-spacing:-.02em;margin:0;font-weight:700}
+.dayhead .sum{font-size:17px;color:var(--muted);font-variant-numeric:tabular-nums}
+.dayhead .sum b{color:var(--accent);font-weight:600}
+.progress{font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums}
+.progress.full{color:var(--good)}
+#day{display:flex;flex-direction:column;gap:6px}
+details.sec{border-bottom:1px solid var(--line)}
+details.sec > summary{list-style:none;cursor:pointer;padding:13px 0;display:flex;align-items:center;gap:10px}
+details.sec > summary::-webkit-details-marker{display:none}
+details.sec > summary h3{flex:1;min-width:0;margin:0;font-size:16px;font-weight:600}
+h3 small{font-weight:400;color:var(--soft);margin-left:5px;font-size:14px;font-variant-numeric:tabular-nums}
+h3 small.ok{color:var(--good)}
+.chev{width:13px;height:13px;flex:none;color:var(--muted);transition:transform .2s}
+details.sec[open] .chev{transform:rotate(90deg)}
+details.sec > .inner{padding-bottom:16px;display:flex;flex-direction:column;gap:10px}
+.meta{font-size:13px;color:var(--muted);text-align:right;max-width:46%}
+
+.list{list-style:none;margin:0;padding:0}
+.item{display:grid;grid-template-columns:22px 1fr auto;gap:14px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
+.list > .item:first-child{border-top:0}
+.item > input{width:20px;height:20px;margin:0;accent-color:var(--done);cursor:pointer}
+.txt{min-width:0;display:flex;flex-direction:column}
+.item label{min-width:0;display:flex;flex-direction:column;gap:1px;cursor:pointer}
+.item .n{font-weight:500}
+.item .d{font-size:14px;color:var(--accent);font-variant-numeric:tabular-nums}
+.item .h{font-size:13px;color:var(--muted)}
+.item.done .n,.item.done .d{color:var(--muted)}
+.item.done .n{text-decoration:line-through;text-decoration-color:var(--soft)}
+.vid{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:1px solid var(--line);color:var(--muted);text-decoration:none;flex:none}
+.vid:hover{color:var(--ink);border-color:var(--soft)}
+.vid svg{width:8px;height:8px;fill:currentColor;margin-left:1px}
+.grp{font-size:11px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;padding:16px 0 4px}
+.list > .grp:first-child{border-top:0;padding-top:0}
+.grp + .item{border-top:0}
+.wts{display:grid;grid-template-columns:repeat(auto-fill,minmax(52px,58px));gap:6px;margin-top:6px}
+.wts input,.times input{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:6px 4px;font:400 14px var(--sans);text-align:center;font-variant-numeric:tabular-nums}
+
+.kpi{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.kpi.hero{background:var(--card);color:var(--card-ink);border-color:var(--card)}
+.kpi.hero .cell{border-color:var(--card-line)}
+.kpi.hero .lbl,.kpi.hero .was{color:var(--card-muted)}
+.kpi.hero .tbtn{background:transparent;color:var(--card-ink);border-color:var(--card-line)}
+.kpi.hero .tbtn.on{background:var(--card-ink);color:var(--card)}
+.kpi.hero .times input,.kpi.hero .wts input{background:transparent;color:var(--card-ink);border-color:var(--card-line)}
+.kpi.hero .times label{color:var(--card-muted)}
+.prev{font-size:13px;color:var(--card-muted);font-variant-numeric:tabular-nums}
+.prev b{color:var(--card-ink);font-weight:600}
+.cell{padding:13px 15px;display:flex;flex-direction:column;gap:5px;min-width:0;border-top:1px solid var(--line)}
+.cell:first-child{border-top:0}
+.cell.wide{grid-column:1/-1}
+.cell.l{border-right:1px solid var(--line)}
+.lbl{font-size:13px}
+.val{font-family:var(--display);font-size:30px;line-height:1.05;letter-spacing:-.02em;font-weight:700;font-variant-numeric:tabular-nums}
+.val.light{font-weight:300}
+.kpi.hero .cell:not(.wide) .val:not([data-out]){font-size:17px;font-weight:600;letter-spacing:0;line-height:1.25}
+.kpi.hero .cell:not(.wide) .val.light:not([data-out]){font-weight:400}
+.kpi.hero .val[data-out]{font-size:26px}
+.was{font-size:13px;color:var(--muted)}
+.tbtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.tbtn{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:999px;padding:5px 12px;font:500 13px var(--sans);cursor:pointer}
+.tbtn.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.times{display:grid;grid-template-columns:repeat(auto-fill,minmax(64px,1fr));gap:8px}
+.times label{display:flex;flex-direction:column;gap:3px;font-size:12px;color:var(--muted)}
+.times input{padding:9px 4px;font-size:16px}
+
+.rest{padding-block:24px;display:flex;flex-direction:column;gap:4px}
+.empty{padding-block:30px;color:var(--muted)}
+.form{display:flex;flex-direction:column;gap:12px}
+.field{display:flex;flex-direction:column;gap:5px;min-width:0}
+.field label{font-size:13px;color:var(--muted)}
+.field input,.field textarea{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 12px;font:400 16px var(--sans)}
+.field textarea{min-height:72px;resize:vertical}
+.savebar{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(14px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);font-size:13px;padding:7px 14px;border-radius:999px;z-index:20;opacity:0;pointer-events:none;transition:opacity .2s}
+.savebar.show{opacity:.92}
+.note{font-size:13px;color:var(--muted)}
+.phd{font-size:14px;color:var(--ink);margin-bottom:4px}
+.goal{font-size:14px;color:var(--muted);line-height:1.45}
+table.dose{min-width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+table.dose th,table.dose td{border-bottom:1px solid var(--line);padding:6px 6px 6px 0;text-align:left;vertical-align:top}
+table.dose th{color:var(--muted);font-weight:500}
+.rules{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:6px;font-size:14px}
+.src{font-size:12px;color:var(--muted)}
+/* library */
+.lib{display:flex;flex-direction:column;gap:4px}
+.lib .item{grid-template-columns:1fr auto}
+.lib .uses{font-size:12px;color:var(--muted)}
+.search{width:100%;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 12px;font:400 16px var(--sans)}
+@media (max-width:420px){h1{font-size:26px}.val{font-size:26px}}
+@media (prefers-reduced-motion:reduce){.chev,.savebar{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow"><span>Планы · Артём Игнатов</span><button type="button" id="libbtn">Библиотека упражнений</button></div>
+    <h1 id="ptitle"></h1>
+  </header>
+  <div class="chips" id="plans" role="group" aria-label="Планы"></div>
+  <div id="planview">
+    <div class="about" id="about"></div>
+    <div class="weekline" style="margin-top:16px"><div class="strip" id="strip"></div><div class="weeks" id="weeks"></div><div class="focus" id="focus"></div></div>
+  </div>
+  <nav class="seg" lang="ru" role="tablist" aria-label="Дни недели" id="days"></nav>
+  <div class="dayhead" id="dayhead"></div>
+  <main id="day"></main>
+</div>
+<div class="savebar" id="savebar" role="status"></div>
+
+<script>
+const EX = {"cardio": {"n": "Безударное кардио (лестница, вело, эллипс)", "v": null, "c": "Бег и кардио (без видео)"}, "joints": {"n": "Суставная разминка", "v": null, "c": "Разминка и мобильность"}, "jog": {"n": "Лёгкий бег", "v": null, "c": "Бег и кардио (без видео)"}, "cooldown": {"n": "Заминочный бег", "v": null, "c": "Бег и кардио (без видео)"}, "rope": {"n": "Скакалка", "v": null, "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "accel": {"n": "Ускорения по нарастающей", "v": null, "c": "Бег и кардио (без видео)"}, "hang": {"n": "Вис на перекладине", "v": null, "c": "Кор и подсобка"}, "mtp": {"n": "Тяга с середины бедра", "v": null, "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "jump_shrug": {"n": "Прыжок со шрагом", "v": null, "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "bike": {"n": "Велотренажёр или гребля", "v": null, "c": "Бег и кардио (без видео)"}, "strides": {"n": "Ускорения после бега", "v": null, "c": "Бег и кардио (без видео)"}, "walk": {"n": "Ходьба / ходьба в гору", "v": null, "c": "Бег и кардио (без видео)"}, "mfr": {"n": "МФР (ролл)", "v": "https://drive.google.com/file/d/1ovifPPrrpEsC_zrMlW1z_e31jGM0b5V2/view", "c": "Разминка и мобильность"}, "sl1": {"n": "Статический выпад: передняя нога на опоре", "v": "https://drive.google.com/file/d/1Y42IXfgs1XoJsh4KZwaUtCd4pblsvDYW/view", "c": "Разминка и мобильность"}, "sl2": {"n": "Статический выпад + уголок + степ под передней ногой", "v": "https://drive.google.com/file/d/1rqvb5LJMx1Z2H0Jx3NRI1vx2SyYyHYNo/view", "c": "Разминка и мобильность"}, "sl3": {"n": "Статический выпад + уголок", "v": "https://drive.google.com/file/d/1P1s9z1bm5eeASiSFMIgDl43P_OJ02Q1Z/view", "c": "Разминка и мобильность"}, "sl4": {"n": "Статический выпад + уголок, задняя нога на опоре", "v": "https://drive.google.com/file/d/1DIYOAseN7Cb0uHyWlXu70KcvEyrseeRc/view", "c": "Разминка и мобильность"}, "sl5": {"n": "Статический выпад + уголок, задняя нога на высокой опоре", "v": "https://drive.google.com/file/d/1F-qyLCkevZE3-9frNuc9KxG4US-Ipv_l/view", "c": "Разминка и мобильность"}, "couch": {"n": "Couch stretch", "v": "https://drive.google.com/file/d/1mkd739vecx-3QXXsL-r0Ma9BO7ya9VqE/view", "c": "Разминка и мобильность"}, "pigeon": {"n": "Pigeon stretch", "v": "https://drive.google.com/file/d/1xCmCUg-8at8QVHnVHsuSHvk44HY7VuZk/view", "c": "Разминка и мобильность"}, "hstance": {"n": "Horse stance", "v": "https://drive.google.com/file/d/1yii9QEr0BShUczfAYP8yAOdJjdgu4BRk/view", "c": "Разминка и мобильность"}, "hstance_sq": {"n": "Horse stance squat", "v": "https://drive.google.com/file/d/1--A0Ft6QxOA6hZqPwYn8jpQWv363vAV_/view", "c": "Разминка и мобильность"}, "slides": {"n": "Слайды в сплит-позиции", "v": "https://drive.google.com/file/d/1M1rZK247N3o33EyUDogX20rhzpxvYDBo/view", "c": "Разминка и мобильность"}, "ham_pole": {"n": "Растяжка ЗПБ лёжа у столба", "v": "https://drive.google.com/file/d/1HICuOuPdafmXQTVk-QjXKozCXI7TNKFQ/view", "c": "Разминка и мобильность"}, "box_fold": {"n": "Статический наклон на тумбе", "v": "https://drive.google.com/file/d/1a5hbBQ2rcfSe3hELwg_Xh4b9VRCkOwIT/view", "c": "Разминка и мобильность"}, "fold_band": {"n": "Складка с резиной", "v": "https://drive.google.com/file/d/1WQMKnd44BKRbvi6EjJAEhr2nZ6Epduwq/view", "c": "Разминка и мобильность"}, "rev_fold": {"n": "Обратная складка", "v": "https://drive.google.com/file/d/1EfsnFD5bcSoDd6b3Ocs1cFAEzrzuwRC6/view", "c": "Разминка и мобильность"}, "pullover_ghd": {"n": "Статический пуловер в GHD", "v": "https://drive.google.com/file/d/1cYWIk6BiH3U62C6tBUHUn1AUSZT2v1H2/view", "c": "Разминка и мобильность"}, "ohs": {"n": "Overhead squat", "v": "https://drive.google.com/file/d/1tdVRUwibVIYkIEwWicik7E1mLrNRcCgH/view", "c": "Разминка и мобильность"}, "cuban": {"n": "Кубинский жим + жим из-за головы", "v": "https://drive.google.com/file/d/1cPG-DZw1idmdah3VpxbjJs487pIAxWqR/view", "c": "Разминка и мобильность"}, "cossack": {"n": "Казачьи приседания с опорой", "v": "https://drive.google.com/file/d/1P-TGlcViQyE_qHPzc9kIzCeQZlP2_3lt/view", "c": "Разминка и мобильность"}, "soldier": {"n": "Солдатская пружина + подъёмы бедра с резиной", "v": "https://drive.google.com/file/d/1cTUrAJqaOi7wS0WU7RETvmrsUdy5vtag/view", "c": "Разминка и мобильность"}, "hiknee": {"n": "Высокое бедро на месте", "v": "https://drive.google.com/file/d/1AA10hZGQePUxsaj2xjPwLbSLXskvmzj1/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "hiknee2": {"n": "Высокое бедро с двойной сменой", "v": "https://drive.google.com/file/d/1YHD-WxtTAfObNgraMLAgwcWDNkPnKEEH/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "skipA": {"n": "A-skips (кан-кан с продвижением)", "v": "https://drive.google.com/file/d/17B99tGqmj7kp_DsH9awkdWc4aeFWBVAM/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "kankan": {"n": "Кан-кан на месте", "v": "https://drive.google.com/file/d/1WGPNA9-RADmXjt25-lbGtOb2V3CDJI4T/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "kankan1": {"n": "Кан-кан 1 ногой", "v": "https://drive.google.com/file/d/13TCctXShuLrx9IuTz9fZXYLtmOWDeS_O/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "kankanband": {"n": "Кан-кан с эспандером", "v": "https://drive.google.com/file/d/1vmB7LlLcXskmVqDNY4V-IJBqen4qtNWG/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "cskip": {"n": "C-skips назад", "v": "https://drive.google.com/file/d/1-cDsDirJQcvWqpu1tLHvt5eqfs1tjVM3/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "pogo": {"n": "Пого-прыжки на месте", "v": "https://drive.google.com/file/d/1wSHnvWOgZzzKUqZYM1cCK0Vq_rWKjiyV/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "pogo_move": {"n": "Пого-прыжки с продвижением", "v": "https://drive.google.com/file/d/1gG_kRjs-1CJ2xUyxy7N3qze8Z652D8gx/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "pogo_short": {"n": "Короткие пого-прыжки", "v": "https://drive.google.com/file/d/10DWL1yAjLauzV415IFdHsmudA9xWztSD/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "stiff_jump": {"n": "Запрыгивания на прямых ногах", "v": "https://drive.google.com/file/d/14OtNd0-y_fuLdwH11yRkxy0Vm_gzf4kR/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "bunny": {"n": "Заячьи прыжки", "v": "https://drive.google.com/file/d/19NuAetNrorD2aV7n2qIPu6lcduiVxS1t/view", "c": "СБУ и реактивная плиометрика (перед спринтом)"}, "bound1": {"n": "Многоскоки на 1 ноге", "v": "https://drive.google.com/file/d/1vnaYyRR8uCD15avI5t4Lwv8YU4TOOB0q/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "broad_rep": {"n": "Последовательные прыжки в длину", "v": "https://drive.google.com/file/d/1EPmbmxTJFamr48BqAjpyPs7FyCa8kooT/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "hop1": {"n": "Прыжки на 1 ноге с перемещением", "v": "https://drive.google.com/file/d/1mafwC3HEg3-fVeNxM6ukFuwIGK0EyrxM/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "boxjump": {"n": "Запрыгивания на плиобокс", "v": "https://drive.google.com/file/d/1lU3aeDP6KnTwWoLLvMCrTePNVXEUoXv7/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "boxjump_ns": {"n": "Запрыгивания на плиобокс без ухода в сед", "v": "https://drive.google.com/file/d/1_cNQY4HaqvA1riVElnFlZoxDj1N9SpNl/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "seated_box": {"n": "Запрыгивания из положения сидя", "v": "https://drive.google.com/file/d/1oeG8spc5hwRRg8TDhuT8sr0XWwRkrxCw/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "deep_box": {"n": "Запрыгивания из полного седа", "v": "https://drive.google.com/file/d/1l_1xLjsZheH20tm7njjGDgpkRWq2G_-f/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "single_box": {"n": "Запрыгивания одной ногой", "v": "https://drive.google.com/file/d/1QaSGE1hDZCsV9Ox_3fjYxjiJydiLvQcU/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "to1_box": {"n": "Запрыгивания с двух на одну", "v": "https://drive.google.com/file/d/1YpKIQzOmC5JyNqdkKtT6zChS6Dqmsi2r/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "depth_jump": {"n": "Прыжок в глубину + выпрыгивание", "v": "https://drive.google.com/file/d/1g_aSeRJjFD_4itPHE5144ON2WP7AgDfC/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "depth_box": {"n": "Прыжок в глубину + запрыгивание", "v": "https://drive.google.com/file/d/1CioprrdkQ81osqBYySYcfiSjLGCtcumi/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "depth1": {"n": "Прыжок в глубину 1 ногой + запрыгивание 1 ногой", "v": "https://drive.google.com/file/d/1OvNLoAwZ0udymz9uCnPnih0D7nyyp9AZ/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "squat_jump": {"n": "Выпрыгивания из седа", "v": "https://drive.google.com/file/d/11jdJDzA9zsTQ5YnitveIvxg6_vDowyWb/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "knee_jump": {"n": "Выпрыгивания с колен", "v": "https://drive.google.com/file/d/1l1SSAWJP254iifo0byR36D1XUri3a5se/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "split_jump": {"n": "Сплит-прыжки со сменой ног", "v": "https://drive.google.com/file/d/1DH0DoXYJ1yl0ZwCiKGZw2mCGHeT3eMLv/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "split_plyo": {"n": "Плиометрические сплит-приседания", "v": "https://drive.google.com/file/d/1-5ImS9CChKhj5WmYgfTf_lD3DbGQbDO2/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "split_lowbox": {"n": "Запрыгивания на низкую опору в сплит-позиции", "v": "https://drive.google.com/file/d/1WmjsZN7WGDGDBChG_ZJIJhUZrTFzX1wm/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "high_switch": {"n": "Прыжковая смена ног на высокой опоре", "v": "https://drive.google.com/file/d/13AVlWIIfKLGUqYXAGjMHqoShYDNbivzR/view", "c": "Прыжки: плиобокс, глубина, многоскоки (после спринта / вертикальный день)"}, "clean": {"n": "Взятие на грудь (без прыжка)", "v": "https://drive.google.com/file/d/136W1RXgWzZEIMwXP7iMrc4sRjvvrgXMO/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "clean_j": {"n": "Взятие на грудь (с прыжком)", "v": "https://drive.google.com/file/d/1zCIEQtNHwo9AahIcTCeS_Lq0vnhXx-VA/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "clean_pp": {"n": "Взятие на грудь + швунг жимовой", "v": "https://drive.google.com/file/d/1R6DiD6ZMVrVQUWEufpgUGhojxXQOjnlc/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "clean_jerk": {"n": "Взятие на грудь в разброс + толчок в ножницы", "v": "https://drive.google.com/file/d/12t9t1prWRjyZofeSTEyZXCbHWQ2C00TB/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "snatch_pull": {"n": "Тяга рывковая", "v": "https://drive.google.com/file/d/1hN3XpNaHXkjTy3zS55HuTBQN1-RQbq1Q/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "swing": {"n": "Свинги с гирей (+ резина)", "v": "https://drive.google.com/file/d/15kuFWv7Vbkt56edTi4wBCzftR3UCvWIY/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "expl_push": {"n": "Взрывные отжимания", "v": "https://drive.google.com/file/d/16tMl15DMXXmdxm0wU57rqUtmYTMbESCz/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "clap_push": {"n": "Отжимания с отрывом ладоней", "v": "https://drive.google.com/file/d/1fEcqN2WfxJYIvnjVyu9oR9uKXoJCsXml/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "mu_jump": {"n": "Подъём силой с прыжка", "v": "https://drive.google.com/file/d/1lWLjo8drwz2eoFYvuX-gXUhvZzZODzR2/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "mu_neg": {"n": "«Опускания» силой", "v": "https://drive.google.com/file/d/1cfoLA6x4Lko91RGi-275kRbI5hQnl4dz/view", "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "medball": {"n": "Броски медбола (вверх-назад, от груди)", "v": null, "c": "Тяжёлая атлетика и баллистика (самостоятельно или после прыжков, не после тяжёлой силовой)"}, "squat": {"n": "Присед со штангой", "v": "https://drive.google.com/file/d/1IUsLxzZJL56I-oguhpQXir6xVg47FYn6/view", "c": "Колено-доминантные (КДУ)"}, "squat_belt": {"n": "Присед с поясом (в колодец)", "v": "https://drive.google.com/file/d/1ygzcDU5sf3KCkXKHdoO-lMVtSpL4iBqt/view", "c": "Колено-доминантные (КДУ)"}, "front": {"n": "Фронтальный присед", "v": "https://drive.google.com/file/d/1py87f-yCfBvePhwhYRl4uB67IR0rmWOQ/view", "c": "Колено-доминантные (КДУ)"}, "box_sb": {"n": "Присед SB на ящик", "v": "https://drive.google.com/file/d/1sm-DLUMJrmAqjzY3o-nB-wFZmpOsbslc/view", "c": "Колено-доминантные (КДУ)"}, "box_low": {"n": "Присед на низкий ящик", "v": "https://drive.google.com/file/d/1OzES8gzPfWRfPSI1NA76-RCGQ94kXngG/view", "c": "Колено-доминантные (КДУ)"}, "box_high": {"n": "Присед на высокий ящик", "v": "https://drive.google.com/file/d/1evje-LxX_lpsr9Bkc8_g9l3_n3HFpYCF/view", "c": "Колено-доминантные (КДУ)"}, "sq_band": {"n": "Присед с резиной", "v": "https://drive.google.com/file/d/1pdlf1D85Z_gP2J1n_Axj5m2rgKfMzbY2/view", "c": "Колено-доминантные (КДУ)"}, "sq_rev": {"n": "Присед с обратной резиной", "v": "https://drive.google.com/file/d/1pETVPWLlLyySykszr0ny-8n2e1cBkFDc/view", "c": "Колено-доминантные (КДУ)"}, "sq_pause_rev": {"n": "Присед с паузой с обратной резиной", "v": "https://drive.google.com/file/d/1ka8AoFTyLIPlaoYGMo6yzTR_rUJmR6oj/view", "c": "Колено-доминантные (КДУ)"}, "hack": {"n": "Гакк-присед (ass to grass)", "v": "https://drive.google.com/file/d/1UypI4PKRgGYfo58pXaiB4sSsEKPuO01a/view", "c": "Колено-доминантные (КДУ)"}, "goblet": {"n": "Гоблет-присед с гирей", "v": "https://drive.google.com/file/d/1M-e0QoEbtekCyoSReaEksXhp0AQDgEvV/view", "c": "Колено-доминантные (КДУ)"}, "legpress": {"n": "Жим платформы ногами", "v": "https://drive.google.com/file/d/132TcUOKlsYHoQcGRdJPpJD_b5nc0Xpt5/view", "c": "Колено-доминантные (КДУ)"}, "hsquat": {"n": "Горизонтальные приседания в тренажёре", "v": "https://drive.google.com/file/d/1D-UGzNp7uPjFCCZvQPf5_H8awDDxmmAy/view", "c": "Колено-доминантные (КДУ)"}, "sissy": {"n": "Сисси-присед с поддержкой резины", "v": "https://drive.google.com/file/d/10QPr0SyTOwRVIyh6zzmH0_SV5er4bLoW/view", "c": "Колено-доминантные (КДУ)"}, "spanish": {"n": "Испанские приседания", "v": "https://drive.google.com/file/d/1wHV1_yKdY5lIVPbLUH7oFBHFUciYh_SB/view", "c": "Колено-доминантные (КДУ)"}, "zercher": {"n": "Присед Зерхера", "v": "https://drive.google.com/file/d/1awX4HKKu7kaqC0hOmVylzorjxFO7RyiV/view", "c": "Колено-доминантные (КДУ)"}, "bw_squat": {"n": "Приседания со своим весом", "v": "https://drive.google.com/file/d/1eY_ysPhmmlA6LIYC0nj9pbwoazs71anz/view", "c": "Колено-доминантные (КДУ)"}, "leg_ext": {"n": "Разгибания голени 1 ногой", "v": "https://drive.google.com/file/d/1rio60cxS5EwHh0FgsDyTEMd-D8wNaI18/view", "c": "Колено-доминантные (КДУ)"}, "rev_nordic": {"n": "Обратные скандинавские сгибания", "v": "https://drive.google.com/file/d/1ifJh7_dVMGFY_AJ-f-ETVy0yUrdo4egb/view", "c": "Колено-доминантные (КДУ)"}, "split_abs": {"n": "Сплит-присед, задняя нога на тренажёре для пресса", "v": "https://drive.google.com/file/d/1lcQzgc83K2qcM2wdQOn1vhf0188SaCyH/view", "c": "Унилатеральные и сплит-позиции"}, "bulgarian": {"n": "Болгарские сплит-приседания с гирями", "v": "https://drive.google.com/file/d/1wOLpDu1svtCwl6IO1T5sCP5rsJ5VtxZV/view", "c": "Унилатеральные и сплит-позиции"}, "bulg_kd": {"n": "Болгарские сплит-приседания (КД-вариант)", "v": "https://drive.google.com/file/d/1eF0_oMSyNrI2aq5WCV4nel8H1yNHYHBw/view", "c": "Унилатеральные и сплит-позиции"}, "bulg_sup": {"n": "Болгарские сплит-приседания с опорой", "v": "https://drive.google.com/file/d/1UhCleWnmyrOj6sFKWFcQ2ndu83GC8mBl/view", "c": "Унилатеральные и сплит-позиции"}, "split_db": {"n": "Сплит-приседания с гантелями", "v": "https://drive.google.com/file/d/1T0pqyqqiiy1zA3hg_Q9r8jaMU0JPFf26/view", "c": "Унилатеральные и сплит-позиции"}, "step_up": {"n": "Зашагивания на тумбу", "v": "https://drive.google.com/file/d/1k9yRTGeDErn4iHeRTAJ5-azO-h_hJ4CI/view", "c": "Унилатеральные и сплит-позиции"}, "stepdown": {"n": "Poliquin step-downs", "v": "https://drive.google.com/file/d/11N-4gRoeMgtUPIg5EXAn3UQ172luroGA/view", "c": "Унилатеральные и сплит-позиции"}, "walk_lunge": {"n": "Ходячие выпады вперёд", "v": "https://drive.google.com/file/d/1TMl3mhGvC5zt9Dgyjo_ZHkIs8gyEFM7k/view", "c": "Унилатеральные и сплит-позиции"}, "lat_lunge": {"n": "Ходячие боковые выпады", "v": "https://drive.google.com/file/d/1ZdpgMsizNaYN4bkDjnIcEbEZJHQwlETe/view", "c": "Унилатеральные и сплит-позиции"}, "push_lunge": {"n": "Толчковые выпады", "v": "https://drive.google.com/file/d/1GERwj-OEFPR8uRgm-oSDQpgTMOuudKoS/view", "c": "Унилатеральные и сплит-позиции"}, "calf_split": {"n": "Подъёмы на носки в сплит-позиции", "v": "https://drive.google.com/file/d/1JuT9pV_u4KtR-eOJOpIPtQ4HxOfMx6jM/view", "c": "Унилатеральные и сплит-позиции"}, "calf": {"n": "Подъёмы на носки стоя в тренажёре", "v": "https://drive.google.com/file/d/1-_CJur8NTa9SDjYMKNmVd_CnvQ5j8tBb/view", "c": "Кор и подсобка"}, "tib": {"n": "Подъёмы на пятки у стены", "v": "https://drive.google.com/file/d/14nK0LQ9YNgwTn1BpegGSrggfGT9SSnCN/view", "c": "Кор и подсобка"}, "dl": {"n": "Становая тяга", "v": "https://drive.google.com/file/d/1kwCzboTzUT6gSf61gDPuUjT-r5Nqwuro/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "dl_pause": {"n": "Становая с паузой у колен", "v": "https://drive.google.com/file/d/1TJV_4AICsHlt5kGOuITBZY9EThVw6bmx/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "dl_pit": {"n": "Становая из ямы с резиной", "v": "https://drive.google.com/file/d/1Z3SXgDLkP1dk5r4tafElJ7wQVj3TDOgI/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "dl_band": {"n": "Становая с резиной", "v": "https://drive.google.com/file/d/13GM5HqZRByYWNmh803IjChEITce5VArC/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "dl_block": {"n": "Становая с подставок", "v": "https://drive.google.com/file/d/1Qx_3_wvvRJw3cBfqjaJdF3J8PpnQpbOT/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "dl_slow": {"n": "Становая замедленная", "v": "https://drive.google.com/file/d/12X_i1Iwhmya5I-NncmxUBdHVvJ2xS_su/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "sumo": {"n": "Тяга сумо", "v": "https://drive.google.com/file/d/1LqQ6JvX4QR_f8SH81LapF5vEPf1VPOxv/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "rdl": {"n": "Румынская тяга со штангой", "v": "https://drive.google.com/file/d/1jd2WsrxqzeD8fbA7xOCVCOB5ZFnpg60o/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "rdl_db": {"n": "Румынская тяга с гантелями", "v": "https://drive.google.com/file/d/1VQCjWukV_InDO2QO1ucbdPsBTsnVM-WQ/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "sl_rdl": {"n": "Румынская тяга на 1 ноге с опорой", "v": "https://drive.google.com/file/d/1l13DbZrhXtk-bU6-aYSuS8TF2I_MipP6/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "hyper": {"n": "Гиперэкстензия", "v": "https://drive.google.com/file/d/1cOKx3LlaJ0L7NOeFAAvq-c-BlM1C0RM-/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "hyper1": {"n": "Гиперэкстензия на 1 ноге", "v": "https://drive.google.com/file/d/1dpvJhiLEhS7h60cuWHWTAtiii4lk2Nak/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "hyper_st": {"n": "Гиперэкстензия статическая", "v": "https://drive.google.com/file/d/1BM4ZVYjXNv9M9VDQuLqCLJyEvTghffpn/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "jefferson": {"n": "Наклоны Джефферсона", "v": "https://drive.google.com/file/d/1FAbWnOcJLDN7vpY7loDLA1EbdSTDyzLs/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "zercher_gm": {"n": "Наклоны Зерхера", "v": "https://drive.google.com/file/d/1fKZsmhb54Lh7fciTNvxQwGvGtWAFdt6J/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "seated_gm": {"n": "Seated good-mornings", "v": "https://drive.google.com/file/d/1nmdf_3RGOto2jFFVrL_zGvmYhKQo9MxT/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "ghr": {"n": "GHR", "v": "https://drive.google.com/file/d/10BLJ10-LVI_DAVrNA5vBy5Us6317F1MW/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "leg_curl": {"n": "Сгибания голени лёжа", "v": "https://drive.google.com/file/d/1lAznd7SS1jK490zgoHrDkwthREPQ329Q/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "curl1": {"n": "Сгибания голени 1 ногой", "v": "https://drive.google.com/file/d/1AjIWQjstn7rEsYVXd4IvXUXwurk8cmd9/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "slide_curl": {"n": "Скользящие сгибания голени", "v": "https://drive.google.com/file/d/1dzE31OteDXLk-efgDgDa0UxnRezUJubj/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "bridge1": {"n": "Ягодичный мост на 1 ноге", "v": "https://drive.google.com/file/d/1xaLgeIlmXXdGNMwKcoINCSr4-MKwPDvc/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "bridge_m": {"n": "Ягодичный мост в тренажёре", "v": "https://drive.google.com/file/d/1ABQvaSF7WRBEOmMhsk5GTyMdFV6vcAEj/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "rev_hyper": {"n": "Обратная гиперэкстензия с резиной", "v": "https://drive.google.com/file/d/1xAk-0lmXMKaxeCQ0f9cvOtydOYARfzGN/view", "c": "Тазово-доминантные (ТДУ) и задняя цепь"}, "bench": {"n": "Жим лёжа", "v": "https://drive.google.com/file/d/1Q5fWLHx1f72n1hUSjBSg-rCqfaVAG2gG/view", "c": "Верх: жимы"}, "bench_pause": {"n": "Жим лёжа с паузой", "v": "https://drive.google.com/file/d/1s4uYkjiwH7aR4KUXGN-Rnz8wAEf11-2R/view", "c": "Верх: жимы"}, "bench_band": {"n": "Жим лёжа с резиной", "v": "https://drive.google.com/file/d/1wvmf7jVUhNfnRyI-O7A60DrQz9UlR0t_/view", "c": "Верх: жимы"}, "bench_floor": {"n": "Жим лёжа на полу", "v": "https://drive.google.com/file/d/15D80cvWeYl2xXVWkHeRZTRsB9BP4Ybfh/view", "c": "Верх: жимы"}, "bench_pins": {"n": "Жим с паузой на низких упорах", "v": "https://drive.google.com/file/d/1jm6FKj36MYG95v9Gsq0y15h6Jp_NdZK7/view", "c": "Верх: жимы"}, "bench_larsen": {"n": "Жим лёжа с поднятыми ногами", "v": "https://drive.google.com/file/d/1LMcFtgG_GMPrykx3ziLT6Aqb0MVq7WLe/view", "c": "Верх: жимы"}, "incline": {"n": "Жим на наклонной скамье", "v": "https://drive.google.com/file/d/1CTigr31gRiMa-0OpRn5EqGZ17plZtdPr/view", "c": "Верх: жимы"}, "db_bench": {"n": "Жим гантелей лёжа", "v": "https://drive.google.com/file/d/1mXTL2UVlJ-YzQPcffdBNtw2nTYrsdDpw/view", "c": "Верх: жимы"}, "db_incline": {"n": "Жим гантелей на наклонной", "v": "https://drive.google.com/file/d/11mWtGO3rmx09IAC7Tmu8M-8sdhDRNceH/view", "c": "Верх: жимы"}, "hammer_press": {"n": "Жим от груди в хаммере", "v": "https://drive.google.com/file/d/19NkLNRcp574-meoaJQHc7YwkmwM49YaU/view", "c": "Верх: жимы"}, "dips": {"n": "Отжимания на брусьях", "v": "https://drive.google.com/file/d/1eelAUu4zZ4uvBCtTIxixFovN0q9-ZXmD/view", "c": "Верх: жимы"}, "pushup": {"n": "Отжимания от пола", "v": "https://drive.google.com/file/d/1JL3BNT6S0aSDMtCtJt7E9NgCGiw_EwX_/view", "c": "Верх: жимы"}, "pushup_easy": {"n": "Облегчённые отжимания", "v": "https://drive.google.com/file/d/1y3j5JWRsCfk3PlOFOHbI2uL_jXB-y6Vx/view", "c": "Верх: жимы"}, "ohp": {"n": "Жим штанги стоя", "v": "https://drive.google.com/file/d/1jTqUzZKzER6wYR_Q9_GeiSZTKoGwWd5H/view", "c": "Верх: жимы"}, "db_press": {"n": "Жим гантелей сидя", "v": "https://drive.google.com/file/d/1ITPlsSQYTtLUC_gEoXLjKhxVkRX--cmY/view", "c": "Верх: жимы"}, "landmine": {"n": "Жим в лэндмайне", "v": "https://drive.google.com/file/d/1w8k2EGsDRznBMUDegmY-qkMKXkQGUFlI/view", "c": "Верх: жимы"}, "btn_press": {"n": "Жим из-за головы", "v": "https://drive.google.com/file/d/1K_AmBt04cUAQ6s3kZH4zqVwG0kLX48D2/view", "c": "Верх: жимы"}, "triceps": {"n": "Разгибания на трицепс в блоке", "v": "https://drive.google.com/file/d/1plojigCBNGFBIj8wp6YNOLGA5Zzrg9Rm/view", "c": "Верх: жимы"}, "french": {"n": "Французский жим с EZ-грифом", "v": "https://drive.google.com/file/d/1ES35j9NDexEO9KH3t9wUYY4lwtczPEQR/view", "c": "Верх: жимы"}, "lat_raise": {"n": "Подъёмы гантелей через стороны", "v": "https://drive.google.com/file/d/1YxnYltc1jPTwzxJIS6k71iMk4ftzhr3m/view", "c": "Верх: жимы"}, "pullup": {"n": "Подтягивания", "v": "https://drive.google.com/file/d/1PrpLNF8Echp0zpq-hC-udsiyt-kAHPF3/view", "c": "Верх: тяги и подтягивания"}, "pullup_w": {"n": "Подтягивания с весом", "v": "https://drive.google.com/file/d/1PrpLNF8Echp0zpq-hC-udsiyt-kAHPF3/view", "c": "Верх: тяги и подтягивания"}, "scap_pull": {"n": "Лопаточные подтягивания", "v": "https://drive.google.com/file/d/13B7wzO6r1xMJQJ8WeEdFBRYjTE4dtN2E/view", "c": "Верх: тяги и подтягивания"}, "aus_pull": {"n": "Австралийские подтягивания", "v": "https://drive.google.com/file/d/19DBf7442qfJl3oVbb2zqfb9FWX3GfVuO/view", "c": "Верх: тяги и подтягивания"}, "gravitron": {"n": "Подтягивания в гравитроне", "v": "https://drive.google.com/file/d/1DxG5lIA52X00XVcZDpXT1eprAP2MoM7M/view", "c": "Верх: тяги и подтягивания"}, "lat_pd": {"n": "Тяга верхнего блока", "v": "https://drive.google.com/file/d/1wNJdhNlv9LelyyY7s3lJEJ6h_hS2oo4A/view", "c": "Верх: тяги и подтягивания"}, "row_bb": {"n": "Тяга штанги в наклоне с паузой на полу", "v": "https://drive.google.com/file/d/1ENdmo3Dkn9qRF4fRhG-zYSjHfF7CS20V/view", "c": "Верх: тяги и подтягивания"}, "row_low": {"n": "Тяга нижнего блока", "v": "https://drive.google.com/file/d/1iYzOY7EOLfHNMGSeApFKyBYB36rvx_Yn/view", "c": "Верх: тяги и подтягивания"}, "row_db": {"n": "Тяга гантелей на наклонной скамье", "v": "https://drive.google.com/file/d/1CsKSWyHYbirvzQ046E6lJ7UeXbOzL8gK/view", "c": "Верх: тяги и подтягивания"}, "row_hammer": {"n": "Тяга в хаммере стоя в наклоне", "v": "https://drive.google.com/file/d/1H_Fv9Btkh0o0823uVE6imBoGwf4qIMki/view", "c": "Верх: тяги и подтягивания"}, "pullover": {"n": "Пуловер в блоке", "v": "https://drive.google.com/file/d/1eYCVY5R8iojWKRg3IT7lZ869QY7e5aA0/view", "c": "Верх: тяги и подтягивания"}, "face_pull": {"n": "Лицевая тяга", "v": "https://drive.google.com/file/d/1Wb7ourfxyCoR9vV7Zs7-ImEZKD1VDrFe/view", "c": "Верх: тяги и подтягивания"}, "rear_delt": {"n": "Разведения на заднюю дельту в кроссовере", "v": "https://drive.google.com/file/d/1YHyNRdQZ12RSSbcMpOeOr1YXwNvb_Tx_/view", "c": "Верх: тяги и подтягивания"}, "y_raise": {"n": "Y-подъёмы с гантелями", "v": "https://drive.google.com/file/d/1CIASZ5vrl9Cg85zx1NghBN2_VtPeNxU2/view", "c": "Верх: тяги и подтягивания"}, "biceps": {"n": "Сгибания рук с гантелями", "v": "https://drive.google.com/file/d/11OCyo8V0ZQMBlxERhxho11ZA8GSegRsF/view", "c": "Верх: тяги и подтягивания"}, "copenhagen": {"n": "Копенгагенская планка", "v": "https://drive.google.com/file/d/1Pi0AcYO4VbbUkSYZEul94YZy7FzR-FVV/view", "c": "Кор и подсобка"}, "side_plank": {"n": "Боковая планка", "v": "https://drive.google.com/file/d/1HnoaZ3JQOgnvdTMvDij0qLVy-8Z1qkki/view", "c": "Кор и подсобка"}, "side_bend": {"n": "Боковые наклоны в станке для гиперэкстензии", "v": "https://drive.google.com/file/d/1B_z8CVeWBRzDBCcLeXouZjjxE0OtXTnd/view", "c": "Кор и подсобка"}, "ghd_raise": {"n": "Подъёмы ног в GHD", "v": "https://drive.google.com/file/d/19BBEu7jR37t25onvUxwGk-C6gL3LJLDJ/view", "c": "Кор и подсобка"}, "ghd_crunch": {"n": "GHD-скручивания", "v": "https://drive.google.com/file/d/1DTPjZQRfc8wmZWcDe5Hvnm57p0dqwMN2/view", "c": "Кор и подсобка"}, "hang_raise": {"n": "Подъём ног в висе", "v": "https://drive.google.com/file/d/1zyESphIXgUFW-i4rpHzuHtmqcgy5Z2W_/view", "c": "Кор и подсобка"}, "deadbug": {"n": "Мёртвый жук с блинами", "v": "https://drive.google.com/file/d/17HhEoWSY84DWG9XXKqtUVQnemD2VAwoj/view", "c": "Кор и подсобка"}, "crunch_m": {"n": "Скручивания в тренажёре", "v": "https://drive.google.com/file/d/18TZf6y3C7YIj-BDoGvOdhPqydf2xDjH0/view", "c": "Кор и подсобка"}, "antirot": {"n": "Антиротационный жим с резиной", "v": "https://drive.google.com/file/d/1caZGSu9nXKv1w_f2bqX9jA68AkCgQuBW/view", "c": "Кор и подсобка"}, "plank_tap": {"n": "Планка с касанием плеча", "v": "https://drive.google.com/file/d/1H2_FdK9ZsSoGjSmHI4xmcMOLe8qL7jWk/view", "c": "Кор и подсобка"}, "hip_flex": {"n": "Сгибание бедра с резиной", "v": "https://drive.google.com/file/d/1emwmFyOo2b9np5lwJPaTyjNixVMNNn1I/view", "c": "Кор и подсобка"}, "hip_flex_c": {"n": "Сгибания бедра в кроссовере", "v": "https://drive.google.com/file/d/1B1mHiSGrC8QYQLJUK0ANSjtKCDKzdmw8/view", "c": "Кор и подсобка"}, "rev_squat_c": {"n": "Обратные приседания в блоке", "v": "https://drive.google.com/file/d/1CMEZSFL4rrCWkxgYskhSNCi11Hlo3o0Z/view", "c": "Кор и подсобка"}, "adductor": {"n": "Сведения бёдер в тренажёре", "v": "https://drive.google.com/file/d/1MP9Pgp7r744qO6SE1a3GnROW-_ua_ewv/view", "c": "Кор и подсобка"}, "abductor": {"n": "Разведения бёдер в тренажёре", "v": "https://drive.google.com/file/d/18sfbQgjj0CWbc9gW0sWbvOz__6sSFLB3/view", "c": "Кор и подсобка"}};
+let PLANS = [];
+</script>
+<script>
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt = s => Math.floor(s/60) + ":" + String(s%60).padStart(2,"0");
+const play = '<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M2 1l7 4-7 4z"/></svg>';
+const chev = '<svg class="chev" viewBox="0 0 14 14" aria-hidden="true"><path d="M5 2l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ls = { get(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
+
+let plan = null, WEEKS = {}, CP = {}, me = null, isStaff = false;
+let wIdx = 0, dIdx = null, view = "plan", timers = {}, cache = {};
+let db = null, canWrite = true, logs = {}, loaded = false;
+const weekOf = (p, w) => (WEEKS[p.id] && WEEKS[p.id][w]) || { phase: "", focus: "Неделя загружается…", days: Array(7).fill({ rest: true, label: "—" }) };
+const dayId = (w, d) => `${CP[plan.id] || plan.id}-${w+1}-${d+1}`;
+function rowsOf(s){ return (s.rows || []).concat(...(s.groups || []).map(g => g.rows)); }
+function ids(day){ day.sections.forEach((s,si) => rowsOf(s).forEach((r,ri) => r.id ||= `${si}-${ri}-${r.k}`)); return day; }
+
+/* ---------- log state with autosave ---------- */
+const local = {}, pending = {}, inflight = {};
+function logOf(id){ if (!local[id]) local[id] = JSON.parse(JSON.stringify(logs[id] || {done:{},times:[],weights:{},feel:"",note:""})); local[id].weights ||= {}; local[id].times ||= []; return local[id]; }
+function toast(t){ const b = document.getElementById("savebar"); b.textContent = t; b.classList.add("show"); clearTimeout(toast.h); toast.h = setTimeout(() => b.classList.remove("show"), 1600); }
+function touch(id){ clearTimeout(pending[id]); pending[id] = setTimeout(() => flush(id), 700); }
+async function flush(id){
+  if (!db || !canWrite || !CP[plan.id]) return;
+  if (inflight[id]) await inflight[id];
+  const body = Object.assign({}, logOf(id), { updatedAt: new Date().toISOString() });
+  delete pending[id];
+  const [cp, wk, dy] = id.split("-").map(Number);
+  inflight[id] = sb.from("program_log").upsert({ client_program_id: cp, week_no: wk, day_no: dy, data: body }).then(({ error }) => {
+    if (error) { toast(error.code === "42501" ? "Нет прав на запись" : "Не сохранилось, проверьте связь"); return; }
+    logs[id] = body; toast("Сохранено");
+  }).finally(() => { inflight[id] = null; });
+  await inflight[id];
+}
+function countDone(day, id){ const L = logOf(id); let all = 0, done = 0; day.sections.forEach(s => rowsOf(s).forEach(r => { all++; if (L.done[r.id]) done++; })); return [done, all]; }
+
+/* ---------- rendering ---------- */
+function wtsHtml(id, key, n, label){
+  const L = logOf(id), dis = canWrite ? "" : " disabled";
+  return `<div class="wts">${Array.from({length:n}, (_,s) => `<input data-w="${esc(key)}" data-s="${s}" inputmode="decimal" placeholder="${s+1}: кг" value="${esc((L.weights[key]||[])[s]||"")}" aria-label="${esc(label)}, подход ${s+1}, кг"${dis}>`).join("")}</div>`;
+}
+function itemHtml(id, r){
+  const L = logOf(id), on = !!L.done[r.id], cid = `c-${id}-${r.id}`;
+  return `<li class="item${on ? " done" : ""}">
+    <input type="checkbox" id="${cid}" data-k="${esc(r.id)}"${on ? " checked" : ""}${canWrite ? "" : " disabled"} aria-label="Сделано: ${esc(r.n)}">
+    <div class="txt"><label for="${cid}"><span class="n">${esc(r.n)}</span>${r.d ? `<span class="d">${esc(r.d)}</span>` : ""}${r.h ? `<span class="h">${esc(r.h)}</span>` : ""}</label>${r.w ? wtsHtml(id, r.id, r.w, r.n) : ""}</div>
+    ${r.v ? `<a class="vid" href="${esc(r.v)}" target="_blank" rel="noopener" aria-label="Видео: ${esc(r.n)}" title="Видео техники">${play}</a>` : "<span></span>"}
+  </li>`;
+}
+const timerHtml = (tid, secs) => `<div class="val" data-out="${tid}">${fmt(secs)}</div><div class="tbtns"><button class="tbtn" type="button" data-tstart="${tid}" data-secs="${secs}">Старт</button><button class="tbtn" type="button" data-treset="${tid}">Сброс</button></div>`;
+function prevResult(m){
+  for (let w = wIdx - 1; w >= 0; w--) { const wk = weekOf(plan, w);
+    for (let d = 0; d < wk.days.length; d++) { const day = wk.days[d]; if (day.rest) continue;
+      const ms = day.sections.find(s => s.main && s.main.kind === m.kind); if (!ms) continue;
+      const L = logs[dayId(w, d)] || {};
+      const t = (L.times || []).filter(x => x !== "" && x != null), k = ((L.weights || {}).main || []).filter(x => x !== "" && x != null);
+      if (t.length || k.length) return { w, big: ms.main.big, vals: t.length ? t : k, unit: t.length ? "с" : "кг" }; } }
+  return null;
+}
+function mainHtml(id, m){
+  const L = logOf(id), dis = canWrite ? "" : " disabled";
+  const cells = (m.cells || []).map((c,ci) => `<div class="cell${ci === 0 ? " l" : ""}"><div class="lbl">${esc(c.lbl)}</div>${c.timer ? timerHtml("rest", c.timer) : `<div class="val${c.light ? " light" : ""}">${esc(c.val)}</div>`}</div>`).join("");
+  const pv = prevResult(m), prev = pv ? `<div class="prev">Неделя ${pv.w+1}, ${esc(pv.big)}: <b>${pv.vals.map(esc).join(" · ")} ${pv.unit}</b></div>` : "";
+  const times = m.times ? `<div class="cell wide"><div class="lbl">Время, с</div>${prev}<div class="times">${Array.from({length:m.times}, (_,i) => `<label>${i+1}-й<input data-t="${i}" inputmode="decimal" value="${esc(L.times[i]||"")}"${dis}></label>`).join("")}</div></div>` : "";
+  const sets = m.sets ? `<div class="cell wide"><div class="lbl">Вес по подходам</div>${prev}${wtsHtml(id, "main", m.sets, m.kind)}</div>` : "";
+  return `<div class="kpi hero"><div class="cell wide"><div class="lbl">${esc(m.kind)}</div><div class="val">${esc(m.big)}</div></div>${cells}${times}${sets}</div>`;
+}
+function isOpen(key, def){ const v = ls.get("open:" + key); return v === null ? def : v === "1"; }
+function sec(key, def, head, body){ return `<details class="sec" data-sec="${key}"${isOpen(key, def) ? " open" : ""}><summary>${chev}${head}</summary><div class="inner">${body}</div></details>`; }
+function sectionHtml(id, s, i){
+  if (s.gap) return `<div class="kpi" style="margin-block:8px;border-style:dashed"><div class="cell wide"><div class="lbl">${esc(s.gap)}</div>${s.timer ? timerHtml("gap"+i, s.timer) : ""}</div></div>`;
+  const L = logOf(id), rows = rowsOf(s), done = rows.filter(r => L.done[r.id]).length;
+  let body;
+  if (s.main) body = mainHtml(id, s.main);
+  else if (s.groups) body = `<ul class="list">${s.groups.map(g => `<li class="grp">${esc(g.t)}</li>` + g.rows.map(r => itemHtml(id, r)).join("")).join("")}</ul>`;
+  else body = `<ul class="list">${rows.map(r => itemHtml(id, r)).join("")}</ul>`;
+  if (s.note) body = `<div class="note">${esc(s.note)}</div>` + body;
+  const cnt = rows.length ? `<small class="${done === rows.length ? "ok" : ""}">${done}/${rows.length}</small>` : "";
+  return sec(`${plan.id}-${i}-${s.t}`, !!s.main, `<h3>${esc(s.t)}${cnt}</h3><span class="meta">${esc(s.meta || "")}</span>`, body);
+}
+function reportHtml(id){
+  const L = logOf(id), dis = canWrite ? "" : " disabled";
+  return sec(`report`, false, `<h3>Самочувствие и комментарий</h3>`, `<div class="form">
+    <div class="field"><label for="r-feel">Самочувствие</label><input id="r-feel" value="${esc(L.feel)}"${dis}></div>
+    <div class="field"><label for="r-note">Комментарий</label><textarea id="r-note"${dis}>${esc(L.note)}</textarea></div>
+    ${logs[id] && logs[id].updatedAt ? `<div class="note">Последнее изменение: ${new Date(logs[id].updatedAt).toLocaleString("ru-RU",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"})}</div>` : ""}
+    ${CP[plan.id] ? "" : `<div class="note">Просмотр программы: дневник ведёт клиент, которому она назначена.</div>`}
+  </div>`);
+}
+function doseHtml(d){
+  return (d.text ? `<div class="note">${esc(d.text)}</div>` : "") + (d.table ? `<div style="overflow-x:auto;margin-inline:-18px;padding-inline:18px"><table class="dose"><thead><tr>${d.table[0].map(c => `<th>${esc(c)}</th>`).join("")}</tr></thead><tbody>${d.table.slice(1).map(r => `<tr>${r.map(c => `<td>${esc(c)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>` : "");
+}
+function phaseOf(w){ return plan.phases.findIndex(ph => w + 1 >= ph.w[0] && w + 1 <= ph.w[1]); }
+
+function render(){
+  Object.values(timers).forEach(t => clearInterval(t.h)); timers = {};
+  if (!plan) { renderGate(); return; }
+  document.getElementById("planview").hidden = false; document.getElementById("days").hidden = false;
+  const P = document.getElementById("plans"), D = document.getElementById("days"), H = document.getElementById("dayhead"), Mn = document.getElementById("day");
+  P.innerHTML = PLANS.map(p => `<button class="chip" type="button" data-plan="${p.id}" aria-pressed="${view === "plan" && p.id === plan.id}">${esc(p.short)}</button>`).join("");
+  document.getElementById("libbtn").textContent = view === "lib" ? "← К планам" : "Библиотека упражнений";
+  if (view === "lib") { document.getElementById("planview").hidden = true; D.hidden = true; H.innerHTML = ""; document.getElementById("ptitle").innerHTML = "<b>Библиотека</b> упражнений"; Mn.innerHTML = libHtml(); bindLib(); return; }
+  document.getElementById("planview").hidden = false; D.hidden = false;
+  document.getElementById("ptitle").innerHTML = esc(plan.title).replace(/^([^:]+)/, "<b>$1</b>");
+  document.getElementById("about").innerHTML = `<div class="who">${esc(plan.intro || plan.who)}</div><div class="freq">Для кого: ${esc(plan.who)}</div><div class="freq">${esc(plan.freq)} · ${plan.weeks} нед</div>` +
+    (plan.load ? sec(`${plan.id}-load`, false, `<h3>Содержание нагрузки</h3>`, `<ul class="rules">${plan.load.map(r => `<li>${esc(r)}</li>`).join("")}</ul>`) : "") +
+    (plan.dose ? sec(`${plan.id}-dose`, false, `<h3>Как дозировать</h3>`, doseHtml(plan.dose)) : "") +
+    (plan.edits && isStaff ? sec(`${plan.id}-edits`, false, `<h3>Правки и дополнения<small>${plan.edits.length}</small></h3>`, `<ul class="rules">${plan.edits.map(r => `<li>${esc(r)}</li>`).join("")}</ul><div class="note" style="margin-top:6px">«Правка» — где логичнее поправить исходный план; «(+)» — добавлено к авторской схеме.</div>`) : "") +
+    sec(`${plan.id}-rules`, false, `<h3>Принципы плана</h3>`, `<ol class="rules">${plan.rules.map(r => `<li>${esc(r)}</li>`).join("")}</ol>${isStaff && plan.check ? `<div class="note" style="margin-top:8px"><b>Сверка с общепринятым:</b> ${esc(plan.check)}</div>` : ""}${isStaff ? `<div class="src">Источники: ${esc(plan.sources)}</div>` : ""}`);
+  const ph = phaseOf(wIdx);
+  document.getElementById("strip").innerHTML = plan.phases.map((p,i) => `<button type="button" data-phase="${i}" class="${i === ph ? "on" : ""}" style="flex:${p.w[1]-p.w[0]+1}" title="${esc(p.t)}, недели ${p.w[0]}–${p.w[1]}">${esc(p.t)}</button>`).join("");
+  document.getElementById("weeks").innerHTML = Array.from({length: plan.weeks}, (_,w) => { const has = weekOf(plan, w).days.some((d,i) => logs[dayId(w, i)]);
+    return `<button class="wk${has ? " has" : ""}" type="button" data-week="${w}" aria-pressed="${w === wIdx}" aria-label="Неделя ${w+1}">${w+1}</button>`; }).join("");
+  const wk = weekOf(plan, wIdx);
+  const phd = ph >= 0 && plan.phases[ph].d ? `<div class="phd">${esc(plan.phases[ph].d)}</div>` : "";
+  document.getElementById("focus").innerHTML = phd + `<b>Неделя ${wIdx+1} · ${esc(wk.phase)}.</b> ${esc(wk.focus)}`;
+  const act = wk.days.map((d,i) => d.rest ? -1 : i).filter(i => i >= 0);
+  if (dIdx === null || !act.includes(dIdx)) dIdx = act[0];
+  D.style.gridTemplateColumns = wk.days.map(d => d.rest ? "20px" : "minmax(0,1fr)").join(" ");
+  D.innerHTML = wk.days.map((d,i) => { if (d.rest) return `<span class="off" aria-label="День ${i+1}: ${esc(d.label)}">${esc(d.label)}</span>`;
+    ids(d); const [dn, all] = countDone(d, dayId(wIdx, i)), full = all && dn === all, bar = full ? "full" : dn ? "part" : "";
+    return `<button role="tab" type="button" data-day="${i}" aria-selected="${i === dIdx}">День ${i+1}<small class="${full ? "ok" : ""}">${full ? "✓ " : ""}${esc(d.title)}</small><span class="bar ${bar}" style="--p:${all ? Math.round(dn/all*100) : 0}%"></span></button>`; }).join("");
+  const day = ids(wk.days[dIdx]), id = dayId(wIdx, dIdx), [dn, all] = countDone(day, id);
+  const ms = day.sections.find(s => s.main);
+  H.innerHTML = `<div class="top"><h2>${esc(day.title)}</h2>${all ? `<span class="progress${dn === all ? " full" : ""}">${dn === all ? "Выполнено" : `Отмечено ${dn} из ${all}`}</span>` : ""}</div>${ms ? `<div class="sum">${esc(ms.main.kind)}: <b>${esc(ms.main.big)}</b></div>` : ""}${day.goal ? `<div class="goal">${esc(day.goal)}</div>` : ""}`;
+  Mn.innerHTML = day.sections.map((s,i) => sectionHtml(id, s, i)).join("") + reportHtml(id);
+  bind(day, id);
+}
+
+function refreshCounts(day, id){
+  const L = logOf(id), [dn, all] = countDone(day, id);
+  const p = document.querySelector("#dayhead .progress"); if (p) { p.textContent = dn === all ? "Выполнено" : `Отмечено ${dn} из ${all}`; p.classList.toggle("full", dn === all); }
+  document.querySelectorAll("#day details.sec").forEach(el => { const i = +el.dataset.sec.split("-")[1]; const s = day.sections[i]; if (!s || el.dataset.sec === "report") return;
+    const rows = rowsOf(s), done = rows.filter(r => L.done[r.id]).length, sm = el.querySelector("h3 small");
+    if (sm) { sm.textContent = `${done}/${rows.length}`; sm.classList.toggle("ok", done === rows.length); } });
+  const tab = document.querySelector(`#days [data-day="${dIdx}"]`);
+  if (tab) { tab.querySelector("small").textContent = (all && dn === all ? "✓ " : "") + day.title; const bar = tab.querySelector(".bar"); bar.className = "bar " + (all && dn === all ? "full" : dn ? "part" : ""); bar.style.setProperty("--p", (all ? Math.round(dn/all*100) : 0) + "%"); }
+}
+function bind(day, id){
+  const L = logOf(id);
+  document.querySelectorAll("#day .item > input[type=checkbox]").forEach(cb => cb.addEventListener("change", () => {
+    if (cb.checked) L.done[cb.dataset.k] = true; else delete L.done[cb.dataset.k];
+    cb.closest(".item").classList.toggle("done", cb.checked); refreshCounts(day, id); touch(id); }));
+  document.querySelectorAll("#day [data-w]").forEach(i => i.addEventListener("input", () => {
+    const a = L.weights[i.dataset.w] ||= []; a[+i.dataset.s] = i.value.trim().replace(",", "."); for (let k = 0; k < a.length; k++) if (a[k] == null) a[k] = ""; touch(id); }));
+  document.querySelectorAll("#day [data-t]").forEach(i => i.addEventListener("input", () => {
+    L.times[+i.dataset.t] = i.value.trim().replace(",", "."); for (let k = 0; k < L.times.length; k++) if (L.times[k] == null) L.times[k] = ""; touch(id); }));
+  const f = document.getElementById("r-feel"), n = document.getElementById("r-note");
+  if (f) f.addEventListener("input", () => { L.feel = f.value; touch(id); });
+  if (n) n.addEventListener("input", () => { L.note = n.value; touch(id); });
+  document.querySelectorAll("details.sec").forEach(d => d.addEventListener("toggle", () => ls.set("open:" + d.dataset.sec, d.open ? "1" : "0")));
+  document.querySelectorAll("[data-tstart]").forEach(b => {
+    const tid = b.dataset.tstart, secs = +b.dataset.secs, out = document.querySelector(`[data-out="${tid}"]`);
+    timers[tid] = { left: secs, h: null };
+    b.addEventListener("click", () => { const t = timers[tid];
+      if (t.h) { clearInterval(t.h); t.h = null; b.textContent = "Продолжить"; b.classList.remove("on"); return; }
+      if (t.left <= 0) t.left = secs; b.textContent = "Пауза"; b.classList.add("on");
+      t.h = setInterval(() => { t.left--; out.textContent = fmt(Math.max(t.left,0)); if (t.left <= 0) { clearInterval(t.h); t.h = null; b.textContent = "Ещё раз"; b.classList.remove("on"); } }, 1000); });
+    document.querySelector(`[data-treset="${tid}"]`).addEventListener("click", () => { const t = timers[tid]; clearInterval(t.h); t.h = null; t.left = secs; out.textContent = fmt(secs); b.textContent = "Старт"; b.classList.remove("on"); });
+  });
+}
+
+/* ---------- library: every exercise, its video, and where the plans put it ---------- */
+let USES = null, libQ = "";
+function buildUses(){
+  USES = {};
+  PLANS.forEach(p => { for (let w = 0; w < p.weeks; w++) weekOf(p, w).days.forEach(d => { if (d.rest) return; d.sections.forEach(s => rowsOf(s).forEach(r => {
+    const u = (USES[r.k] ||= {}); (u[p.short] ||= new Set()).add(s.t); })); }); });
+}
+function libHtml(){
+  if (!USES) buildUses();
+  const cats = {}; Object.entries(EX).sort((a,b) => (a[1].c.startsWith("Бег")) - (b[1].c.startsWith("Бег"))).forEach(([k,e]) => (cats[e.c] ||= []).push([k,e]));
+  const q = libQ.toLowerCase(), withV = Object.values(EX).filter(e => e.v).length;
+  const body = Object.entries(cats).map(([c, list]) => {
+    const rows = list.filter(([k,e]) => !q || e.n.toLowerCase().includes(q)).map(([k,e]) => { const u = USES[k];
+      const uses = u ? Object.entries(u).map(([p, s]) => `${p}: ${[...s].join(", ")}`).join(" · ") : "пока не используется в планах";
+      return `<li class="item"><div class="txt"><span class="n">${esc(e.n)}</span><span class="uses">${esc(uses)}</span></div>${e.v ? `<a class="vid" href="${esc(e.v)}" target="_blank" rel="noopener" aria-label="Видео: ${esc(e.n)}">${play}</a>` : "<span></span>"}</li>`; }).join("");
+    return rows ? sec("lib-" + c, true, `<h3>${esc(c)}<small>${list.length}</small></h3>`, `<ul class="list">${rows}</ul>`) : ""; }).join("");
+  return `<div class="lib"><div class="note">${Object.keys(EX).length} упражнений, у ${withV} есть видео техники с Google Диска. Категория говорит, в какое место занятия упражнение уместно ставить; под названием — где его используют планы.</div>
+    <input class="search" id="libq" type="search" placeholder="Найти упражнение" value="${esc(libQ)}" aria-label="Поиск упражнения">${body}</div>`;
+}
+function bindLib(){
+  const q = document.getElementById("libq");
+  q.addEventListener("input", () => { libQ = q.value; const pos = q.selectionStart; render(); const n = document.getElementById("libq"); n.focus(); n.setSelectionRange(pos, pos); });
+  document.querySelectorAll("details.sec").forEach(d => d.addEventListener("toggle", () => ls.set("open:" + d.dataset.sec, d.open ? "1" : "0")));
+}
+
+/* ---------- navigation ---------- */
+function restoreWeek(){ if (!plan) return; const st = plan.start ? Math.floor((Date.now() - new Date(plan.start)) / 6048e5) : null;
+  const v = ls.get("week:" + plan.id); wIdx = v !== null && +v >= 0 && +v < plan.weeks ? +v : Math.max(0, Math.min(plan.weeks - 1, st || 0));
+  const d = ls.get("day:" + plan.id); dIdx = d === null ? null : +d; }
+document.getElementById("plans").addEventListener("click", async e => { const b = e.target.closest("[data-plan]"); if (!b) return; plan = PLANS.find(p => p.id === b.dataset.plan); ls.set("plan", plan.id); view = "plan"; await loadWeeks(plan); restoreWeek(); render(); window.scrollTo({top:0}); });
+document.getElementById("weeks").addEventListener("click", e => { const b = e.target.closest("[data-week]"); if (!b) return; wIdx = +b.dataset.week; ls.set("week:" + plan.id, wIdx); dIdx = null; render(); });
+document.getElementById("strip").addEventListener("click", e => { const b = e.target.closest("[data-phase]"); if (!b) return; wIdx = plan.phases[+b.dataset.phase].w[0] - 1; ls.set("week:" + plan.id, wIdx); dIdx = null; render(); });
+document.getElementById("days").addEventListener("click", e => { const b = e.target.closest("[data-day]"); if (!b) return; dIdx = +b.dataset.day; ls.set("day:" + plan.id, dIdx); render(); });
+document.getElementById("libbtn").addEventListener("click", () => { view = view === "lib" ? "plan" : "lib"; render(); window.scrollTo({top:0}); });
+
+/* ---------- data: Supabase ---------- */
+const SUPABASE_URL = "https://selgcdicdtjpcsrfrqdq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_wLlkgxHctEZyUzB0TSlUmQ_R_m-t4ca";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+function editing(){ const a = document.activeElement; return a && /INPUT|TEXTAREA/.test(a.tagName) && document.getElementById("day").contains(a); }
+let catalog = [];
+function toPlan(r, cp){ return Object.assign({ id: r.slug, title: r.title, short: r.short, weeks: r.weeks }, r.meta || {}, { dbId: r.id, start: cp ? cp.start_date : null }); }
+async function loadWeeks(p){
+  if (!p || WEEKS[p.id]) return;
+  const { data, error } = await sb.from("program_week").select("week_no, phase, focus, days").eq("program_id", p.dbId).order("week_no");
+  if (error) { toast("Не удалось загрузить недели"); return; }
+  const { data: det } = await sb.from("program_detail").select("data").eq("program_id", p.dbId).maybeSingle();
+  if (det && det.data) Object.assign(p, det.data);   // нагрузка, дозировка, принципы, описания фаз — только клиенту программы и тренеру
+  WEEKS[p.id] = []; data.forEach(r => WEEKS[p.id][r.week_no - 1] = { phase: r.phase, focus: r.focus, days: r.days });
+}
+function renderGate(){
+  document.getElementById("planview").hidden = true; document.getElementById("days").hidden = true;
+  document.getElementById("plans").innerHTML = ""; document.getElementById("dayhead").innerHTML = "";
+  document.getElementById("ptitle").innerHTML = "<b>Тренировочные</b> планы";
+  const list = catalog.map(r => { const p = r.meta || {}; return `<li class="item" style="grid-template-columns:1fr"><div class="txt"><span class="n">${esc(r.title)}</span><span class="h">${esc(p.intro || "")}</span><span class="d">${esc(p.freq || "")} · ${r.weeks} нед</span></div></li>`; }).join("");
+  const box = me ? `<div class="note">Вы вошли как ${esc(me.email || "")}. Программа ещё не назначена — тренер откроет её после оплаты. <button class="tbtn" type="button" id="logout">Выйти</button></div>`
+    : `<div class="form"><div class="field"><label for="em">Почта для входа</label><input id="em" type="email" autocomplete="email" placeholder="you@mail.ru"></div><button class="tbtn" type="button" id="login">Прислать ссылку для входа</button><div class="note" id="lmsg"></div></div>`;
+  document.getElementById("day").innerHTML = box + `<ul class="list" style="margin-top:18px">${list}</ul>`;
+  const lb = document.getElementById("login");
+  if (lb) lb.onclick = async () => { const em = document.getElementById("em").value.trim(); if (!em) return;
+    const { error } = await sb.auth.signInWithOtp({ email: em, options: { emailRedirectTo: location.href.split("#")[0] } });
+    document.getElementById("lmsg").textContent = error ? "Не получилось: " + error.message : "Ссылка отправлена, проверьте почту."; };
+  const lo = document.getElementById("logout"); if (lo) lo.onclick = () => sb.auth.signOut().then(() => location.reload());
+}
+async function boot(){
+  const { data: cat } = await sb.from("program").select("id, slug, title, short, weeks, meta, position").eq("published", true).order("position");
+  catalog = cat || [];
+  const { data: { session } } = await sb.auth.getSession();
+  me = session ? session.user : null; db = me ? sb : null; loaded = true;
+  if (!me) { render(); return; }
+  const { data: prof } = await sb.from("profile").select("role").eq("id", me.id).maybeSingle();
+  isStaff = !!prof && (prof.role === "coach" || prof.role === "admin");
+  const { data: cps } = await sb.from("client_program").select("id, program_id, start_date, status").eq("profile_id", me.id).neq("status", "finished");
+  const mine = (cps || []).map(cp => { const r = catalog.find(x => x.id === cp.program_id); if (!r) return null; CP[r.slug] = cp.id; return toPlan(r, cp); }).filter(Boolean);
+  PLANS = isStaff ? catalog.map(r => mine.find(m => m.id === r.slug) || toPlan(r, null)) : mine;
+  if (!PLANS.length) { render(); return; }
+  plan = PLANS.find(p => p.id === ls.get("plan")) || PLANS[0];
+  const ids = Object.values(CP);
+  if (ids.length) { const { data: lg } = await sb.from("program_log").select("client_program_id, week_no, day_no, data, updated_at").in("client_program_id", ids);
+    (lg || []).forEach(r => logs[`${r.client_program_id}-${r.week_no}-${r.day_no}`] = Object.assign({}, r.data, { updatedAt: r.updated_at })); }
+  await loadWeeks(plan); restoreWeek(); render();
+}
+sb.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_IN" && !me) boot(); });
+document.getElementById("day").innerHTML = '<div class="empty">Загружаю…</div>';
+boot();
+</script>
+</body>
+</html>
