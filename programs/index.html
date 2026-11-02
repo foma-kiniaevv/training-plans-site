@@ -131,6 +131,6 @@ function pick(f){ document.querySelectorAll(".chip").forEach(c => c.setAttribute
 document.querySelector(".chips").addEventListener("click", e => { const b = e.target.closest("[data-f]"); if (b) pick(b.dataset.f); });
 const start = location.hash.slice(1); if (document.querySelector(`.chip[data-f="${start}"]`)) pick(start);
 </script></main>
-<footer><div class="wrap">Автор программ: тренер Артём Игнатов, кандидат педагогических наук</div></footer>
+<footer><div class="wrap">Автор программ: тренер Артём Игнатов, кандидат педагогических наук. Заявки и вопросы: <a href="mailto:ignatooov@mail.ru">ignatooov@mail.ru</a></div></footer>
 </body>
 </html>

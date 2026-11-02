@@ -408,8 +408,8 @@ function renderGate(){
   document.getElementById("planview").hidden = true; document.getElementById("days").hidden = true;
   document.getElementById("plans").innerHTML = ""; document.getElementById("dayhead").innerHTML = "";
   document.getElementById("ptitle").innerHTML = "<b>Личный</b> кабинет";
-  const box = me ? `<div class="note">Вы вошли как ${esc(me.email || "")}. Программа ещё не назначена — тренер откроет её после оплаты. <a href="../programs/">Все программы</a></div>`
-    : `<div class="form"><div class="field"><label for="em">Почта для входа</label><input id="em" type="email" autocomplete="email" placeholder="you@mail.ru"></div><button class="tbtn" type="button" id="login">Прислать ссылку для входа</button><div class="note" id="lmsg" role="status">${esc(authMsg)}</div><div class="note"><a href="../programs/">Посмотреть программы</a></div></div>`;
+  const box = me ? `<div class="note">Вы вошли как ${esc(me.email || "")}. Программа ещё не назначена — тренер откроет её после оплаты. Написать тренеру: <a style="color:var(--accent)" href="mailto:ignatooov@mail.ru">ignatooov@mail.ru</a>. <a style="color:var(--accent)" href="../programs/">Все программы</a></div>`
+    : `<div class="form"><div class="field"><label for="em">Почта для входа</label><input id="em" type="email" autocomplete="email" placeholder="you@mail.ru"></div><button class="tbtn" type="button" id="login">Прислать ссылку для входа</button><div class="note" id="lmsg" role="status">${esc(authMsg)}</div><div class="note"><a style="color:var(--accent)" href="../programs/">Посмотреть программы</a></div></div>`;
   document.getElementById("day").innerHTML = box;
   const lb = document.getElementById("login");
   if (lb) lb.onclick = async () => { const inp = document.getElementById("em"), em = inp.value.trim(), msg = document.getElementById("lmsg"); authMsg = "";
@@ -418,7 +418,13 @@ function renderGate(){
     const { error } = await sb.auth.signInWithOtp({ email: em, options: { emailRedirectTo: location.href.split("#")[0] } });
     lb.disabled = false; msg.textContent = error ? authErrorText(error) : `Ссылка отправлена на ${em}. Проверьте почту и папку «Спам».`; };
 }
+let booting = false;
 async function boot(){
+  if (booting) return; // при входе по ссылке SIGNED_IN приходит, пока первая загрузка ещё идёт
+  booting = true;
+  try { await load(); } finally { booting = false; }
+}
+async function load(){
   const { data: cat } = await sb.from("program").select("id, slug, title, short, weeks, meta, position").eq("published", true).order("position");
   catalog = cat || [];
   const { data: { session } } = await sb.auth.getSession();
