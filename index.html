@@ -269,7 +269,8 @@ function phaseOf(w){ return plan.phases.findIndex(ph => w + 1 >= ph.w[0] && w + 
 
 function render(){
   Object.values(timers).forEach(t => clearInterval(t.h)); timers = {};
-  if (!plan) { renderGate(); return; }
+  document.getElementById("libbtn").textContent = view === "lib" ? "← К планам" : "Библиотека упражнений";
+  if (!plan && view !== "lib") { renderGate(); return; }
   document.getElementById("planview").hidden = false; document.getElementById("days").hidden = false;
   const P = document.getElementById("plans"), D = document.getElementById("days"), H = document.getElementById("dayhead"), Mn = document.getElementById("day");
   P.innerHTML = PLANS.map(p => `<button class="chip" type="button" data-plan="${p.id}" aria-pressed="${view === "plan" && p.id === plan.id}">${esc(p.short)}</button>`).join("");
@@ -343,15 +344,15 @@ function buildUses(){
     const u = (USES[r.k] ||= {}); (u[p.short] ||= new Set()).add(s.t); })); }); });
 }
 function libHtml(){
-  if (!USES) buildUses();
+  buildUses();
   const cats = {}; Object.entries(EX).sort((a,b) => (a[1].c.startsWith("Бег")) - (b[1].c.startsWith("Бег"))).forEach(([k,e]) => (cats[e.c] ||= []).push([k,e]));
   const q = libQ.toLowerCase(), withV = Object.values(EX).filter(e => e.v).length;
   const body = Object.entries(cats).map(([c, list]) => {
     const rows = list.filter(([k,e]) => !q || e.n.toLowerCase().includes(q)).map(([k,e]) => { const u = USES[k];
-      const uses = u ? Object.entries(u).map(([p, s]) => `${p}: ${[...s].join(", ")}`).join(" · ") : "пока не используется в планах";
+      const uses = u ? Object.entries(u).map(([p, s]) => `${p}: ${[...s].join(", ")}`).join(" · ") : "";
       return `<li class="item"><div class="txt"><span class="n">${esc(e.n)}</span><span class="uses">${esc(uses)}</span></div>${e.v ? `<a class="vid" href="${esc(e.v)}" target="_blank" rel="noopener" aria-label="Видео: ${esc(e.n)}">${play}</a>` : "<span></span>"}</li>`; }).join("");
     return rows ? sec("lib-" + c, true, `<h3>${esc(c)}<small>${list.length}</small></h3>`, `<ul class="list">${rows}</ul>`) : ""; }).join("");
-  return `<div class="lib"><div class="note">${Object.keys(EX).length} упражнений, у ${withV} есть видео техники с Google Диска. Категория говорит, в какое место занятия упражнение уместно ставить; под названием — где его используют планы.</div>
+  return `<div class="lib"><div class="note">${Object.keys(EX).length} упражнений, у ${withV} есть видео техники с Google Диска. Категория говорит, в какое место занятия упражнение уместно ставить.</div>
     <input class="search" id="libq" type="search" placeholder="Найти упражнение" value="${esc(libQ)}" aria-label="Поиск упражнения">${body}</div>`;
 }
 function bindLib(){
