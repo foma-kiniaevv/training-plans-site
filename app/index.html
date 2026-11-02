@@ -159,11 +159,123 @@ table.dose th{color:var(--muted);font-weight:500}
 @media (max-width:420px){h1{font-size:26px}.val{font-size:26px}}
 @media (prefers-reduced-motion:reduce){.chev,.savebar{transition:none}}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<style>
+/* Кабинет в стиле витрины: серый фон, белые плитки, чёрная полоса с лозунгом, оранжевый акцент. Поверх стилей template.html. */
+:root{
+  --bg:#f2f2f2; --panel:#ffffff; --sunk:#e8e8e8; --night:#111111; --on-night:#f2efe8; --ink:#212121; --muted:#6b6b6b; --soft:#b5b5b8; --line:#dedede;
+  --accent:#b8440f; --brand:#f06428; --on-brand:#1a1a1a; --done:#212121; --good:#2a7046;
+  --card:#111111; --card-ink:#ffffff; --card-muted:#a5a5aa; --card-line:#2e2e30;
+  --sans:"Montserrat","Helvetica Neue",Arial,sans-serif; --display:"Montserrat","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#121214; --panel:#1c1d20; --sunk:#0b0b0d; --night:#000000; --ink:#f2f2f2; --muted:#a1a1a6; --soft:#5c5c60; --line:#2c2d31;
+  --accent:#f27540; --brand:#f27540; --on-brand:#121214; --done:#f2f2f2; --good:#5cc98a; --card:#000000; --card-line:#2c2d31; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#121214; --panel:#1c1d20; --sunk:#0b0b0d; --night:#000000; --ink:#f2f2f2; --muted:#a1a1a6; --soft:#5c5c60; --line:#2c2d31;
+  --accent:#f27540; --brand:#f27540; --on-brand:#121214; --done:#f2f2f2; --good:#5cc98a; --card:#000000; --card-line:#2c2d31; color-scheme:dark}
+body{font-size:15px;line-height:1.6}
+.bar-wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.topstrip{background:var(--night);color:var(--on-night)}
+.topstrip .bar-wrap{padding-block:9px;text-align:center;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase}
+.topbar{background:var(--panel)}
+.topbar .bar-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-block:15px}
+.topbar .brand{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:inherit}
+.topnav{display:flex;gap:22px;flex-wrap:wrap;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase}
+.topnav a,.topnav button{background:none;border:0;padding:0;color:inherit;cursor:pointer;text-decoration:none;font:inherit;letter-spacing:inherit;text-transform:inherit}
+.topnav a:hover,.topnav button:hover{color:var(--accent)}
+.wrap{max-width:760px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:26px 56px;gap:14px}
+h1{font-size:clamp(24px,3.4vw,34px);line-height:1.18;letter-spacing:-.015em;font-weight:600}
+h1 b{font-weight:600}
+
+/* выбор программы */
+#plans:has(.chip:only-child){display:none}
+#planview{display:flex;flex-direction:column;gap:14px}
+.chips{gap:18px;margin-inline:-16px;padding-inline:16px;padding-block:2px}
+.chip{border:0;border-bottom:2px solid transparent;border-radius:0;background:none;color:var(--muted);font:400 14px var(--sans);padding:0 0 5px}
+.chip[aria-pressed="true"]{background:none;color:var(--ink);border-color:var(--ink)}
+
+/* о программе */
+.about{background:var(--panel);border-radius:10px;padding:18px;gap:12px}
+.about .who{font-size:15px;color:var(--muted);line-height:1.6}
+.about .spec{margin:0;display:grid;gap:0;border-top:1px solid var(--line)}
+.about .spec div{display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px;padding-block:9px;border-bottom:1px solid var(--line)}
+.about .spec dt{font-size:12.5px;color:var(--muted)}
+.about .spec dd{margin:0;font-size:14px;font-weight:500;line-height:1.45}
+.about details.sec:last-child{border-bottom:0}
+.about details.sec > summary{padding:11px 0}
+.about details.sec > summary h3{font-size:14px;font-weight:600}
+
+/* фазы и недели */
+.weekline{background:var(--panel);border-radius:10px;padding:18px;gap:12px;margin-top:0!important}
+.strip{height:26px;gap:2px}
+.strip button{border-radius:3px;background:var(--sunk);color:var(--muted);font:500 10.5px var(--sans)}
+.strip button.on{background:var(--brand);color:var(--on-brand);font-weight:600}
+.weeks{gap:4px}
+.wk{background:var(--panel);font:500 12.5px var(--sans);min-width:32px;padding:4px 8px}
+.wk.has{color:var(--ink);border-color:var(--soft)}
+.wk[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.focus{font-size:13.5px;line-height:1.55}
+.phd{font-size:13.5px;color:var(--muted)}
+
+/* дни */
+.seg{background:var(--sunk);border-radius:10px;box-shadow:0 0 0 6px var(--bg)}
+.seg button{border-radius:8px;font:500 12px var(--sans)}
+.seg button small{font-size:11px}
+.seg button[aria-selected="true"]{background:var(--panel)}
+.seg .bar.part{background:linear-gradient(90deg,var(--brand) var(--p),var(--line) var(--p))}
+.dayhead{padding-top:8px;gap:4px}
+.dayhead h2{font-size:24px;line-height:1.2;font-weight:600;letter-spacing:-.01em}
+.dayhead .sum{font-size:14px}
+.dayhead .goal,.goal{font-size:14px;line-height:1.55}
+
+/* секции занятия */
+#day{gap:8px}
+#day details.sec{background:var(--panel);border:0;border-radius:10px;padding-inline:18px}
+details.sec > summary h3{font-size:15px}
+h3 small{color:var(--muted);font-size:13px}
+.meta{font-size:12.5px}
+.item .n{font-size:14.5px}
+.item .d{font-size:13.5px}
+.item > input{accent-color:var(--brand)}
+.vid{background:var(--panel)}
+.vid:hover{color:var(--accent);border-color:var(--accent)}
+.wts input,.times input,.field input,.field textarea,.search{background:var(--bg);border-radius:6px}
+.grp{font-size:11px;font-weight:600;letter-spacing:.14em}
+
+/* основная работа */
+.kpi{border-radius:10px}
+.val{font-weight:600;letter-spacing:-.01em;font-size:26px}
+.kpi.hero .cell:not(.wide) .val:not([data-out]){font-size:15px;font-weight:600}
+.kpi.hero .val[data-out]{font-size:22px}
+.kpi.hero .times input,.kpi.hero .wts input{background:transparent}
+.lbl{font-size:12.5px}
+.tbtn{background:var(--panel);font:500 12.5px var(--sans);padding:6px 14px}
+.tbtn.on{background:var(--ink);color:var(--panel)}
+.kpi.hero .tbtn{background:transparent}
+
+/* вход и пустые состояния */
+.form{background:var(--panel);border-radius:10px;padding:20px}
+#login{background:var(--brand);color:var(--on-brand);border:0;font:600 13px var(--sans);padding:12px 26px}
+#login:hover{filter:brightness(1.07)}
+#login:disabled{opacity:.6}
+#day > .note{background:var(--panel);border-radius:10px;padding:18px;font-size:14px}
+.rest,.empty{background:var(--panel);border-radius:10px;padding:18px}
+.note a{color:var(--accent)}
+
+/* библиотека */
+.lib{gap:8px}
+.lib > .note{padding-inline:2px}
+.search{background:var(--panel);border-color:var(--line)}
+.savebar{border-radius:999px}
+@media (max-width:520px){.about .spec div{grid-template-columns:100px minmax(0,1fr)}.topnav{gap:16px}.topstrip .bar-wrap{letter-spacing:.18em}}
+</style>
 </head>
 <body>
+<div class="topstrip"><div class="bar-wrap">Больше, чем качалка</div></div>
+<div class="topbar"><div class="bar-wrap"><a class="brand" href="../">Тренировочные программы</a><nav class="topnav" aria-label="Основное меню"><a href="../programs/">Программы</a><button type="button" id="libbtn">Библиотека</button><button type="button" id="logout" hidden>Выйти</button></nav></div></div>
 <div class="wrap">
   <header>
-    <div class="eyebrow"><a href="../" style="text-decoration:none;color:inherit">Тренировочные программы</a><span style="display:flex;gap:14px;flex:none"><button type="button" id="libbtn">Библиотека упражнений</button><button type="button" id="logout" hidden>Выйти</button></span></div>
     <h1 id="ptitle"></h1>
   </header>
   <div class="chips" id="plans" role="group" aria-label="Планы"></div>
@@ -275,16 +387,16 @@ function phaseOf(w){ return plan.phases.findIndex(ph => w + 1 >= ph.w[0] && w + 
 
 function render(){
   Object.values(timers).forEach(t => clearInterval(t.h)); timers = {};
-  document.getElementById("libbtn").textContent = view === "lib" ? "← К планам" : "Библиотека упражнений";
+  document.getElementById("libbtn").textContent = view === "lib" ? "← К планам" : "Библиотека";
   if (!plan && view !== "lib") { renderGate(); return; }
   document.getElementById("planview").hidden = false; document.getElementById("days").hidden = false;
   const P = document.getElementById("plans"), D = document.getElementById("days"), H = document.getElementById("dayhead"), Mn = document.getElementById("day");
   P.innerHTML = PLANS.map(p => `<button class="chip" type="button" data-plan="${p.id}" aria-pressed="${view === "plan" && p.id === plan.id}">${esc(p.short)}</button>`).join("");
-  document.getElementById("libbtn").textContent = view === "lib" ? "← К планам" : "Библиотека упражнений";
+  document.getElementById("libbtn").textContent = view === "lib" ? "← К планам" : "Библиотека";
   if (view === "lib") { document.getElementById("planview").hidden = true; D.hidden = true; H.innerHTML = ""; document.getElementById("ptitle").innerHTML = "<b>Библиотека</b> упражнений"; Mn.innerHTML = libHtml(); bindLib(); return; }
   document.getElementById("planview").hidden = false; D.hidden = false;
   document.getElementById("ptitle").innerHTML = esc(plan.title).replace(/^([^:]+)/, "<b>$1</b>");
-  document.getElementById("about").innerHTML = `<div class="who">${esc(plan.intro || plan.who)}</div><div class="freq">Для кого: ${esc(plan.who)}</div><div class="freq">${esc(plan.freq)} · ${plan.weeks} нед</div>` +
+  document.getElementById("about").innerHTML = `<div class="who">${esc(plan.intro || plan.who)}</div><dl class="spec"><div><dt>Срок</dt><dd>${plan.weeks} нед</dd></div><div><dt>В неделю</dt><dd>${esc(plan.freq)}</dd></div><div><dt>Для кого</dt><dd>${esc(plan.who)}</dd></div></dl>` +
     (plan.load ? sec(`${plan.id}-load`, false, `<h3>Содержание нагрузки</h3>`, `<ul class="rules">${plan.load.map(r => `<li>${esc(r)}</li>`).join("")}</ul>`) : "") +
     (plan.dose ? sec(`${plan.id}-dose`, false, `<h3>Как дозировать</h3>`, doseHtml(plan.dose)) : "") +
     (plan.edits && isStaff ? sec(`${plan.id}-edits`, false, `<h3>Правки и дополнения<small>${plan.edits.length}</small></h3>`, `<ul class="rules">${plan.edits.map(r => `<li>${esc(r)}</li>`).join("")}</ul><div class="note" style="margin-top:6px">«Правка» — где логичнее поправить исходный план; «(+)» — добавлено к авторской схеме.</div>`) : "") +
