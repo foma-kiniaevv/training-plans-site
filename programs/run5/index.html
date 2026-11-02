@@ -3,134 +3,109 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Бег 3–5 км</title>
+<title>Бег 3–5 км · Больше, чем качалка</title>
 <meta name="description" content="Три блока по нарастающей и контрольный забег 3000 м в конце.">
 <meta property="og:type" content="website">
 <meta property="og:locale" content="ru_RU">
-<meta property="og:title" content="Бег 3–5 км">
+<meta property="og:title" content="Бег 3–5 км · Больше, чем качалка">
 <meta property="og:description" content="Три блока по нарастающей и контрольный забег 3000 м в конце.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2611f'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%98%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Golos+Text:wght@400;500;600&family=Unbounded:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Golos+Text:wght@400;500;600;700&display=swap">
 <style>
 :root{
-  --bg:#ffffff; --sunk:#f3f3f4; --ink:#141414; --muted:#6c6c72; --line:#e3e3e6; --accent:#c2611f; --on-accent:#ffffff;
-  --ph1:#f0d2bb; --ph2:#e0a173; --ph3:#c2611f; --ph4:#7c3a0f;
-  --display:"Unbounded","Arial Black",system-ui,sans-serif; --body:"Golos Text",-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --bg:#efefef; --panel:#ffffff; --ink:#111112; --muted:#646468; --line:#d6d6d8; --accent:#1a4fd8; --on-accent:#ffffff;
+  --sans:"Golos Text",-apple-system,"Segoe UI",Roboto,Arial,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,Consolas,monospace;
 }
 @media (prefers-color-scheme:dark){:root{
-  --bg:#0c0c0d; --sunk:#1c1c1e; --ink:#f2f2f3; --muted:#a0a0a6; --line:#2d2d31; --accent:#e8873f; --on-accent:#140a03;
-  --ph1:#4f2d15; --ph2:#8a4c1f; --ph3:#c96f2c; --ph4:#f0a76d; color-scheme:dark}}
+  --bg:#111112; --panel:#1b1b1d; --ink:#f1f1f2; --muted:#a2a2a8; --line:#323236; --accent:#7f9fff; --on-accent:#0a1230; color-scheme:dark}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--body);-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--sans);-webkit-font-smoothing:antialiased}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
 a{color:inherit}
-h1,h2,h3{margin:0;text-wrap:balance}
-p{margin:0}
 :focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-.wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-header.top{border-bottom:1px solid var(--line)}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:14px;flex-wrap:wrap}
-.brand{font:600 15px var(--display);text-decoration:none}
-nav.main{display:flex;gap:18px;align-items:center;font-size:15px;font-weight:500}
+.wrap{max-width:1360px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.mono{font:400 13px/1.45 var(--mono);letter-spacing:.02em}
+header.top .wrap{display:flex;justify-content:space-between;align-items:center;gap:14px 24px;flex-wrap:wrap;padding-block:16px}
+.logo{font:700 16px var(--sans);letter-spacing:-.01em;text-decoration:none}
+nav.main{display:flex;gap:22px;font-size:15px}
 nav.main a{text-decoration:none}
 nav.main a:hover{color:var(--accent)}
-.btn{display:inline-block;border:0;background:var(--accent);color:var(--on-accent);font-weight:600;padding:13px 22px;border-radius:8px;text-decoration:none;text-align:center}
-.btn:hover{filter:brightness(1.08)}
-.eyebrow{font-size:12.5px;font-weight:600;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
-section{padding-block:56px}
-section+section{border-top:1px solid var(--line)}
-h2{font:500 clamp(22px,3.4vw,30px)/1.2 var(--display)}
-.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:48px;align-items:center;padding-block:56px}
+.hero{padding-block:clamp(28px,6vw,72px) clamp(28px,5vw,56px);display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:24px 48px;align-items:end}
 .hero>*{min-width:0}
-.hero h1{font:600 clamp(30px,4.6vw,50px)/1.1 var(--display);letter-spacing:-.01em;overflow-wrap:break-word}
-.hero .lead{margin-top:18px;font-size:18px;color:var(--muted);max-width:32em}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
-.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:30px}
-.facts b{display:block;font:600 22px var(--display);font-variant-numeric:tabular-nums}
-.facts span{font-size:13.5px;color:var(--muted)}
-.sched{display:grid;gap:7px}
-.sched .cap{display:flex;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted);margin-bottom:6px}
-.row{display:grid;grid-template-columns:128px minmax(0,1fr);gap:10px;align-items:center;padding:3px 0;text-decoration:none}
-.row .nm{font-size:13.5px;font-weight:500;line-height:1.2}
-.row:hover .nm{color:var(--accent)}
-.ruler{display:flex;gap:2px;width:100%}
-.ruler i{display:block;flex:1 1 0;min-width:0;height:14px;border-radius:2px}
-.ruler.big i{height:26px;border-radius:3px}
-.p0{background:var(--ph1)}.p1{background:var(--ph2)}.p2{background:var(--ph3)}.p3{background:var(--ph4)}
-.goals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:24px}
-.goal{background:var(--sunk);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:8px;text-decoration:none}
-.goal:hover{box-shadow:inset 0 0 0 1.5px var(--accent)}
-.goal b{font:500 16px/1.25 var(--display)}
-.goal span{font-size:14px;color:var(--muted)}
-.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:48px;align-items:start}
-.split>*{min-width:0}
-.steps{list-style:none;margin:24px 0 0;padding:0;display:grid;gap:18px;counter-reset:s}
-.steps li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;counter-increment:s}
-.steps li::before{content:counter(s);font:600 17px var(--display);color:var(--accent)}
-.steps b{display:block;font-weight:600}
-.steps span{color:var(--muted);font-size:15px}
-.chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
-.chip{border:1px solid var(--line);background:var(--bg);color:var(--ink);padding:7px 14px;border-radius:999px;font:500 14.5px var(--body);cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}
-.card{border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:12px;min-width:0;text-decoration:none}
-.card[hidden]{display:none}
-.card:hover{border-color:var(--accent)}
-.card h2{font:500 18px/1.25 var(--display)}
-.card .one{color:var(--muted);font-size:15px}
-.spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13.5px;margin:0}
-.spec dt{color:var(--muted);font-size:12.5px}
-.spec dd{margin:0;font-weight:500}
-.more{color:var(--accent);font-weight:600;font-size:14.5px;margin-top:auto}
-.back{color:var(--accent);font-weight:500;font-size:15px;text-decoration:none}
-.proghead{padding-top:28px}
-.proghead h1,.pagetitle{font:600 clamp(26px,4vw,40px)/1.15 var(--display);overflow-wrap:break-word}
-.proghead h1{margin-top:12px}
-.proghead .lead{font-size:18px;margin-top:14px;max-width:36em}
-.prog{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:48px;align-items:start;padding-block:32px 56px}
+.hero h1{font:600 clamp(44px,10.2vw,148px)/.96 var(--sans);letter-spacing:-.035em}
+.side{display:grid;gap:14px}
+.side p{color:var(--muted)}
+.tag{display:inline-block;background:var(--panel);padding:4px;border-radius:3px;justify-self:start;transform:rotate(-1.5deg)}
+.tag span{display:block;border:1px dashed var(--muted);border-radius:2px;padding:6px 10px;font:500 12px/1.3 var(--mono);text-transform:uppercase;letter-spacing:.06em}
+.pagetitle{font:600 clamp(36px,6vw,84px)/1 var(--sans);letter-spacing:-.03em;padding-block:clamp(20px,4vw,48px)}
+.chips{display:flex;gap:8px 18px;flex-wrap:wrap;align-items:baseline;border-top:1px solid var(--ink);padding-block:12px}
+.chip{background:none;border:0;padding:0;cursor:pointer;font:400 14px var(--mono);color:var(--muted)}
+.chip[aria-pressed="true"]{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.chip:hover{color:var(--ink)}
+.count{margin-left:auto;font:400 14px var(--mono);color:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding-bottom:56px}
+.card,.tile{background:var(--panel);border-radius:2px;padding:14px;display:flex;flex-direction:column;gap:6px;min-height:340px;min-width:0;text-decoration:none}
+.card[hidden],.tile[hidden]{display:none}
+.card:hover,.tile:hover{outline:1.5px solid var(--ink);outline-offset:-1.5px}
+.code{display:flex;justify-content:space-between;gap:8px;color:var(--muted)}
+.card .num{font:500 clamp(84px,10vw,136px)/1 var(--sans);letter-spacing:-.05em;margin-block:auto;padding-block:18px;font-variant-numeric:tabular-nums}
+.num small{font:400 14px var(--mono);letter-spacing:.02em;margin-left:6px}
+.card h2,.tile h2{font:700 18px/1.25 var(--sans);letter-spacing:-.01em}
+.fact{color:var(--muted)}
+.tile{background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.tile h2{margin-top:auto}
+.how{border-top:1px solid var(--ink);padding-block:18px 64px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px}
+.how div{display:grid;gap:6px;align-content:start}
+.how b{font-weight:600;font-size:17px}
+.how span{color:var(--muted);max-width:30em}
+.back{display:inline-block;font:400 14px var(--mono);color:var(--muted);text-decoration:none;margin-top:8px}
+.back:hover{color:var(--ink)}
+.prog{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:8px;padding-block:14px 8px}
 .prog>*{min-width:0}
-.block{display:grid;gap:12px}
-.block+.block{margin-top:34px}
-.block h2{font-size:19px}
-.block p,.block li{max-width:38em}
-.phases{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.phases li{display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:10px;align-items:center;font-size:15px}
-.phases i{width:14px;height:14px;border-radius:3px}
-.phases span{color:var(--muted);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap}
-.incl{margin:0;padding-left:20px;display:grid;gap:5px}
-.buy{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));border:1px solid var(--line);border-radius:12px;padding:20px;display:grid;gap:14px}
-.buy dl{margin:0;display:grid;gap:10px;font-size:14.5px}
-.buy dt{color:var(--muted);font-size:12.5px}
-.buy dd{margin:0;font-weight:500}
-.buy .btn{width:100%}
-.buy small{font-size:13.5px;color:var(--muted)}
-footer{border-top:1px solid var(--line);font-size:14px;color:var(--muted)}
-footer .wrap{padding-block:26px}
-@media (max-width:860px){
-  .hero,.split,.prog{grid-template-columns:minmax(0,1fr);gap:30px}
-  .hero{padding-block:34px}
-  section{padding-block:40px}
-  .goals{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cards{grid-template-columns:minmax(0,1fr)}
-  .buy{position:static;order:-1}
+.plate{background:var(--panel);border-radius:2px;padding:18px;min-height:clamp(320px,50vw,620px);display:flex;flex-direction:column;justify-content:space-between;gap:16px}
+.plate .num{font:500 clamp(140px,26vw,340px)/.85 var(--sans);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
+.plate .num small{font-size:16px;margin-left:8px}
+.info{background:var(--panel);border-radius:2px;padding:18px;display:flex;flex-direction:column;gap:18px}
+.info h1{font:700 clamp(24px,2.6vw,34px)/1.15 var(--sans);letter-spacing:-.015em;overflow-wrap:break-word}
+.info .lead{font-size:17px}
+.spec{margin:0;display:grid;border-top:1px solid var(--line)}
+.spec div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px;padding-block:9px;border-bottom:1px solid var(--line)}
+.spec dt{color:var(--muted);font:400 13px/1.5 var(--mono)}
+.spec dd{margin:0;font-weight:500;font-size:15px}
+.btn{display:block;background:var(--ink);color:var(--bg);border-radius:2px;padding:13px 20px;font-weight:600;text-decoration:none;text-align:center;margin-top:auto}
+.btn:hover{background:var(--accent);color:var(--on-accent)}
+.more{background:var(--panel);border-radius:2px;padding:18px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-bottom:56px}
+.more>div{display:grid;gap:8px;align-content:start;min-width:0}
+.more h2{font:400 13px/1.4 var(--mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.phases{list-style:none;margin:0;padding:0;display:grid;gap:5px}
+.phases li{display:flex;justify-content:space-between;gap:12px}
+.phases span{font:400 13px/1.6 var(--mono);color:var(--muted);white-space:nowrap}
+footer{border-top:1px solid var(--line);color:var(--muted)}
+footer .wrap{padding-block:18px}
+@media (max-width:900px){
+  .hero,.prog,.more,.how{grid-template-columns:minmax(0,1fr)}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plate{min-height:0}
 }
-@media (max-width:420px){.row{grid-template-columns:104px minmax(0,1fr)}.row .nm{font-size:12.5px}.spec{gap:8px}.facts{gap:20px}}
+@media (max-width:520px){.cards{grid-template-columns:minmax(0,1fr)}.card,.tile{min-height:280px}.tile{min-height:0}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap">
-  <a class="brand" href="../../">Тренировочные программы</a>
+  <a class="logo" href="../../">Больше, чем качалка</a>
   <nav class="main" aria-label="Основное меню"><a href="../../programs/">Программы</a><a href="../../app/#library">Библиотека</a><a href="../../app/">Войти</a></nav>
 </div></header>
-<main><div class="wrap" style="padding-top:24px"><a class="back" href="../">← Все программы</a>
-<div class="proghead"><span class="eyebrow">Бег и спринт</span><h1>Бег 3–5 км</h1><p class="lead">Три блока по нарастающей и контрольный забег 3000 м в конце.</p></div>
-<div class="prog"><div>
-  <div class="block"><h2>Структура: 12 нед</h2><div class="ruler big" aria-hidden="true"><i class="p0" title="База, неделя 1"></i><i class="p0" title="База, неделя 2"></i><i class="p0" title="База, неделя 3"></i><i class="p0" title="База, неделя 4"></i><i class="p1" title="МПК, неделя 5"></i><i class="p1" title="МПК, неделя 6"></i><i class="p1" title="МПК, неделя 7"></i><i class="p1" title="МПК, неделя 8"></i><i class="p2" title="Горки и скорость, неделя 9"></i><i class="p2" title="Горки и скорость, неделя 10"></i><i class="p2" title="Горки и скорость, неделя 11"></i><i class="p3" title="Контроль, неделя 12"></i></div><ul class="phases"><li><i class="p0"></i>База<span>недели 1–4</span></li><li><i class="p1"></i>МПК<span>недели 5–8</span></li><li><i class="p2"></i>Горки и скорость<span>недели 9–11</span></li><li><i class="p3"></i>Контроль<span>неделя 12</span></li></ul></div>
-  <div class="block"><h2>Как строится подготовка</h2><p>Сначала темповый и лёгкий бег, затем добавляются интервалы на МПК, затем бег в гору. В конце контроль 3000 м. Интервалы строятся по правилу «отрезок + пауза = 1000 м» и чередуются с пирамидами того же объёма.</p></div>
-  <div class="block"><h2>Для кого и что нужно до старта</h2><p>Бегун-любитель, пробегает 5 км без остановки.</p></div>
-  <div class="block"><h2>Что вы получите</h2><ul class="incl"><li>Расписание на все 12 нед в личном кабинете</li><li>Цель каждого занятия</li><li>Видео техники упражнений</li><li>Таймер отдыха и дневник с весами, временем и самочувствием</li></ul></div>
+<main><div class="wrap"><a class="back" href="../">← Все программы</a>
+<div class="prog">
+  <div class="plate"><span class="code mono"><span>БЕГ-12</span><span>Бег</span></span><span class="num">12<small>нед</small></span></div>
+  <div class="info"><h1>Бег 3–5 км</h1><p class="lead">Три блока по нарастающей и контрольный забег 3000 м в конце.</p><dl class="spec"><div><dt>Срок</dt><dd>12 нед</dd></div><div><dt>В неделю</dt><dd>4 пробежки + 1 силовая</dd></div><div><dt>Условие</dt><dd>Пробегаете 5 км</dd></div></dl><a class="btn" href="../../app/">Войти и начать</a><span class="mono fact">Программу открывает тренер после оплаты.</span></div>
 </div>
-<aside class="buy"><dl><div><dt>Срок</dt><dd>12 нед</dd></div><div><dt>В неделю</dt><dd>4 пробежки + 1 силовая</dd></div><div><dt>Условие</dt><dd>Пробегаете 5 км</dd></div></dl><a class="btn" href="../../app/">Войти и начать</a><small>Программу открывает тренер после оплаты.</small></aside>
+<div class="more">
+  <div><h2>Как строится</h2><p>Сначала темповый и лёгкий бег, затем добавляются интервалы на МПК, затем бег в гору. В конце контроль 3000 м. Интервалы строятся по правилу «отрезок + пауза = 1000 м» и чередуются с пирамидами того же объёма.</p></div>
+  <div><h2>Для кого</h2><p>Бегун-любитель, пробегает 5 км без остановки.</p></div>
+  <div><h2>Структура</h2><ul class="phases"><li>База<span>нед 1–4</span></li><li>МПК<span>нед 5–8</span></li><li>Горки и скорость<span>нед 9–11</span></li><li>Контроль<span>нед 12</span></li></ul></div>
 </div></div></main>
-<footer><div class="wrap">Автор программ: тренер Артём Игнатов, кандидат педагогических наук</div></footer>
+<footer><div class="wrap mono">Автор программ: тренер Артём Игнатов, кандидат педагогических наук</div></footer>
 </body>
 </html>
