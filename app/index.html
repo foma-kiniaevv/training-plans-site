@@ -503,7 +503,7 @@ function bindLib(){
 function restoreWeek(){ if (!plan) return; const st = plan.start ? Math.floor((Date.now() - new Date(plan.start)) / 6048e5) : null;
   const v = ls.get("week:" + plan.id); wIdx = v !== null && +v >= 0 && +v < plan.weeks ? +v : Math.max(0, Math.min(plan.weeks - 1, st || 0));
   const d = ls.get("day:" + plan.id); dIdx = d === null ? null : +d; }
-document.getElementById("plans").addEventListener("click", async e => { const b = e.target.closest("[data-plan]"); if (!b) return; const next = PLANS.find(p => p.id === b.dataset.plan); await loadWeeks(next); plan = next; ls.set("plan", plan.id); view = "plan"; restoreWeek(); render(); window.scrollTo({top:0}); });
+document.getElementById("plans").addEventListener("click", async e => { const b = e.target.closest("[data-plan]"); if (!b) return; const next = PLANS.find(p => p.id === b.dataset.plan); document.querySelectorAll("[data-plan]").forEach(c => c.setAttribute("aria-pressed", c === b)); await loadWeeks(next); plan = next; ls.set("plan", plan.id); view = "plan"; restoreWeek(); render(); window.scrollTo({top:0}); });
 document.getElementById("weeks").addEventListener("click", e => { const b = e.target.closest("[data-week]"); if (!b) return; wIdx = +b.dataset.week; ls.set("week:" + plan.id, wIdx); dIdx = null; render(); });
 document.getElementById("strip").addEventListener("click", e => { const b = e.target.closest("[data-phase]"); if (!b) return; wIdx = plan.phases[+b.dataset.phase].w[0] - 1; ls.set("week:" + plan.id, wIdx); dIdx = null; render(); });
 document.getElementById("days").addEventListener("click", e => { const b = e.target.closest("[data-day]"); if (!b) return; dIdx = +b.dataset.day; ls.set("day:" + plan.id, dIdx); render(); });
