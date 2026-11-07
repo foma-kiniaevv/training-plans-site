@@ -24,6 +24,8 @@
   /* шкала фаз программы: светлее → темнее */
   --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
   --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
+  /* линия ссылки в тексте: цвет ссылки с прозрачностью 35 % */
+  --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
@@ -41,6 +43,14 @@
   --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
   --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
   --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+
+/* Ссылки (правила L1–L2). Ссылки интерфейса без подчёркивания: место, вес, цвет, фон при наведении.
+   Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
+a{text-decoration:none}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
+:where(a, button, summary, [role="button"]){cursor:pointer}
+:where(a, button, summary, input, select, textarea):focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px}
 
 :root{
   --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --line:var(--ds-line);
@@ -65,7 +75,7 @@ header.top .wrap{display:flex;align-items:center;justify-content:space-between;g
 nav.main{display:flex;align-items:center;gap:4px;font-size:14px;line-height:18px;font-weight:500}
 nav.main a{text-decoration:none;padding:9px 12px;border-radius:var(--r-md);white-space:nowrap}
 nav.main a:hover{background:var(--sunken)}
-nav.main a[aria-current="page"]{color:var(--brand-strong);font-weight:600}
+nav.main a[aria-current="page"]{background:var(--sunken);color:var(--ink);font-weight:600}
 nav.main a.login{border:1px solid var(--line);background:var(--raised)}
 nav.main .s{display:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--brand);color:var(--on-brand);font-size:14px;line-height:18px;font-weight:600;padding:12px 22px;border-radius:var(--r-md);text-decoration:none;text-align:center}
@@ -101,9 +111,11 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 .panel{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
 .panel p+p{margin-top:10px}
 .panel .muted,.muted{color:var(--muted)}
+.after-title{margin-top:16px}
+.closing .after-title{margin-top:8px}
 .closing{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 /* каталог */
-.pagetitle{font-size:40px;line-height:46px;font-weight:700}
+.pagetitle{font-size:40px;line-height:46px;font-weight:700;margin-top:8px}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:24px}
 .chip{background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font:500 14px/18px var(--sans);color:var(--ink);cursor:pointer;min-height:40px}
 .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
@@ -117,22 +129,24 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 .grp>p{color:var(--muted);margin-top:4px}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
 .card{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);text-decoration:none;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.card:hover{border-color:var(--brand)}
+.card:hover{border-color:var(--brand);background:var(--surface)}
 .card[hidden]{display:none}
 .card h3{font-size:19px;line-height:24px;font-weight:600}
 .card .one{color:var(--muted)}
 .spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13px;line-height:18px;margin:0}
 .spec dt{color:var(--muted)}
 .spec dd{margin:0;font-weight:500}
-.more{color:var(--brand-strong);font-size:14px;line-height:18px;font-weight:600;margin-top:auto}
 .empty{margin-top:24px}
 .ruler{display:flex;gap:2px;width:100%}
 .ruler i{display:block;flex:1 1 0;min-width:0;height:8px;border-radius:2px;background:var(--sunken)}
 .ruler.big i{height:12px}
 .ruler i.p0{background:var(--ph1)}.ruler i.p1{background:var(--ph2)}.ruler i.p2{background:var(--ph3)}.ruler i.p3{background:var(--ph4)}
 /* страница программы */
-.back{color:var(--brand-strong);font-size:14px;line-height:18px;font-weight:500;text-decoration:none}
-.proghead{padding-top:18px}
+.pagehead{padding-top:24px}
+.crumbs{display:flex;flex-wrap:wrap;gap:4px 8px;font-size:13px;line-height:18px;color:var(--muted)}
+.crumbs a{color:var(--brand-strong);font-weight:500}
+.crumbs a:hover{color:var(--ink)}
+.proghead{padding-top:16px}
 .proghead h1{font-size:40px;line-height:46px;font-weight:700;margin-top:8px;overflow-wrap:break-word}
 .prog{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;padding-block:24px 48px}
 .prog>*{min-width:0}
@@ -151,6 +165,7 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 .place dt{color:var(--muted);font-size:13px;line-height:18px}
 .place dd{margin:2px 0 0}
 .place a{color:var(--brand-strong);font-weight:600}
+.place a:hover{color:var(--ink)}
 .buy{position:sticky;top:76px;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:grid;gap:14px}
 .buy dl{margin:0;display:grid;gap:9px}
 .buy dt{color:var(--muted);font-size:13px;line-height:18px}
@@ -160,7 +175,8 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 .buy small a{color:var(--brand-strong)}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:20px}
 footer .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap}
-footer a{color:var(--brand-strong)}
+footer a{color:var(--brand-strong);font-weight:500}
+footer a:hover{color:var(--ink)}
 @media (max-width:860px){
   .dirs,.split,.prog{grid-template-columns:minmax(0,1fr);gap:16px}
   .split{gap:32px}
@@ -219,7 +235,7 @@ footer a{color:var(--brand-strong)}
     <li><div><b>Входите по ссылке из письма</b><span>Пароль не нужен. В кабинете собраны ваш курс, ваши программы и библиотека упражнений.</span></div></li>
   </ol></div>
   <div><h2 class="rule">Библиотека упражнений</h2>
-    <div class="panel" style="margin-top:20px"><p>Общий справочник для курса и программ: упражнения по местам в занятии и видео техники к ним.</p><p class="muted">Библиотека находится в личном кабинете и открывается тем, у кого есть доступ к курсу или к программе. Видео без входа не показываются.</p></div>
+    <div class="panel after-title"><p>Общий справочник для курса и программ: упражнения по местам в занятии и видео техники к ним.</p><p class="muted">Библиотека находится в личном кабинете и открывается тем, у кого есть доступ к курсу или к программе. Видео без входа не показываются.</p></div>
   </div>
 </div></section>
 <section><div class="wrap split">
@@ -227,7 +243,7 @@ footer a{color:var(--brand-strong)}
   <div><h2 class="rule">Автор</h2><p class="lead">Артём Игнатов, тренер, кандидат педагогических наук.</p></div>
 </div></section>
 <section><div class="wrap closing">
-  <div><h2 class="rule">Уже есть доступ?</h2><p class="muted" style="margin-top:6px">Войдите по почте, которую вы указали в заявке.</p></div>
+  <div><h2 class="rule">Уже есть доступ?</h2><p class="muted after-title">Войдите по почте, которую вы указали в заявке.</p></div>
   <a class="btn accent" href="app/">Войти в кабинет</a>
 </div></section></main>
 <footer><div class="wrap"><span>Больше чем качалка. Автор курса и программ: Артём Игнатов, тренер, кандидат педагогических наук.</span><span>Вопросы и заявки: <a href="mailto:ignatooov@mail.ru">ignatooov@mail.ru</a></span></div></footer>

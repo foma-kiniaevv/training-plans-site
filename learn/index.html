@@ -24,6 +24,8 @@
   /* шкала фаз программы: светлее → темнее */
   --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
   --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
+  /* линия ссылки в тексте: цвет ссылки с прозрачностью 35 % */
+  --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
@@ -41,13 +43,21 @@
   --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
   --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
   --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+
+/* Ссылки (правила L1–L2). Ссылки интерфейса без подчёркивания: место, вес, цвет, фон при наведении.
+   Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
+a{text-decoration:none}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
+:where(a, button, summary, [role="button"]){cursor:pointer}
+:where(a, button, summary, input, select, textarea):focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px}
 /* Раздел «Обучение». Токены AL Leone (src/al-leone.css): тёмная панель deep слева, светлые плитки, кирпичный только для текущего места. */
 :root{
   --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --night:var(--ds-deep); --on-night:var(--ds-on-deep); --on-night-muted:rgba(255,255,255,.74); --night-line:rgba(255,255,255,.14);
   --ink:var(--ds-ink); --muted:var(--ds-ink-2); --soft:var(--ds-ink-3); --line:var(--ds-line); --brand:var(--ds-brand); --brand-strong:var(--ds-brand-strong); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand);
   --accent:var(--ds-accent); --accent-ink:var(--ds-accent-ink); --on-accent:var(--ds-on-accent);
   --good:var(--ds-up); --good-soft:var(--ds-brand-soft); --bad:var(--ds-down); --bad-soft:var(--ds-accent-soft);
-  --shadow-card:var(--ds-shadow-card);
+  --shadow-card:none; /* B1: статичные плитки отделяет одна рамка, тени только у всплывающего */
   --r-sm:var(--ds-r-sm); --r-md:var(--ds-r-md); --r-lg:var(--ds-r-lg);
   --sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
 }
@@ -98,7 +108,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .note{font-size:13px;line-height:18px;color:var(--muted)}
 .note a,.link{color:var(--brand-strong);font-weight:600}
-.link{background:none;border:0;padding:0;font-size:inherit;text-decoration:underline;text-underline-offset:2px}
+.link{background:none;border:0;padding:0;font-size:inherit}
+.link:hover{color:var(--ink)}
 .loading{color:var(--muted);padding:40px 0;text-align:center}
 .chips{display:flex;gap:4px;flex-wrap:wrap}
 .chip{background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;line-height:18px;font-weight:500;color:var(--muted);text-decoration:none}
@@ -108,8 +119,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* вход и доступ */
 .gate{display:flex;flex-direction:column;gap:14px;max-width:560px}
 .gate h2{font-size:24px;line-height:30px;font-weight:600}
-.gate form{display:flex;gap:8px;flex-wrap:wrap}
-.gate input{flex:1 1 220px;min-width:0;font:inherit;padding:11px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+.gate form{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.gate .fld{flex:1 1 220px;min-width:0;display:grid;gap:4px;font-size:13px;line-height:18px;color:var(--muted)}
+.gate input{width:100%;min-width:0;min-height:44px;font:inherit;font-size:15px;padding:10px 12px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--surface);color:var(--ink)}
 .gate .ok{color:var(--good);font-weight:500}
 .gate .err{color:var(--bad);font-weight:500}
 .status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between}
@@ -235,7 +247,8 @@ dialog.zoomed button{position:fixed;top:12px;right:16px;background:rgba(255,255,
 .terms p{font-size:14px;line-height:22px;color:var(--muted)}
 .srcs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .srcs li{border-bottom:1px solid var(--line);padding:10px 0;font-size:14px;line-height:22px}
-.srcs a{text-decoration-color:var(--soft);text-underline-offset:3px}
+.srcs a{color:var(--brand-strong);font-weight:500}
+.srcs a:hover{color:var(--ink)}
 .vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
 h2.rule{font-size:20px;line-height:28px;font-weight:600}
 
@@ -715,7 +728,7 @@ function gateBox(title) {
   if (!session) return `<div class="tile gate" id="gate">
     <h2>${esc(title || "Войдите, чтобы открыть главы")}</h2>
     <p class="note">Пришлём на почту ссылку для входа. Пароль не нужен. Главы, карточки и самопроверка открываются после того, как тренер выдаст доступ. Запросить доступ: <a href="mailto:${EMAIL}?subject=${encodeURIComponent("Доступ к курсу для тренеров")}">${EMAIL}</a></p>
-    <form data-login><input type="email" name="email" required autocomplete="email" placeholder="Ваша почта" aria-label="Почта"><button class="btn" type="submit">Получить ссылку</button></form>
+    <form data-login><label class="fld">Почта<input type="email" name="email" required autocomplete="email" placeholder="name@mail.ru"></label><button class="btn" type="submit">Получить ссылку</button></form>
     <p class="note" data-login-msg aria-live="polite"></p></div>`;
   if (!access) return `<div class="tile gate"><h2>Доступ к курсу пока не открыт</h2>
     <p>Вы вошли как <b>${esc(session.user.email)}</b>. Курс открывает тренер. Напишите на <a class="link" href="mailto:${EMAIL}?subject=${encodeURIComponent("Доступ к курсу для тренеров")}&body=${encodeURIComponent("Почта для входа: " + session.user.email)}">${EMAIL}</a> с этой почты, и доступ появится после обновления страницы.</p></div>`;
@@ -736,8 +749,8 @@ function home() {
     ${status}<div class="mods">${mods}</div>`;
 }
 function lastLink() {
-  for (const m of OUTLINE) { const s = store.get(m.slug); const next = m.chapters.find(c => !s.done.includes(c.id)); if (next) return `<a class="btn" href="#/${m.slug}/${next.id}">Продолжить: ${esc(next.shortTitle)} →</a>`; }
-  return `<a class="btn" href="#/${OUTLINE[0].slug}/quiz">К самопроверке →</a>`;
+  for (const m of OUTLINE) { const s = store.get(m.slug); const next = m.chapters.find(c => !s.done.includes(c.id)); if (next) return `<a class="btn" href="#/${m.slug}/${next.id}">Продолжить: ${esc(next.shortTitle)}</a>`; }
+  return `<a class="btn" href="#/${OUTLINE[0].slug}/quiz">К самопроверке</a>`;
 }
 function chapterList(m) {
   const done = store.get(m.slug).done;
@@ -803,7 +816,7 @@ function chapterView(m, d, id) {
     <div class="wrapup"><h2>Главное из главы</h2><ul>${ch.takeaways.map(t => `<li>${rich(t)}</li>`).join("")}</ul></div>
     ${ch.practice ? `<section class="tile practice"><span class="eyebrow">Ситуация из зала</span><h2>${esc(ch.practice.title)}</h2><p>${esc(ch.practice.prompt)}</p><details><summary>Сравнить с разбором</summary><div>${esc(ch.practice.answer)}</div></details></section>` : ""}
     <div class="row"><button type="button" class="btn${done ? " ghost" : ""}" data-done="${id}">${done ? "✓ Глава изучена" : "Отметить главу изученной"}</button><a class="btn ghost" href="#/${m.slug}/quiz/${id}">Проверить себя</a><a class="btn ghost" href="#/${m.slug}/cards/${id}">Карточки главы</a>${pdf ? `<a class="btn ghost" href="${esc(pdf)}" target="_blank" rel="noopener">Презентация, PDF</a>` : ""}</div>
-    <nav class="pager" aria-label="Соседние главы">${prev ? `<a href="#/${m.slug}/${prev.id}"><span>← Предыдущая</span><b>${esc(prev.shortTitle)}</b></a>` : ""}${next ? `<a class="next" href="#/${m.slug}/${next.id}"><span>Следующая →</span><b>${esc(next.shortTitle)}</b></a>` : `<a class="next" href="#/${m.slug}/quiz"><span>Дальше →</span><b>Итоговая самопроверка</b></a>`}</nav></article>`;
+    <nav class="pager" aria-label="Соседние главы">${prev ? `<a href="#/${m.slug}/${prev.id}"><span>Предыдущая глава</span><b>${esc(prev.shortTitle)}</b></a>` : ""}${next ? `<a class="next" href="#/${m.slug}/${next.id}"><span>Следующая глава</span><b>${esc(next.shortTitle)}</b></a>` : `<a class="next" href="#/${m.slug}/quiz"><span>Дальше</span><b>Итоговая самопроверка</b></a>`}</nav></article>`;
 }
 
 /* ---------- карточки ---------- */

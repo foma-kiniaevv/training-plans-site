@@ -20,6 +20,8 @@
   /* шкала фаз программы: светлее → темнее */
   --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
   --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
+  /* линия ссылки в тексте: цвет ссылки с прозрачностью 35 % */
+  --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
@@ -37,6 +39,14 @@
   --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
   --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
   --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+
+/* Ссылки (правила L1–L2). Ссылки интерфейса без подчёркивания: место, вес, цвет, фон при наведении.
+   Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
+a{text-decoration:none}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
+:where(a, button, summary, [role="button"]){cursor:pointer}
+:where(a, button, summary, input, select, textarea):focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px}
 
 :root{--sans:"Montserrat","Helvetica Neue",Arial,sans-serif}
 *{box-sizing:border-box}
@@ -57,6 +67,9 @@ h1{font-size:32px;line-height:38px;font-weight:700}
 .tile{background:var(--ds-surface);border:1px solid var(--ds-line);border-radius:var(--ds-r-lg);padding:20px;display:grid;gap:12px;min-width:0}
 .tile h2{font-size:19px;line-height:24px;font-weight:600}
 .muted{color:var(--ds-ink-2);font-size:13px;line-height:18px}
+.grow{flex:1}
+.check{display:flex;flex-direction:row;gap:8px;align-items:center}
+.check input{min-height:0}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--ds-brand);color:var(--ds-on-brand);border:0;border-radius:var(--ds-r-md);padding:10px 18px;font:600 14px/18px var(--sans);text-decoration:none;cursor:pointer}
 .btn.accent{background:var(--ds-accent);color:var(--ds-on-accent)}
@@ -104,7 +117,7 @@ let me = null, USERS = [], PENDING = [], PROGRAMS = [], ATTEMPTS = [];
 
 function loginView(msg) {
   main.innerHTML = `<h1>Кабинет владельца</h1><div class="tile"><h2>Вход</h2><p class="note">Ссылка для входа придёт на почту. Кабинет открывается только учётной записи с ролью тренера: права проверяет база.</p>
-    <div class="row"><label style="flex:1">Почта<input id="em" type="email" autocomplete="email"></label><button class="btn" id="login" type="button">Прислать ссылку</button></div><p class="note" id="lmsg" role="status">${esc(msg || "")}</p></div>`;
+    <div class="row"><label class="grow">Почта<input id="em" type="email" autocomplete="email"></label><button class="btn" id="login" type="button">Прислать ссылку</button></div><p class="note" id="lmsg" role="status">${esc(msg || "")}</p></div>`;
   $("#login").onclick = async () => { const em = $("#em").value.trim(); if (!em || !$("#em").checkValidity()) { $("#lmsg").textContent = "Проверьте адрес почты."; return; }
     $("#login").disabled = true; const { error } = await sb.auth.signInWithOtp({ email: em, options: { emailRedirectTo: location.href.split("#")[0], shouldCreateUser: false } });
     $("#login").disabled = false; $("#lmsg").textContent = error ? "Не получилось отправить ссылку. Если это новая почта, сначала войдите через личный кабинет." : `Ссылка отправлена на ${em}.`; };
@@ -131,7 +144,7 @@ function view() {
   <div class="grid2">
     <div class="tile"><h2>Открыть курс</h2><p class="note">Доступ выдаётся по почте до первого входа. Оплата на сайте не подключена: основанием служит ваша запись, её текст виден в списке.</p>
       <label>Почта<input id="ga-em" type="email" placeholder="name@mail.ru"></label><label>Основание (оплата, договор, подарок…)<input id="ga-note"></label>
-      <div class="row"><button class="btn" id="ga" type="button">Открыть курс</button><label style="flex-direction:row;display:flex;gap:6px;align-items:center"><input type="checkbox" id="ga-lib" style="min-height:0"> и отдельно библиотеку</label></div><p class="note" id="ga-msg" role="status"></p></div>
+      <div class="row"><button class="btn" id="ga" type="button">Открыть курс</button><label class="check"><input type="checkbox" id="ga-lib"> и отдельно библиотеку</label></div><p class="note" id="ga-msg" role="status"></p></div>
     <div class="tile"><h2>Назначить программу</h2><p class="note">Человек должен хотя бы раз войти на сайт. Неделя в кабинете считается от даты старта.</p>
       <label>Пользователь<select id="ap-u">${USERS.map(x => `<option value="${x.user_id}">${esc(x.email)}</option>`).join("")}</select></label>
       <label>Программа<select id="ap-p">${PROGRAMS.map(x => `<option value="${x.id}">${esc(x.title)}</option>`).join("")}</select></label>
