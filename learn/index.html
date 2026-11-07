@@ -12,7 +12,7 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-4%200%2057%2076%22%3E%3Cstyle%3Epath%7Bfill%3A%2320252B%7D%40media%20%28prefers-color-scheme%3Adark%29%7Bpath%7Bfill%3A%23F2F4F7%7D%7D%3C/style%3E%3Cpath%20d%3D%22M4.53125%2058.4H30.3515625C41.9921875%2058.4%2049.2578125%2051.4078125%2049.2578125%2040.275C49.2578125%2029.5328125%2041.9921875%2023.7515625%2030.3515625%2023.7515625H18.3203125V11.251562499999999H44.21875V0.19687499999999858H4.53125ZM18.3203125%2047.8140625V33.3609375H28.0078125C32.890625%2033.3609375%2036.0546875%2036.3296875%2036.0546875%2040.509375C36.0546875%2044.80625%2032.890625%2047.8140625%2028.0078125%2047.8140625Z%22/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
 <script>try{var t=localStorage.getItem("bchk-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
-<style>/* Дизайн-система «Больше чем качалка» (claude.ai/artifact/RzNZbZFbooDDb1qJhgsHrD, tokens.json): светлая и «Сланец».
+<style>/* Дизайн-система «Больше чем качалка» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j («Холст · Сланец · Малина», в неё влита «Больше чем качалка»), tokens.json): светлая и «Сланец».
    Цвет в две роли: малина = «где ты» (шкала s1–s5: этап, тип дня, текущее место), голубой = «что делать» (ссылки, инструкция).
    Нейтральный холодный холст, белые карточки отделяются тоном, без рамок и теней. Главная кнопка графитовая.
    Подключается первым на всех страницах. Имена --ds-* сохранены, чтобы стили страниц не переписывать:
@@ -85,7 +85,8 @@ input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focu
 .skip{position:absolute;left:-9999px;top:8px}
 .skip:focus{left:16px;z-index:40;min-height:32px;display:inline-flex;align-items:center;background:var(--ds-surface);color:var(--ds-ink);padding:8px 12px;border-radius:var(--ds-r-sm)}
 
-/* Знак: контур названия, цвет ink в обеих темах */
+/* Знак: контур названия, цвет ink в обеих темах; в шапке сайта переход малина → серо-голубой (acctext → link) */
+:root{--ds-wm-a:var(--ds-accent-ink);--ds-wm-b:var(--ds-brand-strong)}
 .wordmark{display:block;height:20px;width:auto;color:var(--ds-ink)}
 
 /* Текст только для экранных дикторов */
