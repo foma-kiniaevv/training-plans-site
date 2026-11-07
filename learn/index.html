@@ -9,21 +9,48 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Обучение тренеров">
 <meta property="og:description" content="Курс для тренеров: анатомия, физиология и биомеханика силовых упражнений. Главы, схемы, карточки и самопроверка.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2611f'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d6b79'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-<style>/* Раздел «Обучение». Те же токены, что у витрины и кабинета: чёрная панель слева, светлые плитки, оранжевый только для главного. */
+<style>/* Дизайн-система AL Leone, связка «Залив + Ночь» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j, tokens.json).
+   Шрифт сайта остаётся прежним (Montserrat): гарнитуры Unbounded/Onest из системы сознательно не подключаем.
+   Подключается первым на всех страницах; старые имена переменных в storefront, learn и cabinet ссылаются сюда. */
 :root{
-  --surface:#f2f2f2; --raised:#ffffff; --sunken:#e8e8e8; --night:#111111; --on-night:#f2efe8; --on-night-muted:#9a978f; --night-line:#2c2c2e;
-  --ink:#212121; --muted:#6b6b6b; --soft:#b0b0b0; --line:#dedede; --brand:#f06428; --brand-strong:#b8440f; --brand-soft:#fbe6dc; --on-brand:#1a1a1a;
-  --good:#2a7046; --good-soft:#e6f2ea; --bad:#a3361b; --bad-soft:#f8e3dc;
-  --shadow-card:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05);
-  --r-sm:8px; --r-md:14px; --r-lg:22px;
+  --ds-bg:#f5f1ea; --ds-surface:#fffcf7; --ds-surface-2:#ebe5da; --ds-line:#dad2c4;
+  --ds-ink:#1b201e; --ds-ink-2:#525853; --ds-ink-3:#878a84;
+  --ds-brand:#1d6b79; --ds-brand-strong:#124650; --ds-brand-soft:#d9e8e5; --ds-on-brand:#ffffff;
+  --ds-accent:#b0473a; --ds-accent-ink:#9a3c30; --ds-accent-soft:#f3ddd7; --ds-on-accent:#ffffff;
+  --ds-deep:#15333a; --ds-on-deep:#ffffff; --ds-up:#1d7348; --ds-down:#b8322a;
+  --ds-shadow-card:0 0 0 1px rgba(24,32,31,.09),0 1px 2px rgba(24,32,31,.04); --ds-shadow-pop:0 8px 24px rgba(24,32,31,.12);
+  /* шкала фаз программы: светлее → темнее */
+  --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
+  --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
+  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
+  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
+  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
+  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
+  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
+  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
+  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
+  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+/* Раздел «Обучение». Токены AL Leone (src/al-leone.css): тёмная панель deep слева, светлые плитки, кирпичный только для текущего места. */
+:root{
+  --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --night:var(--ds-deep); --on-night:var(--ds-on-deep); --on-night-muted:rgba(255,255,255,.74); --night-line:rgba(255,255,255,.14);
+  --ink:var(--ds-ink); --muted:var(--ds-ink-2); --soft:var(--ds-ink-3); --line:var(--ds-line); --brand:var(--ds-brand); --brand-strong:var(--ds-brand-strong); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand);
+  --accent:var(--ds-accent); --accent-ink:var(--ds-accent-ink); --on-accent:var(--ds-on-accent);
+  --good:var(--ds-up); --good-soft:var(--ds-brand-soft); --bad:var(--ds-down); --bad-soft:var(--ds-accent-soft);
+  --shadow-card:var(--ds-shadow-card);
+  --r-sm:var(--ds-r-sm); --r-md:var(--ds-r-md); --r-lg:var(--ds-r-lg);
   --sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root{
-  --surface:#121214; --raised:#1c1d20; --sunken:#0b0b0d; --night:#000000; --on-night-muted:#a1a1a6; --night-line:#2c2d31;
-  --ink:#f2f2f2; --muted:#a1a1a6; --soft:#5c5c60; --line:#2c2d31; --brand:#f27540; --brand-strong:#f27540; --brand-soft:#2c1d14; --on-brand:#121214;
-  --good:#5cc98a; --good-soft:#17291e; --bad:#f08a6c; --bad-soft:#2e1a14; --shadow-card:0 0 0 transparent; color-scheme:dark}}
 *{box-sizing:border-box}
 html{scroll-padding-top:16px}
 body{margin:0;background:var(--surface);color:var(--ink);font:400 15px/24px var(--sans);-webkit-font-smoothing:antialiased}
@@ -43,7 +70,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .nav .lbl{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--on-night-muted);padding:12px 10px 6px}
 .nav a{display:flex;gap:8px;align-items:baseline;padding:8px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--on-night-muted);font-size:13px;line-height:18px;font-weight:500}
 .nav a:hover{background:var(--night-line);color:var(--on-night)}
-.nav a[aria-current="page"]{background:var(--brand);color:var(--on-brand);font-weight:600}
+.nav a[aria-current="page"]{background:var(--accent);color:var(--on-accent);font-weight:600}
 .nav a.mod{color:var(--on-night);font-weight:600}
 .nav a.ch{padding-left:16px}
 .nav a .n{flex:none;width:20px;font-variant-numeric:tabular-nums;opacity:.7}
@@ -119,7 +146,7 @@ button{font:inherit;color:inherit;cursor:pointer}
 .sec p{max-width:44em}
 .sec strong{font-weight:600}
 .key,.callout{border-radius:var(--r-sm);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
-.key{background:var(--brand-soft);border-left:3px solid var(--brand)}
+.key{background:var(--brand-soft)}
 .key .lbl,.callout .lbl{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-strong)}
 .callout{background:var(--sunken)}
 .callout .lbl{color:var(--muted)}
@@ -213,8 +240,8 @@ dialog.zoomed button{position:fixed;top:12px;right:16px;background:rgba(255,255,
 h2.rule{font-size:20px;line-height:28px;font-weight:600}
 
 /* интерактивные схемы: всегда на тёмной плитке */
-.diagram{--panel:#1c1d20;--ink:#f2f2f2;--muted:#a1a1a6;--dim:#8d8e96;--line:#2f3035;--accent:#f27540;--soft:#2c1d14;--font:var(--sans);
-  background:#151618;color:#f2f2f2;border-radius:var(--r-md);padding:22px;overflow:hidden}
+.diagram{--panel:#212224;--ink:#f2f1ee;--muted:#b4b5b3;--dim:#878a8b;--line:#3a3d40;--accent:#e8917f;--soft:#3d2622;--font:var(--sans);
+  background:#18191a;color:#f2f1ee;border-radius:var(--r-md);padding:22px;overflow:hidden}
 .diagram .diagram-heading{font-size:14px;line-height:20px;font-weight:600;margin-bottom:16px}
 .diagram-note{font-size:12px;line-height:19px;color:var(--dim);margin-top:14px}
 .diagram svg{max-width:100%;height:auto;display:block}
@@ -223,7 +250,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 .hierarchy button{border:1px solid #3a3b41;background:transparent;border-radius:7px;min-width:0;padding:14px 4px 12px;color:var(--muted);font-size:12px;line-height:18px}
 .hierarchy button svg{height:38px;margin:0 auto 10px;max-width:52px}
 .diagram-detail{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;font-size:14px;line-height:23px;color:#d2d3da;min-height:76px}
-.diagram-detail strong{color:#f29a6e;font-weight:600}
+.diagram-detail strong{color:#e8917f;font-weight:600}
 .signal-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
 .signal-node{padding:12px 10px;border:1px solid #35363b;background:transparent;border-radius:8px;text-align:left;font-size:12px;color:var(--muted);line-height:18px}
 .signal-node span{display:block;font-size:11px;color:var(--accent);margin-bottom:4px}
@@ -233,7 +260,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 .energy-bands{display:grid;gap:14px}
 .energy-band{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;font-size:12px;color:var(--muted)}
 .energy-ribbon{height:26px;border-radius:4px;display:flex;align-items:center;padding:0 12px;font-size:11px;color:#eee;position:relative;overflow:hidden}
-.energy-ribbon:after{content:'';position:absolute;right:0;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,#151618)}
+.energy-ribbon:after{content:'';position:absolute;right:0;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,#18191a)}
 .mechanics-diagram{--mechanics-accent:var(--accent);--mechanics-muted:var(--muted);--mechanics-ink:var(--ink)}
 .mechanics-intro{color:var(--mechanics-muted);font-size:13px;line-height:21px;margin:0 0 18px}
 .mechanics-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,.9fr);gap:24px;align-items:center}
@@ -252,7 +279,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 .mechanics-forearm{stroke:#c0c1c6;stroke-width:12;stroke-linecap:round}
 .mechanics-pivot{fill:var(--panel);stroke:var(--mechanics-ink);stroke-width:2}
 .mechanics-angle{fill:none;stroke:var(--mechanics-accent);stroke-width:1.6}
-.mechanics-load{fill:#3b2b22;stroke:var(--mechanics-accent);stroke-width:2}
+.mechanics-load{fill:#3d2622;stroke:var(--mechanics-accent);stroke-width:2}
 .mechanics-gravity{color:var(--mechanics-accent);stroke:currentColor;stroke-width:2.5}
 .mechanics-controls{display:grid;gap:22px}
 .mechanics-control label{display:flex;justify-content:space-between;align-items:baseline;gap:15px;font-size:13px;font-weight:600;color:var(--mechanics-ink);line-height:20px}
@@ -300,6 +327,10 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
   .pager{grid-template-columns:1fr}.pager a.next{grid-column:1}
   .chs a{grid-template-columns:26px minmax(0,1fr)}.chs .t{display:none}
 }
+
+/* режим «Посмотреть как обучающийся» */
+.preview{background:var(--ds-accent-soft);color:var(--ink);font-size:13px;line-height:20px;padding:10px max(16px,env(safe-area-inset-left,0px));border-bottom:1px solid var(--line)}
+.preview a{color:var(--ds-accent-ink);font-weight:600}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -584,7 +615,7 @@ const bucket = () => sb.storage.from("course");
 const $ = (s, r = document) => r.querySelector(s);
 const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 const rich = v => esc(v).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
-const pad = n => String(n).padStart(2, "0");
+const pad = n => String(n); // нумерация без ведущих нулей: 1, 2, 3
 const plural = (n, f) => { const a = n % 100, b = n % 10; return f[a > 10 && a < 20 ? 2 : b === 1 ? 0 : b >= 2 && b <= 4 ? 1 : 2]; };
 const minutes = n => `${n} мин`;
 const LETTERS = ["А", "Б", "В", "Г", "Д"];
@@ -593,11 +624,31 @@ let session = null, access = false, ready = false, seq = 0;
 const content = {}, urls = {};
 let quiz = null, quizKey = "", card = { i: 0, flip: false, unknown: false };
 
-/* прогресс хранится в браузере: изученные главы, знакомые карточки, последний результат */
+/* «Посмотреть как обучающийся» (learn/?preview): тот же интерфейс, но ничего не пишется ни в базу, ни в постоянное хранилище браузера */
+const PREVIEW = new URLSearchParams(location.search).has("preview");
+const keep = PREVIEW ? sessionStorage : localStorage, KEY = PREVIEW ? "bchk-preview-" : "bchk-learn-";
+/* прогресс в браузере для быстрой отрисовки; у вошедшего с доступом он дублируется в базе (course_progress, course_visit, quiz_attempt) */
 const store = {
-  get(slug) { try { const v = JSON.parse(localStorage.getItem("bchk-learn-" + slug) || "{}"); return { done: v.done || [], known: v.known || [], last: v.last || null }; } catch { return { done: [], known: [], last: null }; } },
-  set(slug, v) { try { localStorage.setItem("bchk-learn-" + slug, JSON.stringify(v)); } catch {} },
+  get(slug) { try { const v = JSON.parse(keep.getItem(KEY + slug) || "{}"); return { done: v.done || [], known: v.known || [], last: v.last || null }; } catch { return { done: [], known: [], last: null }; } },
+  set(slug, v) { try { keep.setItem(KEY + slug, JSON.stringify(v)); } catch {} },
 };
+const synced = {};
+const saving = () => session && access && !PREVIEW;
+async function syncProgress(slug) {
+  if (!saving() || synced[slug]) return;
+  const { data, error } = await sb.from("course_progress").select("chapter").eq("slug", slug);
+  if (error) return; // таблицы ещё нет или нет связи: остаётся локальный прогресс
+  synced[slug] = true;
+  const s = store.get(slug), server = data.map(x => x.chapter), local = s.done.filter(id => !server.includes(id));
+  if (local.length) await sb.from("course_progress").insert(local.map(chapter => ({ slug, chapter })));
+  s.done = [...new Set(server.concat(s.done))]; store.set(slug, s);
+}
+function track(table, row, op) {
+  if (!saving()) return;
+  const q = op === "delete" ? sb.from(table).delete().eq("slug", row.slug).eq("chapter", row.chapter)
+    : op === "upsert" ? sb.from(table).upsert(row) : sb.from(table).insert(row);
+  q.then(({ error }) => { if (error) console.warn(table, error.message); });
+}
 
 /* адрес: #/  #/anatomy  #/anatomy/3  #/anatomy/cards[/3]  #/anatomy/quiz[/3]  #/anatomy/glossary  #/anatomy/materials */
 function route() {
@@ -655,7 +706,7 @@ function sidebar(r) {
     }
   }
   const who = session ? `<span class="who">${esc(session.user.email)}</span><button type="button" data-logout>Выйти</button>` : `<a href="#/" data-login-scroll>Войти</a>`;
-  $("#side").innerHTML = `<a class="brand" href="../">Больше чем качалка<span>Обучение тренеров</span></a><nav class="nav" aria-label="Курс">${nav}</nav><div class="foot"><a href="../programs/">Программы</a><a href="../app/">Личный кабинет</a>${who}</div>`;
+  $("#side").innerHTML = `<a class="brand" href="../">Больше чем качалка<span>Обучение тренеров</span></a><nav class="nav" aria-label="Курс">${nav}</nav><div class="foot"><a href="../app/">Личный кабинет</a><a href="../programs/">Программы тренировок</a>${who}</div>`;
 }
 
 /* ---------- вход и доступ ---------- */
@@ -836,7 +887,7 @@ async function render() {
   const r = route(), t = ++seq, main = $("#main");
   sidebar(r);
   $("#side").classList.remove("open");
-  const put = (html, title) => { if (t !== seq) return; main.innerHTML = `<div class="page">${html}</div>`; document.title = (title ? title + " · " : "") + "Обучение · Больше чем качалка"; if (window.DIAGRAMS) window.DIAGRAMS.init(main); };
+  const put = (html, title) => { if (t !== seq) return; main.innerHTML = `${PREVIEW ? `<div class="preview" role="status"><b>Просмотр как обучающийся.</b> Интерфейс и материалы те же, что у ученика; отметки глав и результаты тестов не сохраняются. <a href="../admin/">Вернуться в кабинет владельца</a> · <a href="./">Выйти из просмотра</a></div>` : ""}<div class="page">${html}</div>`; document.title = (title ? title + " · " : "") + "Обучение · Больше чем качалка"; if (window.DIAGRAMS) window.DIAGRAMS.init(main); };
   if (r.view === "home") return put(home(), "");
   if (r.view === "missing") return put(`<div class="tile gate"><h2>Такой страницы нет</h2><div class="row"><a class="btn" href="#/">К обзору курса</a></div></div>`, "Нет страницы");
   if (r.view === "module") return put(moduleView(r.mod), r.mod.title);
@@ -844,7 +895,7 @@ async function render() {
   if (!session || !access) return put(`<div class="head"><span class="eyebrow">${esc(m.title)}</span><h1>${esc(chOutline && r.view === "chapter" ? chOutline.title : TITLES[r.view])}</h1></div>${gateBox()}`, TITLES[r.view] || m.title);
   put(`<p class="loading">Загружаем материалы…</p>`, m.title);
   let d;
-  try { d = await loadModule(m.slug); } catch (e) { return put(`<div class="tile gate"><h2>Материалы не загрузились</h2><p class="note">Проверьте интернет и обновите страницу. Если не поможет, напишите на <a href="mailto:${EMAIL}">${EMAIL}</a>.</p></div>`, m.title); }
+  try { d = await loadModule(m.slug); await syncProgress(m.slug); if (r.view === "chapter") track("course_visit", { slug: m.slug, chapter: r.ch, last_at: new Date().toISOString() }, "upsert"); } catch (e) { return put(`<div class="tile gate"><h2>Материалы не загрузились</h2><p class="note">Проверьте интернет и обновите страницу. Если не поможет, напишите на <a href="mailto:${EMAIL}">${EMAIL}</a>.</p></div>`, m.title); }
   if (r.view === "chapter") { await sign(figuresOf(d.chapters.find(c => c.id === r.ch)).concat(m.pdf || [])); put(chapterView(m, d, r.ch), chOutline.shortTitle); scrollTo(0, 0); return; }
   if (r.view === "materials") await sign(d.chapters.flatMap(figuresOf).concat(m.pdf || []));
   const key = m.slug + "/" + r.ch;
@@ -865,7 +916,7 @@ document.addEventListener("click", async e => {
   if (el.hasAttribute("data-login-scroll")) { e.preventDefault(); if (location.hash !== "#/" && location.hash !== "") location.hash = "#/"; else render(); setTimeout(() => { const i = $("#gate input"); if (i) i.focus(); }, 50); return; }
   if (el.dataset.goto) { const f = document.getElementById(el.dataset.goto); if (f) f.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
   if (el.dataset.zoom) { zoom(url(el.dataset.zoom), el.dataset.cap); return; }
-  if (el.dataset.done && m) { const s = store.get(m.slug), id = +el.dataset.done; s.done = s.done.includes(id) ? s.done.filter(x => x !== id) : s.done.concat(id); store.set(m.slug, s); render(); return; }
+  if (el.dataset.done && m) { const s = store.get(m.slug), id = +el.dataset.done, was = s.done.includes(id); s.done = was ? s.done.filter(x => x !== id) : s.done.concat(id); store.set(m.slug, s); track("course_progress", { slug: m.slug, chapter: id }, was ? "delete" : "insert"); render(); return; }
   if (el.dataset.card && d) {
     const a = el.dataset.card, list = cardsList(m, d, r.ch);
     if (a === "flip") card.flip = !card.flip;
@@ -883,7 +934,7 @@ document.addEventListener("click", async e => {
     if (a === "pick" && quiz && !quiz.checked) quiz.sel = +el.dataset.i;
     if (a === "check" && quiz && quiz.sel !== null) { quiz.checked = true; quiz.answers[quiz.i] = quiz.sel; }
     if (a === "next" && quiz) {
-      if (quiz.i === quiz.items.length - 1) { quiz.done = true; if (!quiz.ch) { const s = store.get(m.slug); s.last = { correct: quiz.answers.filter((x, i) => x === quiz.items[i].correct).length, total: quiz.items.length }; store.set(m.slug, s); } }
+      if (quiz.i === quiz.items.length - 1) { quiz.done = true; track("quiz_attempt", { slug: m.slug, chapter: quiz.ch || null, correct: quiz.answers.filter((x, i) => x === quiz.items[i].correct).length, total: quiz.items.length, answers: quiz.items.map((q, i) => ({ q: q.question, a: quiz.answers[i], ok: quiz.answers[i] === q.correct })) }); if (!quiz.ch) { const s = store.get(m.slug); s.last = { correct: quiz.answers.filter((x, i) => x === quiz.items[i].correct).length, total: quiz.items.length }; store.set(m.slug, s); } }
       else { quiz.i++; quiz.sel = null; quiz.checked = false; }
     }
     $("#quiz").innerHTML = quizBody(m, d, r.ch);

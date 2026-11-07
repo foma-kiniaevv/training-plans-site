@@ -9,138 +9,189 @@
 <meta property="og:locale" content="ru_RU">
 <meta property="og:title" content="Спринт 200–400 м">
 <meta property="og:description" content="Подготовка к стартам на 200–400 м.">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2611f'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d6b79'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-<style>
+<style>/* Дизайн-система AL Leone, связка «Залив + Ночь» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j, tokens.json).
+   Шрифт сайта остаётся прежним (Montserrat): гарнитуры Unbounded/Onest из системы сознательно не подключаем.
+   Подключается первым на всех страницах; старые имена переменных в storefront, learn и cabinet ссылаются сюда. */
 :root{
-  --surface:#f2f2f2; --raised:#ffffff; --sunken:#e8e8e8; --night:#111111; --on-night:#f2efe8; --on-night-muted:#9a978f;
-  --ink:#212121; --muted:#6b6b6b; --line:#dedede; --brand:#f06428; --brand-strong:#b8440f; --brand-soft:#fbe6dc; --on-brand:#1a1a1a;
-  --ph1:#dedede; --ph2:#b0b0b0; --ph3:#6b6b6b; --ph4:#212121;
-  --shadow-card:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05); --shadow-hover:0 10px 28px rgba(0,0,0,.10);
-  --r-sm:8px; --r-md:14px; --r-lg:22px;
+  --ds-bg:#f5f1ea; --ds-surface:#fffcf7; --ds-surface-2:#ebe5da; --ds-line:#dad2c4;
+  --ds-ink:#1b201e; --ds-ink-2:#525853; --ds-ink-3:#878a84;
+  --ds-brand:#1d6b79; --ds-brand-strong:#124650; --ds-brand-soft:#d9e8e5; --ds-on-brand:#ffffff;
+  --ds-accent:#b0473a; --ds-accent-ink:#9a3c30; --ds-accent-soft:#f3ddd7; --ds-on-accent:#ffffff;
+  --ds-deep:#15333a; --ds-on-deep:#ffffff; --ds-up:#1d7348; --ds-down:#b8322a;
+  --ds-shadow-card:0 0 0 1px rgba(24,32,31,.09),0 1px 2px rgba(24,32,31,.04); --ds-shadow-pop:0 8px 24px rgba(24,32,31,.12);
+  /* шкала фаз программы: светлее → темнее */
+  --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
+  --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
+  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
+  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
+  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
+  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
+  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
+  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
+  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
+  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+
+:root{
+  --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --line:var(--ds-line);
+  --ink:var(--ds-ink); --muted:var(--ds-ink-2); --brand:var(--ds-brand); --brand-strong:var(--ds-brand-strong); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand);
+  --accent:var(--ds-accent); --accent-ink:var(--ds-accent-ink); --on-accent:var(--ds-on-accent); --deep:var(--ds-deep); --on-deep:var(--ds-on-deep);
+  --ph1:var(--ds-ph1); --ph2:var(--ds-ph2); --ph3:var(--ds-ph3); --ph4:var(--ds-ph4);
+  --r-sm:var(--ds-r-sm); --r-md:var(--ds-r-md); --r-lg:var(--ds-r-lg);
   --sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
 }
-@media (prefers-color-scheme:dark){:root{
-  --surface:#121214; --raised:#1c1d20; --sunken:#0b0b0d; --night:#000000; --on-night-muted:#a1a1a6;
-  --ink:#f2f2f2; --muted:#a1a1a6; --line:#2c2d31; --brand:#f27540; --brand-strong:#f27540; --brand-soft:#2c1d14; --on-brand:#121214;
-  --ph1:#2c2d31; --ph2:#5c5c60; --ph3:#a1a1a6; --ph4:#f2f2f2; --shadow-card:0 0 0 transparent; color-scheme:dark}}
 *{box-sizing:border-box}
-body{margin:0;background:var(--surface);color:var(--ink);font:400 15px/22px var(--sans);-webkit-font-smoothing:antialiased}
+html{scroll-padding-top:80px}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 15px/24px var(--sans);-webkit-font-smoothing:antialiased}
 a{color:inherit}
 h1,h2,h3,p{margin:0}
 h1,h2,h3{text-wrap:balance}
-:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
 .wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.strip{background:var(--night);color:var(--on-night)}
-.strip .wrap{padding-block:9px;text-align:center;font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
-header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px 24px;flex-wrap:wrap;padding-block:16px}
-.brand{font-size:14px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none}
-nav.main{display:flex;gap:20px;font-size:13px;line-height:18px;font-weight:500}
-nav.main a{text-decoration:none}
-nav.main a:hover{color:var(--brand-strong)}
-.btn{display:inline-block;background:var(--brand);color:var(--on-brand);font-size:13px;line-height:18px;font-weight:600;padding:12px 26px;border-radius:999px;text-decoration:none;text-align:center}
-.btn:hover{filter:brightness(1.05)}
-.hero{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:40px;align-items:center;background:var(--night);color:var(--on-night);border-radius:var(--r-lg);padding:40px;margin-block:8px 0}
-.hero>*{min-width:0}
-.hero h1{font-size:40px;line-height:44px;font-weight:700}
-.lead{margin-top:14px;max-width:30em}
-.hero .lead{color:var(--on-night-muted)}
-.hero .btn{margin-top:22px}
-.facts{display:flex;gap:28px;flex-wrap:wrap;margin-top:28px}
-.facts b{display:block;font-size:34px;line-height:38px;font-weight:700;font-variant-numeric:tabular-nums}
-.facts span{font-size:13px;line-height:18px;color:var(--on-night-muted)}
-.sched{background:var(--raised);color:var(--ink);border-radius:var(--r-md);padding:20px;display:grid;gap:4px}
-.sched .cap{display:flex;justify-content:space-between;gap:12px;font-size:13px;line-height:18px;color:var(--muted);margin-bottom:8px;flex-wrap:wrap}
-.row{display:grid;grid-template-columns:124px minmax(0,1fr);gap:10px;align-items:center;padding:4px 0;text-decoration:none}
-.row .nm{font-size:13px;line-height:16px;font-weight:500}
-.row:hover .nm{color:var(--brand-strong)}
-.ruler{display:flex;gap:2px;width:100%}
-.ruler i{display:block;flex:1 1 0;min-width:0;height:8px;border-radius:2px}
-.ruler.big i{height:12px}
-.p0{background:var(--ph1)}.p1{background:var(--ph2)}.p2{background:var(--ph3)}.p3{background:var(--ph4)}
-section{padding-block:32px}
-h2.rule{font-size:24px;line-height:30px;font-weight:600}
-.goals{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-top:20px}
-.goal,.card{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);text-decoration:none;transition:transform .15s,box-shadow .15s}
-.goal{padding:18px;display:flex;flex-direction:column;gap:6px}
-.goal:hover,.card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
-.goal b{font-size:18px;line-height:24px;font-weight:600}
-.goal span{font-size:13px;line-height:18px;color:var(--muted)}
+.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:8px;z-index:30;background:var(--raised);padding:8px 12px;border-radius:var(--r-sm)}
+header.top{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:8px 20px;min-height:60px}
+.brand{font-size:14px;line-height:18px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+nav.main{display:flex;align-items:center;gap:4px;font-size:14px;line-height:18px;font-weight:500}
+nav.main a{text-decoration:none;padding:9px 12px;border-radius:var(--r-md);white-space:nowrap}
+nav.main a:hover{background:var(--sunken)}
+nav.main a[aria-current="page"]{color:var(--brand-strong);font-weight:600}
+nav.main a.login{border:1px solid var(--line);background:var(--raised)}
+nav.main .s{display:none}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--brand);color:var(--on-brand);font-size:14px;line-height:18px;font-weight:600;padding:12px 22px;border-radius:var(--r-md);text-decoration:none;text-align:center}
+.btn:hover{background:var(--brand-strong)}
+.btn.accent{background:var(--accent);color:var(--on-accent)}
+.btn.accent:hover{filter:brightness(.92)}
+.btn.ghost{background:transparent;color:var(--brand-strong);border:1px solid var(--line)}
+.btn.ghost:hover{background:var(--sunken)}
+.eyebrow{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.lead{margin-top:14px;max-width:36em;color:var(--muted);font-size:16px;line-height:26px}
+section{padding-block:48px}
+section+section{border-top:1px solid var(--line)}
+h2.rule{font-size:26px;line-height:32px;font-weight:600}
+.intro{padding-block:48px 24px}
+.intro h1{font-size:42px;line-height:48px;font-weight:700;max-width:18em}
+/* два направления */
+.dirs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-bottom:48px}
+.dir{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.dir h2{font-size:28px;line-height:34px;font-weight:700}
+.dir .one{color:var(--muted)}
+.dir dl{margin:0;display:grid;gap:12px}
+.dir dt{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.dir dd{margin:2px 0 0}
+.dir .acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:auto;padding-top:8px}
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
 .split>*{min-width:0}
 .steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:16px;counter-reset:s}
-.steps li{display:grid;grid-template-columns:26px minmax(0,1fr);gap:8px;counter-increment:s}
-.steps li::before{content:counter(s);font-weight:600;color:var(--muted)}
+.steps li{display:grid;grid-template-columns:32px minmax(0,1fr);gap:10px;counter-increment:s}
+.steps li::before{content:counter(s);display:grid;place-items:center;width:28px;height:28px;border-radius:999px;background:var(--brand-soft);color:var(--brand-strong);font-weight:600;font-size:13px}
 .steps b{display:block;font-weight:600}
-.steps span{color:var(--muted);font-size:13px;line-height:18px}
+.steps span{color:var(--muted)}
 .incl{margin:20px 0 0;padding-left:18px;display:grid;gap:6px}
-.chips{display:inline-flex;gap:2px;flex-wrap:wrap;background:var(--sunken);border-radius:var(--r-sm);padding:3px;margin-top:20px}
-.chip{background:none;border:0;border-radius:6px;padding:6px 12px;font:500 13px/18px var(--sans);color:var(--muted);cursor:pointer}
-.chip[aria-pressed="true"]{background:var(--raised);color:var(--ink);box-shadow:var(--shadow-card)}
-.pagetitle{font-size:40px;line-height:44px;font-weight:700}
-.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:20px}
-.card{padding:20px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.panel{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
+.panel p+p{margin-top:10px}
+.panel .muted,.muted{color:var(--muted)}
+.closing{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+/* каталог */
+.pagetitle{font-size:40px;line-height:46px;font-weight:700}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:24px}
+.chip{background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font:500 14px/18px var(--sans);color:var(--ink);cursor:pointer;min-height:40px}
+.chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
+.filters{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:end}
+.filters label{display:grid;gap:4px;font-size:13px;line-height:18px;color:var(--muted)}
+.filters select{font:500 14px/18px var(--sans);color:var(--ink);background:var(--raised);border:1px solid var(--line);border-radius:var(--r-sm);padding:9px 10px;min-height:40px}
+.found{margin-top:16px;color:var(--muted);font-size:13px}
+.grp{margin-top:32px}
+.grp[hidden]{display:none}
+.grp h2{font-size:22px;line-height:28px;font-weight:600}
+.grp>p{color:var(--muted);margin-top:4px}
+.cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
+.card{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);text-decoration:none;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card:hover{border-color:var(--brand)}
 .card[hidden]{display:none}
-.eyebrow{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
-.card h2{font-size:18px;line-height:24px;font-weight:600}
-.card .one{color:var(--muted);font-size:13px;line-height:18px}
+.card h3{font-size:19px;line-height:24px;font-weight:600}
+.card .one{color:var(--muted)}
 .spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13px;line-height:18px;margin:0}
 .spec dt{color:var(--muted)}
 .spec dd{margin:0;font-weight:500}
-.more{color:var(--brand-strong);font-size:13px;line-height:18px;font-weight:600;margin-top:auto}
-.back{color:var(--brand-strong);font-size:13px;line-height:18px;font-weight:500;text-decoration:none}
+.more{color:var(--brand-strong);font-size:14px;line-height:18px;font-weight:600;margin-top:auto}
+.empty{margin-top:24px}
+.ruler{display:flex;gap:2px;width:100%}
+.ruler i{display:block;flex:1 1 0;min-width:0;height:8px;border-radius:2px;background:var(--sunken)}
+.ruler.big i{height:12px}
+.ruler i.p0{background:var(--ph1)}.ruler i.p1{background:var(--ph2)}.ruler i.p2{background:var(--ph3)}.ruler i.p3{background:var(--ph4)}
+/* страница программы */
+.back{color:var(--brand-strong);font-size:14px;line-height:18px;font-weight:500;text-decoration:none}
 .proghead{padding-top:18px}
-.proghead h1{font-size:40px;line-height:44px;font-weight:700;margin-top:8px;overflow-wrap:break-word}
+.proghead h1{font-size:40px;line-height:46px;font-weight:700;margin-top:8px;overflow-wrap:break-word}
 .prog{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;padding-block:24px 48px}
 .prog>*{min-width:0}
-.prog>div:first-child{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:24px}
+.prog>div:first-child{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
 .block{display:grid;gap:10px}
 .block+.block{margin-top:28px}
-.block h2.rule{font-size:18px;line-height:24px}
+.block h2.rule{font-size:19px;line-height:24px}
 .block p{max-width:38em}
 .phases{list-style:none;margin:0;padding:0;display:grid;gap:6px}
 .phases li{display:grid;grid-template-columns:12px minmax(0,1fr) auto;gap:10px;align-items:center}
 .phases i{width:10px;height:10px;border-radius:2px}
+.phases i.p0{background:var(--ph1)}.phases i.p1{background:var(--ph2)}.phases i.p2{background:var(--ph3)}.phases i.p3{background:var(--ph4)}
 .phases span{color:var(--muted);font-size:13px;line-height:18px;font-variant-numeric:tabular-nums;white-space:nowrap}
 .block .incl{margin-top:0}
-.buy{position:sticky;top:calc(16px + env(safe-area-inset-top,0px));background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:20px;display:grid;gap:14px}
+.place{margin:0;display:grid;gap:10px}
+.place dt{color:var(--muted);font-size:13px;line-height:18px}
+.place dd{margin:2px 0 0}
+.place a{color:var(--brand-strong);font-weight:600}
+.buy{position:sticky;top:76px;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:grid;gap:14px}
 .buy dl{margin:0;display:grid;gap:9px}
 .buy dt{color:var(--muted);font-size:13px;line-height:18px}
 .buy dd{margin:0;font-weight:500}
 .buy .btn{width:100%}
 .buy small{font-size:13px;line-height:18px;color:var(--muted)}
 .buy small a{color:var(--brand-strong)}
-footer{background:var(--night);color:var(--on-night-muted);font-size:13px;line-height:18px}
-footer a{color:var(--on-night)}
-footer .wrap{padding-block:18px}
+footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:20px}
+footer .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap}
+footer a{color:var(--brand-strong)}
 @media (max-width:860px){
-  .hero,.split,.prog{grid-template-columns:minmax(0,1fr);gap:24px}
-  .hero{padding:24px;border-radius:var(--r-md)}
-  .hero h1,.pagetitle,.proghead h1{font-size:30px;line-height:34px}
-  .goals{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dirs,.split,.prog{grid-template-columns:minmax(0,1fr);gap:16px}
+  .split{gap:32px}
+  .intro{padding-block:32px 20px}
+  .intro h1,.pagetitle,.proghead h1{font-size:30px;line-height:36px}
+  .dir{padding:20px}.dir h2{font-size:24px;line-height:30px}
   .cards{grid-template-columns:minmax(0,1fr)}
   .buy{position:static;order:-1}
+  section{padding-block:36px}
 }
-@media (max-width:420px){.row{grid-template-columns:100px minmax(0,1fr)}.spec{gap:8px}.goals{grid-template-columns:minmax(0,1fr)}}
-@media (prefers-reduced-motion:reduce){.goal,.card{transition:none}}
+@media (max-width:640px){header.top .wrap{flex-wrap:wrap;padding-block:10px 8px;min-height:0}nav.main{width:100%;display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}nav.main .f{display:none}nav.main .s{display:inline}nav.main a{text-align:center;padding:10px 4px;min-height:44px}html{scroll-padding-top:110px}.buy{top:0}}
+@media (max-width:380px){.spec{gap:8px}}
 </style>
 </head>
 <body>
-<div class="strip"><div class="wrap">Программы подготовки и обучение тренеров</div></div>
+<a class="skip" href="#main">К содержанию</a>
 <header class="top"><div class="wrap">
   <a class="brand" href="../../">Больше чем качалка</a>
-  <nav class="main" aria-label="Основное меню"><a href="../../programs/">Программы</a><a href="../../learn/">Обучение</a><a href="../../app/#library">Библиотека</a><a href="../../app/">Войти</a></nav>
+  <nav class="main" aria-label="Основное меню"><a href="../../learn/"><span class="f">Обучение тренеров</span><span class="s">Обучение</span></a><a href="../../programs/" aria-current="page"><span class="f">Программы тренировок</span><span class="s">Программы</span></a><a class="login" href="../../app/"><span class="f">Войти в кабинет</span><span class="s">Войти</span></a></nav>
 </div></header>
-<main><div class="wrap" style="padding-top:22px"><a class="back" href="../">← Все программы</a>
-<div class="proghead"><span class="eyebrow">Бег и спринт</span><h1>Спринт 200–400 м</h1><p class="lead">Подготовка к стартам на 200–400 м.</p></div>
+<main id="main"><div class="wrap" style="padding-top:22px"><a class="back" href="../">← Все программы</a>
+<div class="proghead"><span class="eyebrow">Беговые дисциплины</span><h1>Спринт 200–400 м</h1><p class="lead">Подготовка к стартам на 200–400 м.</p></div>
 <div class="prog"><div>
   <div class="block"><h2 class="rule">Структура: 24 нед</h2><div class="ruler big" aria-hidden="true"><i class="p0" title="Переход, неделя 1"></i><i class="p0" title="Переход, неделя 2"></i><i class="p1" title="База в манеже, неделя 3"></i><i class="p1" title="База в манеже, неделя 4"></i><i class="p1" title="База в манеже, неделя 5"></i><i class="p1" title="База в манеже, неделя 6"></i><i class="p1" title="База в манеже, неделя 7"></i><i class="p1" title="База в манеже, неделя 8"></i><i class="p1" title="База в манеже, неделя 9"></i><i class="p1" title="База в манеже, неделя 10"></i><i class="p1" title="База в манеже, неделя 11"></i><i class="p1" title="База в манеже, неделя 12"></i><i class="p1" title="База в манеже, неделя 13"></i><i class="p1" title="База в манеже, неделя 14"></i><i class="p1" title="База в манеже, неделя 15"></i><i class="p2" title="Специальная подготовка, неделя 16"></i><i class="p2" title="Специальная подготовка, неделя 17"></i><i class="p2" title="Специальная подготовка, неделя 18"></i><i class="p2" title="Специальная подготовка, неделя 19"></i><i class="p3" title="Пик, неделя 20"></i><i class="p3" title="Пик, неделя 21"></i><i class="p3" title="Пик, неделя 22"></i><i class="p3" title="Пик, неделя 23"></i><i class="p3" title="Пик, неделя 24"></i></div><ul class="phases"><li><i class="p0"></i>Переход<span>недели 1–2</span></li><li><i class="p1"></i>База в манеже<span>недели 3–15</span></li><li><i class="p2"></i>Специальная подготовка<span>недели 16–19</span></li><li><i class="p3"></i>Пик<span>недели 20–24</span></li></ul></div>
   <div class="block"><h2 class="rule">Как строится подготовка</h2><p>От выносливости через базу в манеже к специальной подготовке и пику. В базе три беговых линии: скоростная выносливость, короткие отрезки и интервалы, плюс силовая. В специальной подготовке спринт, темп забега на коротких отрезках и бег медленнее забега на длинных. В пике отрезки удлиняются, их становится меньше, а горки, средние отрезки и общая силовая уходят первыми.</p></div>
   <div class="block"><h2 class="rule">Для кого</h2><p>Спринтер или бегун на 200–400 м, тренируется 4–5 раз в неделю. Нужен манеж или стадион.</p></div>
-  <div class="block"><h2 class="rule">Что вы получите</h2><ul class="incl"><li>Расписание на все 24 нед в личном кабинете</li><li>Цель каждого занятия</li><li>Видео техники упражнений</li><li>Таймер отдыха и дневник с весами, временем и самочувствием</li></ul></div>
+  <div class="block"><h2 class="rule">Место в системе</h2><dl class="place"><div><dt>Исходная подготовка</dt><dd>Тренировки 4–5 раз в неделю, манеж или стадион</dd></div><div><dt>Если готовности не хватает</dt><dd>Подготовительной программы в каталоге пока нет. Если требования к старту пока не выполняются, напишите тренеру.</dd></div><div><dt>Что дальше</dt><dd>Продолжение подбирается по итогам программы и вашей цели: напишите тренеру.</dd></div></dl></div>
+  <div class="block"><h2 class="rule">Что будет в кабинете</h2><ul class="incl"><li>Расписание на все 24 нед с текущей недели от даты старта</li><li>Цель каждого занятия</li><li>Видео техники упражнений из библиотеки</li><li>Таймер отдыха и дневник с весами, временем и самочувствием</li></ul></div>
 </div>
-<aside class="buy"><dl><div><dt>Срок</dt><dd>24 нед</dd></div><div><dt>Занятий в неделю</dt><dd>4–5</dd></div><div><dt>Нужно до старта</dt><dd>Тренировки 4–5 раз в неделю, манеж или стадион</dd></div></dl><a class="btn" href="mailto:ignatooov@mail.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%3A%20%D0%A1%D0%BF%D1%80%D0%B8%D0%BD%D1%82%20200%E2%80%93400%20%D0%BC">Оставить заявку</a><small>Письмо на ignatooov@mail.ru. Программу открывает тренер после оплаты. Уже клиент? <a href="../../app/">Войти</a></small></aside>
+<aside class="buy"><dl><div><dt>Срок</dt><dd>24 нед</dd></div><div><dt>Занятий в неделю</dt><dd>4–5</dd></div><div><dt>Нужно до старта</dt><dd>Тренировки 4–5 раз в неделю, манеж или стадион</dd></div></dl><a class="btn" href="mailto:ignatooov@mail.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%3A%20%D0%A1%D0%BF%D1%80%D0%B8%D0%BD%D1%82%20200%E2%80%93400%20%D0%BC">Оставить заявку</a><small>Оплата на сайте пока не подключена: заявка уходит письмом на ignatooov@mail.ru, тренер отвечает и открывает программу. Уже занимаетесь? <a href="../../app/">Войти в кабинет</a></small></aside>
 </div></div></main>
-<footer><div class="wrap">Автор программ: тренер Артём Игнатов, кандидат педагогических наук. Заявки и вопросы: <a href="mailto:ignatooov@mail.ru">ignatooov@mail.ru</a></div></footer>
+<footer><div class="wrap"><span>Больше чем качалка. Автор курса и программ: Артём Игнатов, тренер, кандидат педагогических наук.</span><span>Вопросы и заявки: <a href="mailto:ignatooov@mail.ru">ignatooov@mail.ru</a></span></div></footer>
 </body>
 </html>

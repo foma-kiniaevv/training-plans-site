@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Кабинет владельца · Больше чем качалка</title>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d6b79'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
+<style>/* Дизайн-система AL Leone, связка «Залив + Ночь» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j, tokens.json).
+   Шрифт сайта остаётся прежним (Montserrat): гарнитуры Unbounded/Onest из системы сознательно не подключаем.
+   Подключается первым на всех страницах; старые имена переменных в storefront, learn и cabinet ссылаются сюда. */
+:root{
+  --ds-bg:#f5f1ea; --ds-surface:#fffcf7; --ds-surface-2:#ebe5da; --ds-line:#dad2c4;
+  --ds-ink:#1b201e; --ds-ink-2:#525853; --ds-ink-3:#878a84;
+  --ds-brand:#1d6b79; --ds-brand-strong:#124650; --ds-brand-soft:#d9e8e5; --ds-on-brand:#ffffff;
+  --ds-accent:#b0473a; --ds-accent-ink:#9a3c30; --ds-accent-soft:#f3ddd7; --ds-on-accent:#ffffff;
+  --ds-deep:#15333a; --ds-on-deep:#ffffff; --ds-up:#1d7348; --ds-down:#b8322a;
+  --ds-shadow-card:0 0 0 1px rgba(24,32,31,.09),0 1px 2px rgba(24,32,31,.04); --ds-shadow-pop:0 8px 24px rgba(24,32,31,.12);
+  /* шкала фаз программы: светлее → темнее */
+  --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
+  --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
+  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
+  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
+  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
+  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
+  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
+  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
+  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
+  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+
+:root{--sans:"Montserrat","Helvetica Neue",Arial,sans-serif}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ds-bg);color:var(--ds-ink);font:400 15px/22px var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--ds-brand-strong)}
+h1,h2,h3,p{margin:0}
+:focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px;border-radius:4px}
+.top{background:var(--ds-deep);color:var(--ds-on-deep)}
+.top .in{max-width:1120px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap}
+.top a{color:inherit;text-decoration:none;font-size:14px}
+.top .brand{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px}
+.top .brand span{display:block;font-size:11px;letter-spacing:.08em;opacity:.74}
+.top nav{display:flex;gap:4px;flex-wrap:wrap}
+.top nav a,.top nav button{padding:8px 10px;border-radius:var(--ds-r-md);background:none;border:0;color:inherit;font:500 14px/18px var(--sans);cursor:pointer}
+.top nav a:hover,.top nav button:hover{background:rgba(255,255,255,.12)}
+main{max-width:1120px;margin:0 auto;padding:24px 16px 64px;display:grid;gap:16px}
+h1{font-size:32px;line-height:38px;font-weight:700}
+.tile{background:var(--ds-surface);border:1px solid var(--ds-line);border-radius:var(--ds-r-lg);padding:20px;display:grid;gap:12px;min-width:0}
+.tile h2{font-size:19px;line-height:24px;font-weight:600}
+.muted{color:var(--ds-ink-2);font-size:13px;line-height:18px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--ds-brand);color:var(--ds-on-brand);border:0;border-radius:var(--ds-r-md);padding:10px 18px;font:600 14px/18px var(--sans);text-decoration:none;cursor:pointer}
+.btn.accent{background:var(--ds-accent);color:var(--ds-on-accent)}
+.btn.ghost{background:transparent;color:var(--ds-brand-strong);border:1px solid var(--ds-line)}
+.btn:disabled{opacity:.6}
+label{display:grid;gap:4px;font-size:13px;color:var(--ds-ink-2)}
+input,select{font:500 14px/18px var(--sans);color:var(--ds-ink);background:var(--ds-surface);border:1px solid var(--ds-line);border-radius:var(--ds-r-sm);padding:10px;min-height:44px;min-width:0}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.stat b{display:block;font-size:28px;line-height:34px;font-weight:300;font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--ds-ink-2)}
+.users{display:grid;gap:10px}
+.user{border:1px solid var(--ds-line);border-radius:var(--ds-r-md);padding:14px;display:grid;gap:10px;background:var(--ds-bg)}
+.user .h{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
+.user .h b{overflow-wrap:anywhere}
+.user dl{margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 12px;font-size:13px;line-height:18px}
+.user dt{color:var(--ds-ink-2)}
+.user dd{margin:0;font-weight:500}
+.pill{display:inline-block;font-size:11px;line-height:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:999px;background:var(--ds-surface-2);color:var(--ds-ink-2)}
+.pill.on{background:var(--ds-brand-soft);color:var(--ds-brand-strong)}
+.note{font-size:13px;line-height:18px;color:var(--ds-ink-2)}
+.err{color:var(--ds-down)}
+table{width:100%;border-collapse:collapse;font-size:13px;line-height:18px}
+th,td{text-align:left;padding:8px 6px;border-bottom:1px solid var(--ds-line);vertical-align:top}
+th{color:var(--ds-ink-2);font-weight:500}
+.scroll{overflow-x:auto}
+@media (max-width:860px){.grid2,.stats{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.user dl{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+@media (max-width:560px){.grid2{grid-template-columns:minmax(0,1fr)}h1{font-size:26px;line-height:32px}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<header class="top"><div class="in"><a class="brand" href="../">Больше чем качалка<span>Кабинет владельца</span></a>
+<nav aria-label="Разделы"><a href="../learn/?preview#/">Курс как ученик</a><a href="../app/">Программы и дневники</a><a href="../">Сайт</a><button type="button" id="logout" hidden>Выйти</button></nav></div></header>
+<main id="main"><p class="note">Загружаем…</p></main>
+<script>window.OUTLINE = [{"slug": "anatomy", "title": "Анатомия и физиология"}, {"slug": "biomechanics", "title": "Биомеханика движений"}];</script>
+<script>
+const SUPABASE_URL = "https://selgcdicdtjpcsrfrqdq.supabase.co", SUPABASE_KEY = "sb_publishable_wLlkgxHctEZyUzB0TSlUmQ_R_m-t4ca";
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const $ = s => document.querySelector(s), main = $("#main");
+const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const dt = v => v ? new Date(v).toLocaleString("ru-RU", { day: "numeric", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }) : "нет";
+const d0 = v => v ? new Date(v).toLocaleDateString("ru-RU", { day: "numeric", month: "short", year: "numeric" }) : "нет";
+let me = null, USERS = [], PENDING = [], PROGRAMS = [], ATTEMPTS = [];
+
+function loginView(msg) {
+  main.innerHTML = `<h1>Кабинет владельца</h1><div class="tile"><h2>Вход</h2><p class="note">Ссылка для входа придёт на почту. Кабинет открывается только учётной записи с ролью тренера: права проверяет база.</p>
+    <div class="row"><label style="flex:1">Почта<input id="em" type="email" autocomplete="email"></label><button class="btn" id="login" type="button">Прислать ссылку</button></div><p class="note" id="lmsg" role="status">${esc(msg || "")}</p></div>`;
+  $("#login").onclick = async () => { const em = $("#em").value.trim(); if (!em || !$("#em").checkValidity()) { $("#lmsg").textContent = "Проверьте адрес почты."; return; }
+    $("#login").disabled = true; const { error } = await sb.auth.signInWithOtp({ email: em, options: { emailRedirectTo: location.href.split("#")[0], shouldCreateUser: false } });
+    $("#login").disabled = false; $("#lmsg").textContent = error ? "Не получилось отправить ссылку. Если это новая почта, сначала войдите через личный кабинет." : `Ссылка отправлена на ${em}.`; };
+}
+
+async function load() {
+  const [u, p, pr, qa] = await Promise.all([sb.rpc("admin_users"), sb.rpc("admin_pending_access"), sb.from("program").select("id, slug, title").order("position"),
+    sb.from("quiz_attempt").select("user_id, slug, chapter, correct, total, created_at").order("created_at", { ascending: false }).limit(50)]);
+  if (u.error) return u.error;
+  USERS = u.data || []; PENDING = p.data || []; PROGRAMS = pr.data || []; ATTEMPTS = qa.data || [];
+  return null;
+}
+
+function view() {
+  const withCourse = USERS.filter(x => x.course_access).length, active = USERS.filter(x => x.chapters_opened > 0).length;
+  const progName = s => (PROGRAMS.find(p => p.slug === s) || {}).title || s;
+  const email = id => (USERS.find(x => x.user_id === id) || {}).email || "удалён";
+  const modTitle = s => (window.OUTLINE.find(m => m.slug === s) || {}).title || s;
+  main.innerHTML = `<h1>Кабинет владельца</h1>
+  <div class="tile"><h2>Курс глазами обучающегося</h2><p class="note">Открывается тот же интерфейс курса, что у ученика: главы, карточки, самопроверка. В режиме просмотра отметки и результаты тестов не сохраняются.</p>
+    <div class="row"><a class="btn accent" href="../learn/?preview#/">Посмотреть как обучающийся</a><a class="btn ghost" href="../learn/?preview#/anatomy/1">Открыть первую главу</a></div>
+    <p class="note">Экран человека без доступа: откройте <a href="../learn/">раздел курса</a> в приватном окне браузера.</p></div>
+  <div class="stats"><div class="tile stat"><b>${USERS.length}</b><span>учётных записей</span></div><div class="tile stat"><b>${withCourse}</b><span>с доступом к курсу</span></div><div class="tile stat"><b>${PENDING.length}</b><span>доступ выдан, ещё не входили</span></div><div class="tile stat"><b>${active}</b><span>открывали главы</span></div></div>
+  <div class="grid2">
+    <div class="tile"><h2>Открыть курс</h2><p class="note">Доступ выдаётся по почте до первого входа. Оплата на сайте не подключена: основанием служит ваша запись, её текст виден в списке.</p>
+      <label>Почта<input id="ga-em" type="email" placeholder="name@mail.ru"></label><label>Основание (оплата, договор, подарок…)<input id="ga-note"></label>
+      <div class="row"><button class="btn" id="ga" type="button">Открыть курс</button><label style="flex-direction:row;display:flex;gap:6px;align-items:center"><input type="checkbox" id="ga-lib" style="min-height:0"> и отдельно библиотеку</label></div><p class="note" id="ga-msg" role="status"></p></div>
+    <div class="tile"><h2>Назначить программу</h2><p class="note">Человек должен хотя бы раз войти на сайт. Неделя в кабинете считается от даты старта.</p>
+      <label>Пользователь<select id="ap-u">${USERS.map(x => `<option value="${x.user_id}">${esc(x.email)}</option>`).join("")}</select></label>
+      <label>Программа<select id="ap-p">${PROGRAMS.map(x => `<option value="${x.id}">${esc(x.title)}</option>`).join("")}</select></label>
+      <label>Дата старта<input id="ap-d" type="date" value="${new Date().toISOString().slice(0, 10)}"></label>
+      <div class="row"><button class="btn" id="ap" type="button">Назначить</button></div><p class="note" id="ap-msg" role="status"></p></div>
+  </div>
+  <div class="tile"><h2>Пользователи и доступ</h2>
+    <p class="note">«Открывал главы» и «отметил изученными»: разные события. Первое записывается при открытии главы, второе только по кнопке «Глава изучена». Сбор идёт с момента включения записи прогресса; раньше прогресс хранился только в браузере ученика. Покупок в системе нет: оплата не подключена.</p>
+    <div class="users">${USERS.map(x => `<div class="user"><div class="h"><b>${esc(x.email)}</b><span>${x.role !== "client" ? `<span class="pill on">${esc(x.role)}</span> ` : ""}<span class="pill ${x.course_access ? "on" : ""}">${x.course_access ? "курс открыт" : "курс закрыт"}</span></span></div>
+      <dl><div><dt>Регистрация</dt><dd>${d0(x.registered_at)}</dd></div><div><dt>Последний вход</dt><dd>${dt(x.last_sign_in_at)}</dd></div>
+      <div><dt>Основание доступа</dt><dd>${x.course_access ? esc(x.course_note || "без пометки") + ", " + d0(x.course_granted_at) : "нет"}</dd></div>
+      <div><dt>Программы</dt><dd>${x.programs.length ? x.programs.map(p => esc(progName(p.slug)) + " (" + esc({ active: "идёт", finished: "завершена", paused: "пауза" }[p.status] || p.status) + ", с " + d0(p.start) + ")").join("; ") : "нет"}</dd></div>
+      <div><dt>Открывал глав</dt><dd>${x.chapters_opened}</dd></div><div><dt>Отметил изученными</dt><dd>${x.chapters_done}</dd></div>
+      <div><dt>Попыток тестов</dt><dd>${x.quiz_attempts}${x.quiz_last ? ", последняя " + esc(x.quiz_last) : ""}</dd></div><div><dt>Последняя активность в курсе</dt><dd>${dt(x.last_activity)}</dd></div></dl>
+      <div class="row">${x.course_access ? `<button class="btn ghost" type="button" data-revoke="${esc(x.email)}">Закрыть курс</button>` : `<button class="btn ghost" type="button" data-grant="${esc(x.email)}">Открыть курс</button>`}</div></div>`).join("") || `<p class="note">Пока никого.</p>`}</div></div>
+  <div class="tile"><h2>Доступ выдан, но ещё не входили</h2>${PENDING.length ? `<div class="scroll"><table><tr><th>Почта</th><th>Основание</th><th>Выдан</th><th></th></tr>${PENDING.map(x => `<tr><td>${esc(x.email)}</td><td>${esc(x.note || "")}</td><td>${d0(x.granted_at)}</td><td><button class="btn ghost" type="button" data-revoke="${esc(x.email)}">Отозвать</button></td></tr>`).join("")}</table></div>` : `<p class="note">Нет.</p>`}</div>
+  <div class="tile"><h2>Последние попытки самопроверки</h2><p class="note">Показано число верных ответов. Критерия «сдал» в курсе нет, ручной проверки нет.</p>${ATTEMPTS.length ? `<div class="scroll"><table><tr><th>Когда</th><th>Кто</th><th>Модуль</th><th>Глава</th><th>Результат</th></tr>${ATTEMPTS.map(a => `<tr><td>${dt(a.created_at)}</td><td>${esc(email(a.user_id))}</td><td>${esc(modTitle(a.slug))}</td><td>${a.chapter || "весь модуль"}</td><td>${a.correct} из ${a.total}</td></tr>`).join("")}</table></div>` : `<p class="note">Попыток пока нет.</p>`}</div>`;
+  $("#ga").onclick = () => grant($("#ga-em").value, $("#ga-note").value, $("#ga-lib").checked, "#ga-msg");
+  $("#ap").onclick = assign;
+  main.querySelectorAll("[data-grant]").forEach(b => b.onclick = () => grant(b.dataset.grant, "", false, null));
+  main.querySelectorAll("[data-revoke]").forEach(b => b.onclick = () => revoke(b.dataset.revoke));
+}
+
+async function refresh() { const e = await load(); if (e) return denied(e); view(); }
+async function grant(em, note, lib, msgSel) {
+  em = em.trim().toLowerCase(); const msg = t => { if (msgSel) $(msgSel).textContent = t; };
+  if (!/^[^@\s]+@[^@\s]+$/.test(em)) return msg("Проверьте адрес почты.");
+  const { error } = await sb.from("course_access").upsert({ email: em, note: note.trim() || null });
+  if (error) return msg("Не сохранилось: " + error.message);
+  if (lib) { const r = await sb.from("library_access").upsert({ email: em, note: note.trim() || null }); if (r.error) return msg("Курс открыт, библиотека не сохранилась: " + r.error.message); }
+  await refresh(); $("#ga-msg").textContent = `Курс открыт для ${em}.`;
+}
+async function revoke(em) {
+  if (!confirm(`Закрыть доступ к курсу для ${em}? Уже выданные ссылки на файлы работают до истечения срока (до 1 часа).`)) return;
+  const { error } = await sb.from("course_access").delete().eq("email", em);
+  if (error) { alert("Не получилось: " + error.message); return; }
+  await refresh();
+}
+async function assign() {
+  const row = { profile_id: $("#ap-u").value, program_id: +$("#ap-p").value, start_date: $("#ap-d").value };
+  if (!row.profile_id) { $("#ap-msg").textContent = "Нет пользователей."; return; }
+  const { error } = await sb.from("client_program").insert(row);
+  $("#ap-msg").textContent = error ? "Не сохранилось: " + error.message : "Программа назначена.";
+  if (!error) await refresh();
+}
+function denied(e) {
+  const forbidden = e.code === "42501" || /forbidden/.test(e.message || "");
+  main.innerHTML = `<h1>Кабинет владельца</h1><div class="tile"><h2>${forbidden ? "Нет прав" : "Данные не загрузились"}</h2><p class="note">${forbidden ? `Вы вошли как ${esc(me.email)}. Этот раздел открыт только учётной записи с ролью тренера.` : "Проверьте интернет и обновите страницу. Если ошибка повторяется, возможно, в базе ещё не применена миграция 05."}</p><p class="note">${esc(e.message || "")}</p><div class="row"><a class="btn ghost" href="../app/">Личный кабинет</a></div></div>`;
+}
+$("#logout").onclick = () => sb.auth.signOut({ scope: "local" }).then(() => location.reload());
+(async () => {
+  const { data } = await sb.auth.getSession(); me = data.session ? data.session.user : null;
+  $("#logout").hidden = !me;
+  if (!me) { const h = new URLSearchParams(location.hash.slice(1)); loginView(h.get("error_code") ? "Ссылка устарела или уже использована. Запросите новую." : ""); return; }
+  if (location.hash) history.replaceState(null, "", location.pathname);
+  main.innerHTML = `<p class="note">Загружаем…</p>`;
+  await refresh();
+})();
+sb.auth.onAuthStateChange(ev => { if (ev === "SIGNED_IN" && !me) location.reload(); });
+</script>
+</body>
+</html>
