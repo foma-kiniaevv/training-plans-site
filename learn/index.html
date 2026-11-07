@@ -10,56 +10,82 @@
 <meta property="og:title" content="Обучение тренеров">
 <meta property="og:description" content="Курс для тренеров: анатомия, физиология и биомеханика силовых упражнений. Главы, схемы, карточки и самопроверка.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d6b79'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-<style>/* Дизайн-система AL Leone, связка «Залив + Ночь» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j, tokens.json).
-   Шрифт сайта остаётся прежним (Montserrat): гарнитуры Unbounded/Onest из системы сознательно не подключаем.
-   Подключается первым на всех страницах; старые имена переменных в storefront, learn и cabinet ссылаются сюда. */
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
+<style>/* Дизайн-система «Больше чем качалка» (claude.ai/artifact/RzNZbZFbooDDb1qJhgsHrD, tokens.json): светлая и «Вечер».
+   Цвет в две роли: малина = «где ты» (шкала s1–s5: этап, тип дня, текущее место), голубой = «что делать» (ссылки, инструкция).
+   Нейтральный холодный холст, белые карточки отделяются тоном, без рамок и теней. Главная кнопка графитовая.
+   Подключается первым на всех страницах. Имена --ds-* сохранены, чтобы стили страниц не переписывать:
+   --ds-brand = главная кнопка, --ds-brand-strong = ссылка, --ds-accent = малина «где ты». */
 :root{
-  --ds-bg:#f5f1ea; --ds-surface:#fffcf7; --ds-surface-2:#ebe5da; --ds-line:#dad2c4;
-  --ds-ink:#1b201e; --ds-ink-2:#525853; --ds-ink-3:#878a84;
-  --ds-brand:#1d6b79; --ds-brand-strong:#124650; --ds-brand-soft:#d9e8e5; --ds-on-brand:#ffffff;
-  --ds-accent:#b0473a; --ds-accent-ink:#9a3c30; --ds-accent-soft:#f3ddd7; --ds-on-accent:#ffffff;
-  --ds-deep:#15333a; --ds-on-deep:#ffffff; --ds-up:#1d7348; --ds-down:#b8322a;
-  --ds-shadow-card:0 0 0 1px rgba(24,32,31,.09),0 1px 2px rgba(24,32,31,.04); --ds-shadow-pop:0 8px 24px rgba(24,32,31,.12);
-  /* шкала фаз программы: светлее → темнее */
-  --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
-  --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
-  /* линия ссылки в тексте: цвет ссылки с прозрачностью 35 % */
+  /* нейтральные */
+  --ds-bg:#CED6DD; --ds-surface:#FFFFFF; --ds-surface-2:#EEF1F4; --ds-line:#C9D1D8; --ds-ctrl:#7D8894; --ds-rest:#E3E8EC;
+  --ds-ink:#20252B; --ds-ink-2:#535E69; --ds-ink-3:#7D8894;
+  /* главная кнопка и ссылки */
+  --ds-brand:#20252B; --ds-on-brand:#FFFFFF; --ds-brand-strong:#2F567B; --ds-brand-soft:#EBF0F6;
+  --ds-info:#7FA8CC; --ds-instr-k:#2F567B;
+  /* малина: шкала s1–s5 и текст на ней */
+  --ds-s1:#F4E1E8; --ds-s2:#E9BFCF; --ds-s3:#D995AF; --ds-s4:#CA7196; --ds-s5:#A5466D; --ds-on-s:#0E1521;
+  --ds-accent:#E9BFCF; --ds-on-accent:#0E1521; --ds-accent-ink:#A5466D; --ds-accent-soft:#F4E1E8;
+  /* тёмная плашка (основная работа в дневнике, шапка кабинета владельца): графит, как главная кнопка */
+  --ds-deep:#20252B; --ds-on-deep:#FFFFFF;
+  /* статусы: в системе их нет, оставлены прежние значения, всегда со словом или значком */
+  --ds-up:#1d7348; --ds-down:#b8322a;
+  --ds-shadow-card:none; --ds-shadow-pop:0 8px 24px rgba(14,21,33,.14);
+  --ds-ph1:#F4E1E8; --ds-ph2:#E9BFCF; --ds-ph3:#D995AF; --ds-ph4:#CA7196;
+  --ds-r-sm:8px; --ds-r-md:10px; --ds-r-lg:14px;
   --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
+  --ds-sans:"Inter","Inter Display",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}
+
+/* Шрифт: одна гарнитура Inter; заголовки 800 с отрицательным трекингом, цифры табличные */
+body{font-family:var(--ds-sans)}
+h1{letter-spacing:-0.04em}
+h2,h3{letter-spacing:-0.02em}
+.num, td, .stat b, .phases span{font-variant-numeric:tabular-nums}
 
 /* Ссылки (правила L1–L2). Ссылки интерфейса без подчёркивания: место, вес, цвет, фон при наведении.
    Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
 a{text-decoration:none}
-:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
 :is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
 :where(a, button, summary, [role="button"]){cursor:pointer}
-:where(a, button, summary, input, select, textarea):focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px}
-/* Раздел «Обучение». Токены AL Leone (src/al-leone.css): тёмная панель deep слева, светлые плитки, кирпичный только для текущего места. */
+:where(a, button, summary, input, select, textarea, video):focus-visible{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* флажки и плеер видео: браузер не всегда считает их фокус «видимым», поэтому обводка по обычному фокусу */
+input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focus-within, video:focus-within{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* ссылка «К содержанию»: видна только при фокусе с клавиатуры (2.4.1) */
+.skip{position:absolute;left:-9999px;top:8px}
+.skip:focus{left:16px;z-index:40;min-height:32px;display:inline-flex;align-items:center;background:var(--ds-surface);color:var(--ds-ink);padding:8px 12px;border-radius:var(--ds-r-sm)}
+/* Раздел «Обучение». Токены «Больше чем качалка» (src/bchk.css): светлая панель слева, белые плитки без рамок, малина только для текущего места. */
 :root{
-  --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --night:var(--ds-deep); --on-night:var(--ds-on-deep); --on-night-muted:rgba(255,255,255,.74); --night-line:rgba(255,255,255,.14);
+  --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --night:var(--ds-surface-2); --on-night:var(--ds-ink); --on-night-muted:var(--ds-ink-2); --night-line:var(--ds-rest);
   --ink:var(--ds-ink); --muted:var(--ds-ink-2); --soft:var(--ds-ink-3); --line:var(--ds-line); --brand:var(--ds-brand); --brand-strong:var(--ds-brand-strong); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand);
   --accent:var(--ds-accent); --accent-ink:var(--ds-accent-ink); --on-accent:var(--ds-on-accent);
   --good:var(--ds-up); --good-soft:var(--ds-brand-soft); --bad:var(--ds-down); --bad-soft:var(--ds-accent-soft);
   --shadow-card:none; /* B1: статичные плитки отделяет одна рамка, тени только у всплывающего */
   --r-sm:var(--ds-r-sm); --r-md:var(--ds-r-md); --r-lg:var(--ds-r-lg);
-  --sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --sans:var(--ds-sans);
 }
 *{box-sizing:border-box}
 html{scroll-padding-top:16px}
@@ -74,8 +100,8 @@ button{font:inherit;color:inherit;cursor:pointer}
 /* каркас */
 .shell{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
 .side{background:var(--night);color:var(--on-night);padding:20px 14px;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh;overflow-y:auto}
-.brand{font-size:13px;line-height:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding-inline:10px}
-.brand span{display:block;font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;color:var(--on-night-muted);margin-top:6px}
+.brand{font-size:16px;line-height:20px;padding-block:2px;font-weight:800;letter-spacing:-0.02em;text-decoration:none;padding-inline:10px}
+.brand span{display:block;font-size:11px;line-height:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--on-night-muted);margin-top:6px}
 .nav{display:flex;flex-direction:column;gap:2px}
 .nav .lbl{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--on-night-muted);padding:12px 10px 6px}
 .nav a{display:flex;gap:8px;align-items:baseline;padding:8px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--on-night-muted);font-size:13px;line-height:18px;font-weight:500}
@@ -94,16 +120,16 @@ button{font:inherit;color:inherit;cursor:pointer}
 .page{max-width:860px;margin-inline:auto;display:flex;flex-direction:column;gap:16px}
 
 /* общие элементы */
-.eyebrow{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.eyebrow{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-2, var(--muted))}
 .head{display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
-.head h1{font-size:40px;line-height:44px;font-weight:700}
+.head h1{font-size:40px;line-height:44px;font-weight:800}
 .lead{color:var(--muted);max-width:40em}
 .meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;line-height:18px;color:var(--muted)}
-.tile{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:24px}
+.tile{background:var(--raised);border:1px solid transparent;border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:24px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:var(--on-brand);font-size:13px;line-height:18px;font-weight:600;padding:12px 24px;border-radius:999px;border:0;text-decoration:none;text-align:center}
 .btn:hover{filter:brightness(1.05)}
 .btn:disabled{opacity:.45;cursor:default;filter:none}
-.btn.ghost{background:var(--raised);color:var(--ink);border:1px solid var(--line)}
+.btn.ghost{background:var(--raised);color:var(--ink);border:1px solid var(--ds-ctrl)}
 .btn.ghost:hover{border-color:var(--soft)}
 .row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 .note{font-size:13px;line-height:18px;color:var(--muted)}
@@ -112,9 +138,9 @@ button{font:inherit;color:inherit;cursor:pointer}
 .link:hover{color:var(--ink)}
 .loading{color:var(--muted);padding:40px 0;text-align:center}
 .chips{display:flex;gap:4px;flex-wrap:wrap}
-.chip{background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;line-height:18px;font-weight:500;color:var(--muted);text-decoration:none}
+.chip{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-sm);padding:6px 12px;font-size:13px;line-height:18px;font-weight:500;color:var(--muted);text-decoration:none}
 .chip:hover{border-color:var(--soft)}
-.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--raised)}
+.chip[aria-current="page"]{background:var(--ink);border-color:var(--ink);color:var(--raised)}
 
 /* вход и доступ */
 .gate{display:flex;flex-direction:column;gap:14px;max-width:560px}
@@ -206,7 +232,7 @@ details.more>.body{padding:0 16px 16px;display:flex;flex-direction:column;gap:12
 dialog.zoomed{border:0;padding:0;background:transparent;max-width:min(1200px,96vw);max-height:94vh}
 dialog.zoomed::backdrop{background:rgba(0,0,0,.82)}
 dialog.zoomed img{display:block;max-width:100%;max-height:84vh;margin:0 auto;background:#fff;border-radius:var(--r-sm)}
-dialog.zoomed p{color:#f2f2f2;font-size:13px;line-height:20px;margin-top:10px;text-align:center}
+dialog.zoomed p{color:#F2F4F7;font-size:13px;line-height:20px;margin-top:10px;text-align:center}
 dialog.zoomed button{position:fixed;top:12px;right:16px;background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
 
 /* карточки */
@@ -240,9 +266,9 @@ dialog.zoomed button{position:fixed;top:12px;right:16px;background:rgba(255,255,
 .review p{margin-top:8px;font-size:14px;line-height:22px}
 
 /* словарь, материалы */
-.search{width:100%;font:inherit;padding:12px 16px;border:1px solid var(--line);border-radius:999px;background:var(--raised);color:var(--ink)}
+.search{width:100%;font:inherit;padding:12px 16px;border:1px solid var(--line);border-radius:var(--r-sm);background:var(--raised);color:var(--ink)}
 .terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.terms article{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);padding:16px}
+.terms article{background:var(--raised);border:1px solid transparent;border-radius:var(--r-md);padding:16px}
 .terms h2{font-size:15px;line-height:22px;font-weight:600;margin-bottom:4px}
 .terms p{font-size:14px;line-height:22px;color:var(--muted)}
 .srcs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
@@ -253,19 +279,19 @@ dialog.zoomed button{position:fixed;top:12px;right:16px;background:rgba(255,255,
 h2.rule{font-size:20px;line-height:28px;font-weight:600}
 
 /* интерактивные схемы: всегда на тёмной плитке */
-.diagram{--panel:#212224;--ink:#f2f1ee;--muted:#b4b5b3;--dim:#878a8b;--line:#3a3d40;--accent:#e8917f;--soft:#3d2622;--font:var(--sans);
-  background:#18191a;color:#f2f1ee;border-radius:var(--r-md);padding:22px;overflow:hidden}
+.diagram{--panel:#1F2A3B;--ink:#F2F4F7;--muted:#A7B2C2;--dim:#8C98A9;--line:#2A3648;--accent:#F0B3CB;--soft:#4A2A3A;--font:var(--sans);
+  background:#161F2D;color:#F2F4F7;border-radius:var(--r-md);padding:22px;overflow:hidden}
 .diagram .diagram-heading{font-size:14px;line-height:20px;font-weight:600;margin-bottom:16px}
 .diagram-note{font-size:12px;line-height:19px;color:var(--dim);margin-top:14px}
 .diagram svg{max-width:100%;height:auto;display:block}
 .diagram button{font-family:var(--sans)}
 .hierarchy{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
-.hierarchy button{border:1px solid #3a3b41;background:transparent;border-radius:7px;min-width:0;padding:14px 4px 12px;color:var(--muted);font-size:12px;line-height:18px}
+.hierarchy button{border:1px solid #2A3648;background:transparent;border-radius:7px;min-width:0;padding:14px 4px 12px;color:var(--muted);font-size:12px;line-height:18px}
 .hierarchy button svg{height:38px;margin:0 auto 10px;max-width:52px}
-.diagram-detail{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;font-size:14px;line-height:23px;color:#d2d3da;min-height:76px}
-.diagram-detail strong{color:#e8917f;font-weight:600}
+.diagram-detail{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;font-size:14px;line-height:23px;color:#C9D2DE;min-height:76px}
+.diagram-detail strong{color:#F0B3CB;font-weight:600}
 .signal-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
-.signal-node{padding:12px 10px;border:1px solid #35363b;background:transparent;border-radius:8px;text-align:left;font-size:12px;color:var(--muted);line-height:18px}
+.signal-node{padding:12px 10px;border:1px solid #2A3648;background:transparent;border-radius:8px;text-align:left;font-size:12px;color:var(--muted);line-height:18px}
 .signal-node span{display:block;font-size:11px;color:var(--accent);margin-bottom:4px}
 .diagram-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
 .diagram-tab{background:transparent;border:1px solid var(--line);border-radius:7px;color:var(--muted);font-size:12px;padding:7px 12px}
@@ -273,7 +299,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 .energy-bands{display:grid;gap:14px}
 .energy-band{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;font-size:12px;color:var(--muted)}
 .energy-ribbon{height:26px;border-radius:4px;display:flex;align-items:center;padding:0 12px;font-size:11px;color:#eee;position:relative;overflow:hidden}
-.energy-ribbon:after{content:'';position:absolute;right:0;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,#18191a)}
+.energy-ribbon:after{content:'';position:absolute;right:0;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,#161F2D)}
 .mechanics-diagram{--mechanics-accent:var(--accent);--mechanics-muted:var(--muted);--mechanics-ink:var(--ink)}
 .mechanics-intro{color:var(--mechanics-muted);font-size:13px;line-height:21px;margin:0 0 18px}
 .mechanics-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,.9fr);gap:24px;align-items:center}
@@ -285,14 +311,14 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 .mechanics-svg-label{fill:var(--mechanics-ink);font-size:12px}
 .mechanics-svg-muted{fill:var(--mechanics-muted);font-size:11px}
 .mechanics-svg-small{font-size:10px}
-.mechanics-reference{stroke:#51535b;stroke-width:1.5;stroke-dasharray:4 5}
+.mechanics-reference{stroke:#4A5568;stroke-width:1.5;stroke-dasharray:4 5}
 .mechanics-force-line{stroke:var(--mechanics-accent);stroke-width:1;stroke-opacity:.35;stroke-dasharray:4 5}
 .mechanics-dimension{fill:none;stroke:var(--mechanics-accent);stroke-width:1.5}
-.mechanics-upper-arm{fill:none;stroke:#656771;stroke-width:12;stroke-linecap:round}
-.mechanics-forearm{stroke:#c0c1c6;stroke-width:12;stroke-linecap:round}
+.mechanics-upper-arm{fill:none;stroke:#6E7A8A;stroke-width:12;stroke-linecap:round}
+.mechanics-forearm{stroke:#C9D2DE;stroke-width:12;stroke-linecap:round}
 .mechanics-pivot{fill:var(--panel);stroke:var(--mechanics-ink);stroke-width:2}
 .mechanics-angle{fill:none;stroke:var(--mechanics-accent);stroke-width:1.6}
-.mechanics-load{fill:#3d2622;stroke:var(--mechanics-accent);stroke-width:2}
+.mechanics-load{fill:#4A2A3A;stroke:var(--mechanics-accent);stroke-width:2}
 .mechanics-gravity{color:var(--mechanics-accent);stroke:currentColor;stroke-width:2.5}
 .mechanics-controls{display:grid;gap:22px}
 .mechanics-control label{display:flex;justify-content:space-between;align-items:baseline;gap:15px;font-size:13px;font-weight:600;color:var(--mechanics-ink);line-height:20px}
@@ -308,7 +334,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 .mechanics-formula{font-size:13px;line-height:21px;color:var(--mechanics-muted);padding:14px 0 0;margin-top:18px;border-top:1px solid var(--line)}
 .mechanics-formula span{color:var(--mechanics-ink);white-space:nowrap}
 .mechanics-grid{stroke:var(--line);stroke-width:1}
-.mechanics-axis{fill:none;stroke:#777982;stroke-width:1.2}
+.mechanics-axis{fill:none;stroke:#8C98A9;stroke-width:1.2}
 .mechanics-curve{fill:none;stroke:var(--mechanics-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
 .mechanics-selection-line{stroke:var(--mechanics-muted);stroke-width:1.2;stroke-dasharray:4 4}
 .mechanics-point{fill:var(--mechanics-accent);stroke:var(--panel);stroke-width:3}
@@ -318,7 +344,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 @media (max-width:860px){
   .shell{grid-template-columns:minmax(0,1fr)}
   .mbar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:20;background:var(--night);color:var(--on-night);padding:12px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px))}
-  .mbar .brand{padding:0}
+  .mbar .brand{padding:2px 0}
   .mbar button{background:var(--night-line);border:0;color:var(--on-night);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
   .side{display:none;position:fixed;inset:56px 0 0 0;height:auto;z-index:19;padding-bottom:max(20px,env(safe-area-inset-bottom,0px))}
   .side>.brand{display:none}
@@ -348,10 +374,11 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+<a class="skip" href="#main">К содержанию</a>
 <div class="mbar"><a class="brand" href="../">Больше чем качалка</a><button type="button" id="menu" aria-controls="side" aria-expanded="false">Меню</button></div>
 <div class="shell">
 <aside class="side" id="side"></aside>
-<main class="main" id="main"><div class="page"><p class="loading">Загружаем…</p></div></main>
+<main class="main" id="main" tabindex="-1"><div class="page"><p class="loading">Загружаем…</p></div></main>
 </div>
 <noscript><p style="padding:24px">Для курса нужен включённый JavaScript.</p></noscript>
 <script>window.OUTLINE = [{"slug":"anatomy","position":1,"title":"Анатомия и физиология","fullTitle":"Функциональная анатомия и физиология мышечной деятельности","author":"А. А. Игнатов","summary":"Строение мышц, нервная регуляция, движения, энергообеспечение и адаптация к нагрузке.","pdf":"anatomy/lecture.pdf","textUrl":"https://docs.google.com/document/d/1IQJeB9QrQAq_xn9sqsCflobHmDQgx8fU/edit","counts":{"cards":36,"quiz":50,"glossary":36},"chapters":[{"id":1,"title":"Опорно-двигательный аппарат и мышечная система","shortTitle":"Строение и опора","kicker":"От органа к саркомеру","summary":"Как кости, суставы, мышцы и сухожилия создают единую систему движения.","minutes":18,"objectives":["Различать функции костей, суставов, связок и сухожилий.","Проследить строение мышцы от органа до белковых нитей.","Связать устройство мышечно-сухожильного комплекса с передачей усилия."],"sections":["Опора, соединения и движение","Мышца как орган","От мышцы к мышечному волокну","Саркомер: где возникает усилие"]},{"id":2,"title":"Нервная регуляция и мышечное сокращение","shortTitle":"Сигнал и сокращение","kicker":"От команды к усилию","summary":"Путь нервного сигнала, роль натрия, кальция и АТФ, регулирование силы и режимы мышечной работы.","minutes":22,"objectives":["Объяснить путь возбуждения от мотонейрона к сократительным белкам.","Различать роль кальция и АТФ в сокращении и расслаблении.","Описать рекрутирование двигательных единиц и три режима работы мышцы."],"sections":["Двигательная единица и нервный сигнал","Как сигнал достигает сократительных нитей","Актин, миозин и участие АТФ","Как регулируется сила","Координация и режимы работы"]},{"id":3,"title":"Функциональная анатомия движений","shortTitle":"Мышцы и движения","kicker":"От плоскости к упражнению","summary":"Общий язык движений, крупные суставы, классификации мышц и разбор мышечных областей с примерами упражнений.","minutes":38,"objectives":["Определять плоскость, сустав и направление движения.","Различать топографию мышцы, число пересекаемых суставов и её роль в действии.","Связывать мышцы туловища, верхней и нижней конечностей с тренировочными упражнениями."],"sections":["Анатомические плоскости и общие движения","Движения верхней конечности","Позвоночник и суставы нижней конечности","Основания классификации и мышечные роли","Мышцы туловища: спина, грудь и живот","Мышцы верхней конечности","Мышцы нижней конечности"]},{"id":4,"title":"Энергообеспечение мышечной деятельности","shortTitle":"Энергия и нагрузка","kicker":"От АТФ к паузам отдыха","summary":"Как пополняется АТФ, почему энергетические системы работают одновременно и как эти знания помогают дозировать нагрузку.","minutes":22,"objectives":["Различать мощность и ёмкость путей ресинтеза АТФ.","Объяснять совместную работу фосфагенной, гликолитической и окислительной систем.","Подбирать начальные ориентиры отдыха по задаче и фактической работоспособности."],"sections":["Расход и ресинтез АТФ","Три взаимодействующих пути","Силовой подход и типы мышечных волокон","Параметры нагрузки и отдых между подходами"]},{"id":5,"title":"Стимул, утомление, восстановление и адаптация","shortTitle":"Восстановление и адаптация","kicker":"От нагрузки к результату","summary":"Чем отличаются утомление, восстановление и устойчивое развитие возможностей. Модель SRA и контроль нагрузки в практике тренера.","minutes":20,"objectives":["Различать стимул, утомление, восстановление и долговременную адаптацию.","Объяснить неодинаковые сроки восстановления разных функций и тканей.","Использовать модель SRA как схему и оценивать готовность по совокупности наблюдений."],"sections":["Стимул и утомление","Неодновременность восстановления","Как регулируется ответ на нагрузку","Специфика адаптации и сочетание нагрузок","Модель SRA и контроль тренировочного цикла"]}]},{"slug":"biomechanics","position":2,"title":"Биомеханика движений","fullTitle":"Биомеханика движений. Профили нагрузки и эффективность силовых упражнений","author":"А. А. Игнатов","summary":"Как анатомия, положение тела и направление сопротивления помогают выбирать и настраивать силовые упражнения.","pdf":"","textUrl":"","counts":{"cards":26,"quiz":28,"glossary":26},"chapters":[{"id":1,"title":"От анатомии к анализу упражнения","shortTitle":"Движение и мышцы","kicker":"Сначала движение — затем сопротивление","summary":"Определяем работающий сустав, функции мышц и изменение их длины.","minutes":12,"objectives":["Различать движение сегмента и перемещение рукояти.","Учитывать оба сустава при анализе двусуставной мышцы.","Отделять направление мышечных волокон от линии внешнего сопротивления."],"sections":["Какую задачу решает упражнение","Одна мышца — один или два сустава"]},{"id":2,"title":"Силы, плечи и моменты","shortTitle":"Сила и момент","kicker":"Одинаковая масса — разные требования","summary":"Учимся видеть линию силы и вычислять её вращательное действие.","minutes":22,"objectives":["Находить ось, линию действия силы и перпендикулярное плечо.","Различать массу снаряда, силу тяжести и момент силы.","Объяснять, почему по весу гантели нельзя узнать силу бицепса."],"sections":["Какие силы действуют в упражнении","Плечо силы — это перпендикуляр","Внешний момент и мышечная тяга"]},{"id":3,"title":"Профили сопротивления и устройство оборудования","shortTitle":"Профили нагрузки","kicker":"Где возникает сопротивление","summary":"Отделяем требования снаряда от возможностей человека и сравниваем оборудование.","minutes":22,"objectives":["Различать профиль внешнего сопротивления и профиль силы в движении.","Предсказывать изменение момента свободного веса и троса.","Не назначать профиль тренажёру по названию или фотографии."],"sections":["Профиль сопротивления и профиль силы","Почему блок и гантель ощущаются по-разному","Соответствие профилей — инструмент выбора"]},{"id":4,"title":"Длина мышцы, амплитуда и результаты исследований","shortTitle":"Длина и амплитуда","kicker":"Удлинить и нагрузить — две задачи","summary":"Разбираем удлинённые позиции, полную амплитуду и частичные повторения.","minutes":24,"objectives":["Различать длину мышцы и внешний момент.","Корректно применять данные о тренировке при большей длине.","Объяснять назначение и ограничения lengthened partials."],"sections":["Что такое удлинённая позиция","Что показали тренировочные исследования","Полная амплитуда и lengthened partials"]},{"id":5,"title":"Практикум: 11 разборов упражнений","shortTitle":"Выбор упражнения","kicker":"От схемы — к решению в зале","summary":"Для каждого случая связываем задачу, механику и конкретную рекомендацию.","minutes":40,"objectives":["Объяснять выбор упражнения через целевое движение и распределение сопротивления.","Предлагать понятную замену, если упражнение не подходит задаче.","Отделять расчётную модель от доказанного превосходства по гипертрофии."],"sections":["1–2. Сгибание с гантелью стоя и на Скотте","3. Сгибание рук с верхних блоков","4. Сгибание голени стоя на нижнем блоке","5. Сгибание голени сидя и лёжа","6–7. Разгибание назад и разгибание над головой","8. Разгибание голени: что меняет спинка","9. Скручивание и подъём ног","10. Разведения с гантелями и кроссовер","11. Тяга нижнего блока и наклон корпуса","Алгоритм выбора за семь шагов"]}]}]; window.CONTACT_EMAIL = "ignatooov@mail.ru";</script>
@@ -359,7 +386,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
    Перенесены без изменений логики из версии курса, сделанной в ChatGPT. Рисуются на тёмной плитке. */
 (function () {
   'use strict';
-  const colors = { ink: '#f2f2f2', muted: '#a1a1a6', accent: '#f27540', line: '#3b3c42', panel: '#1c1d20', soft: '#30231c' };
+  const colors = { ink: '#F2F4F7', muted: '#A7B2C2', accent: '#F0B3CB', line: '#2A3648', panel: '#1F2A3B', soft: '#4A2A3A' };
   const svg = (body, label, viewBox = '0 0 420 220') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" role="img" aria-label="${label}" style="font-family:Montserrat,Arial,sans-serif">${body}</svg>`;
   const text = (x, y, value, fill = colors.muted, size = 12, anchor = 'start') => `<text x="${x}" y="${y}" fill="${fill}" font-size="${size}" text-anchor="${anchor}">${value}</text>`;
   const line = (x1, y1, x2, y2, color = colors.line, width = 2, extra = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="${width}" ${extra}/>`;
@@ -371,7 +398,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
     { title: 'Саркомер', detail: 'Саркомер — участок миофибриллы между двумя Z-дисками. В нём головки миозина взаимодействуют с актином, создавая усилие.' }
   ];
   function muscleIcon(i) {
-    const a = colors.accent, m = '#77787e';
+    const a = colors.accent, m = '#8C98A9';
     const shapes = [
       `<path d="M3 23C13 23 12 9 27 9S42 23 51 23C42 23 41 37 27 37S13 23 3 23Z" fill="${colors.soft}" stroke="${a}"/><path d="M12 23C21 13 33 13 43 23M12 23C22 33 33 33 43 23M12 23H43" fill="none" stroke="${a}" stroke-width="1.4"/>`,
       `<rect x="9" y="7" width="36" height="32" rx="15" fill="none" stroke="${a}"/><path d="M17 12V34M24 9V37M31 9V37M38 12V34" stroke="${a}" stroke-width="3"/>`,
@@ -393,7 +420,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
     horizontal: { title: 'Горизонтальная', detail: 'Горизонтальная плоскость делит тело на верхнюю и нижнюю части. Вращение происходит вокруг продольной оси сегмента. Примеры: поворот туловища, внутреннее и наружное вращение плеча.' }
   };
   function movementSvg(key) {
-    const a = colors.accent, gray = '#999aa0';
+    const a = colors.accent, gray = '#A7B2C2';
     const arrow = `<defs><marker id="plane-arrow-${key}" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="${a}" stroke-width="1.5"/></marker></defs>`;
     let body = '';
     if (key === 'sagittal') {
@@ -411,7 +438,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
   };
   function energyBands(key) {
     const labels = ['Фосфагенная', 'Гликолитическая', 'Окислительная'];
-    const backgrounds = key === 'power' ? ['linear-gradient(90deg,#a94c28,#6b3a28)', 'linear-gradient(90deg,#76513e,#544038)', 'linear-gradient(90deg,#505552,#39423e)'] : ['linear-gradient(90deg,#76513e,#544038)', 'linear-gradient(90deg,#775441,#5d493c)', 'linear-gradient(90deg,#5f776b,#354b3e)'];
+    const backgrounds = key === 'power' ? ['linear-gradient(90deg,#9C5276,#6E3A54)', 'linear-gradient(90deg,#6E3A54,#4A2A3A)', 'linear-gradient(90deg,#2E4A6A,#1F2A3B)'] : ['linear-gradient(90deg,#6E3A54,#4A2A3A)', 'linear-gradient(90deg,#6E3A54,#4A2A3A)', 'linear-gradient(90deg,#2E4A6A,#1F2A3B)'];
     return `<div class="energy-bands">${labels.map((label,i) => `<div class="energy-band"><span>${label}</span><div class="energy-ribbon" style="background:${backgrounds[i]}">${energy[key].labels[i]}</div></div>`).join('')}</div>`;
   }
   function sraSvg() {
@@ -460,7 +487,7 @@ h2.rule{font-size:20px;line-height:28px;font-weight:600}
   }
   function hero() {
     const a = colors.accent;
-    return svg(`<defs><linearGradient id="hero-muscle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c4933" stop-opacity=".7"/><stop offset="1" stop-color="#2c2420" stop-opacity=".7"/></linearGradient></defs><path d="M35 74H280M114 90L147 151M245 167L254 216" fill="none" stroke="#67503f" stroke-width="1.2" stroke-dasharray="3 5"/><rect x="24" y="28" width="221" height="83" rx="11" fill="#1c1d20" stroke="#45413d"/><path d="M48 70C71 70 72 44 132 44S196 70 221 70C196 70 196 95 132 95S71 70 48 70Z" fill="url(#hero-muscle)" stroke="${a}" stroke-width="1.2"/><path d="M67 70C100 47 164 47 204 70M67 70C100 91 165 91 204 70M67 70H204" fill="none" stroke="${a}" stroke-opacity=".65" stroke-width="1.1"/>${text(36,19,'МЫШЦА',colors.muted,10)}<rect x="109" y="125" width="211" height="73" rx="10" fill="#1b1c1f" stroke="#574438"/><rect x="128" y="145" width="169" height="32" rx="16" fill="#33251e" stroke="${a}" stroke-width="1.2"/><path d="M140 154H285M140 162H285M140 170H285" stroke="${a}" stroke-opacity=".65"/><ellipse cx="143" cy="147" rx="5" ry="2" fill="#a1a1a6"/>${text(122,117,'МЫШЕЧНОЕ ВОЛОКНО',colors.muted,10)}<rect x="191" y="212" width="132" height="46" rx="8" fill="#1c1d20" stroke="#66513f"/><path d="M205 222V248M309 222V248" stroke="#9a9a9e" stroke-width="2"/><path d="M205 227H260M255 227H309M205 243H260M255 243H309" stroke="${a}" stroke-width="1.5"/><path d="M232 235H281" stroke="${a}" stroke-width="5"/>${text(200,206,'САРКОМЕР',colors.muted,10)}`, 'Схема уровней строения: мышца, мышечное волокно, саркомер. Условное изображение без соблюдения масштаба', '0 0 350 270');
+    return svg(`<defs><linearGradient id="hero-muscle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#9C5276" stop-opacity=".7"/><stop offset="1" stop-color="#1F2A3B" stop-opacity=".7"/></linearGradient></defs><path d="M35 74H280M114 90L147 151M245 167L254 216" fill="none" stroke="#6E7A8A" stroke-width="1.2" stroke-dasharray="3 5"/><rect x="24" y="28" width="221" height="83" rx="11" fill="#1F2A3B" stroke="#2A3648"/><path d="M48 70C71 70 72 44 132 44S196 70 221 70C196 70 196 95 132 95S71 70 48 70Z" fill="url(#hero-muscle)" stroke="${a}" stroke-width="1.2"/><path d="M67 70C100 47 164 47 204 70M67 70C100 91 165 91 204 70M67 70H204" fill="none" stroke="${a}" stroke-opacity=".65" stroke-width="1.1"/>${text(36,19,'МЫШЦА',colors.muted,10)}<rect x="109" y="125" width="211" height="73" rx="10" fill="#161F2D" stroke="#4A2A3A"/><rect x="128" y="145" width="169" height="32" rx="16" fill="#4A2A3A" stroke="${a}" stroke-width="1.2"/><path d="M140 154H285M140 162H285M140 170H285" stroke="${a}" stroke-opacity=".65"/><ellipse cx="143" cy="147" rx="5" ry="2" fill="#A7B2C2"/>${text(122,117,'МЫШЕЧНОЕ ВОЛОКНО',colors.muted,10)}<rect x="191" y="212" width="132" height="46" rx="8" fill="#1F2A3B" stroke="#6E7A8A"/><path d="M205 222V248M309 222V248" stroke="#A7B2C2" stroke-width="2"/><path d="M205 227H260M255 227H309M205 243H260M255 243H309" stroke="${a}" stroke-width="1.5"/><path d="M232 235H281" stroke="${a}" stroke-width="5"/>${text(200,206,'САРКОМЕР',colors.muted,10)}`, 'Схема уровней строения: мышца, мышечное волокно, саркомер. Условное изображение без соблюдения масштаба', '0 0 350 270');
   }
   window.DIAGRAMS = { render, hero, init };
 })();
@@ -821,7 +848,7 @@ function chapterView(m, d, id) {
 
 /* ---------- карточки ---------- */
 function chapterChips(m, d, sel, kind) {
-  return `<div class="chips" role="group" aria-label="Глава"><a class="chip" href="#/${m.slug}/${kind}" aria-pressed="${!sel}">Все главы</a>${d.chapters.map(c => `<a class="chip" href="#/${m.slug}/${kind}/${c.id}" aria-pressed="${sel === c.id}">${pad(c.id)} ${esc(c.shortTitle)}</a>`).join("")}</div>`;
+  return `<div class="chips" role="group" aria-label="Глава"><a class="chip" href="#/${m.slug}/${kind}" ${!sel ? ' aria-current="page"' : ""}>Все главы</a>${d.chapters.map(c => `<a class="chip" href="#/${m.slug}/${kind}/${c.id}" ${sel === c.id ? ' aria-current="page"' : ""}>${pad(c.id)} ${esc(c.shortTitle)}</a>`).join("")}</div>`;
 }
 function cardsList(m, d, ch) {
   const known = store.get(m.slug).known;

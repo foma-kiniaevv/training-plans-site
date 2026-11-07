@@ -10,47 +10,73 @@
 <meta property="og:title" content="Скоростно-силовая подготовка">
 <meta property="og:description" content="Развитие взрывной силы, прыгучести и стартовой скорости.">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d6b79'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
-<style>/* Дизайн-система AL Leone, связка «Залив + Ночь» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j, tokens.json).
-   Шрифт сайта остаётся прежним (Montserrat): гарнитуры Unbounded/Onest из системы сознательно не подключаем.
-   Подключается первым на всех страницах; старые имена переменных в storefront, learn и cabinet ссылаются сюда. */
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
+<style>/* Дизайн-система «Больше чем качалка» (claude.ai/artifact/RzNZbZFbooDDb1qJhgsHrD, tokens.json): светлая и «Вечер».
+   Цвет в две роли: малина = «где ты» (шкала s1–s5: этап, тип дня, текущее место), голубой = «что делать» (ссылки, инструкция).
+   Нейтральный холодный холст, белые карточки отделяются тоном, без рамок и теней. Главная кнопка графитовая.
+   Подключается первым на всех страницах. Имена --ds-* сохранены, чтобы стили страниц не переписывать:
+   --ds-brand = главная кнопка, --ds-brand-strong = ссылка, --ds-accent = малина «где ты». */
 :root{
-  --ds-bg:#f5f1ea; --ds-surface:#fffcf7; --ds-surface-2:#ebe5da; --ds-line:#dad2c4;
-  --ds-ink:#1b201e; --ds-ink-2:#525853; --ds-ink-3:#878a84;
-  --ds-brand:#1d6b79; --ds-brand-strong:#124650; --ds-brand-soft:#d9e8e5; --ds-on-brand:#ffffff;
-  --ds-accent:#b0473a; --ds-accent-ink:#9a3c30; --ds-accent-soft:#f3ddd7; --ds-on-accent:#ffffff;
-  --ds-deep:#15333a; --ds-on-deep:#ffffff; --ds-up:#1d7348; --ds-down:#b8322a;
-  --ds-shadow-card:0 0 0 1px rgba(24,32,31,.09),0 1px 2px rgba(24,32,31,.04); --ds-shadow-pop:0 8px 24px rgba(24,32,31,.12);
-  /* шкала фаз программы: светлее → темнее */
-  --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
-  --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
-  /* линия ссылки в тексте: цвет ссылки с прозрачностью 35 % */
+  /* нейтральные */
+  --ds-bg:#CED6DD; --ds-surface:#FFFFFF; --ds-surface-2:#EEF1F4; --ds-line:#C9D1D8; --ds-ctrl:#7D8894; --ds-rest:#E3E8EC;
+  --ds-ink:#20252B; --ds-ink-2:#535E69; --ds-ink-3:#7D8894;
+  /* главная кнопка и ссылки */
+  --ds-brand:#20252B; --ds-on-brand:#FFFFFF; --ds-brand-strong:#2F567B; --ds-brand-soft:#EBF0F6;
+  --ds-info:#7FA8CC; --ds-instr-k:#2F567B;
+  /* малина: шкала s1–s5 и текст на ней */
+  --ds-s1:#F4E1E8; --ds-s2:#E9BFCF; --ds-s3:#D995AF; --ds-s4:#CA7196; --ds-s5:#A5466D; --ds-on-s:#0E1521;
+  --ds-accent:#E9BFCF; --ds-on-accent:#0E1521; --ds-accent-ink:#A5466D; --ds-accent-soft:#F4E1E8;
+  /* тёмная плашка (основная работа в дневнике, шапка кабинета владельца): графит, как главная кнопка */
+  --ds-deep:#20252B; --ds-on-deep:#FFFFFF;
+  /* статусы: в системе их нет, оставлены прежние значения, всегда со словом или значком */
+  --ds-up:#1d7348; --ds-down:#b8322a;
+  --ds-shadow-card:none; --ds-shadow-pop:0 8px 24px rgba(14,21,33,.14);
+  --ds-ph1:#F4E1E8; --ds-ph2:#E9BFCF; --ds-ph3:#D995AF; --ds-ph4:#CA7196;
+  --ds-r-sm:8px; --ds-r-md:10px; --ds-r-lg:14px;
   --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
+  --ds-sans:"Inter","Inter Display",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}
+
+/* Шрифт: одна гарнитура Inter; заголовки 800 с отрицательным трекингом, цифры табличные */
+body{font-family:var(--ds-sans)}
+h1{letter-spacing:-0.04em}
+h2,h3{letter-spacing:-0.02em}
+.num, td, .stat b, .phases span{font-variant-numeric:tabular-nums}
 
 /* Ссылки (правила L1–L2). Ссылки интерфейса без подчёркивания: место, вес, цвет, фон при наведении.
    Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
 a{text-decoration:none}
-:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
 :is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
 :where(a, button, summary, [role="button"]){cursor:pointer}
-:where(a, button, summary, input, select, textarea):focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px}
+:where(a, button, summary, input, select, textarea, video):focus-visible{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* флажки и плеер видео: браузер не всегда считает их фокус «видимым», поэтому обводка по обычному фокусу */
+input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focus-within, video:focus-within{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* ссылка «К содержанию»: видна только при фокусе с клавиатуры (2.4.1) */
+.skip{position:absolute;left:-9999px;top:8px}
+.skip:focus{left:16px;z-index:40;min-height:32px;display:inline-flex;align-items:center;background:var(--ds-surface);color:var(--ds-ink);padding:8px 12px;border-radius:var(--ds-r-sm)}
 
 :root{
   --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --line:var(--ds-line);
@@ -58,7 +84,7 @@ a{text-decoration:none}
   --accent:var(--ds-accent); --accent-ink:var(--ds-accent-ink); --on-accent:var(--ds-on-accent); --deep:var(--ds-deep); --on-deep:var(--ds-on-deep);
   --ph1:var(--ds-ph1); --ph2:var(--ds-ph2); --ph3:var(--ds-ph3); --ph4:var(--ds-ph4);
   --r-sm:var(--ds-r-sm); --r-md:var(--ds-r-md); --r-lg:var(--ds-r-lg);
-  --sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --sans:var(--ds-sans);
 }
 *{box-sizing:border-box}
 html{scroll-padding-top:80px}
@@ -68,33 +94,32 @@ h1,h2,h3,p{margin:0}
 h1,h2,h3{text-wrap:balance}
 :focus-visible{outline:2px solid var(--brand);outline-offset:2px;border-radius:4px}
 .wrap{max-width:1120px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
-.skip{position:absolute;left:-9999px}.skip:focus{left:16px;top:8px;z-index:30;background:var(--raised);padding:8px 12px;border-radius:var(--r-sm)}
 header.top{position:sticky;top:0;z-index:20;background:var(--surface);border-bottom:1px solid var(--line)}
 header.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:8px 20px;min-height:60px}
-.brand{font-size:14px;line-height:18px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;white-space:nowrap}
+.brand{font-size:16px;line-height:20px;padding-block:2px;font-weight:800;letter-spacing:-0.02em;text-decoration:none;white-space:nowrap}
 nav.main{display:flex;align-items:center;gap:4px;font-size:14px;line-height:18px;font-weight:500}
 nav.main a{text-decoration:none;padding:9px 12px;border-radius:var(--r-md);white-space:nowrap}
 nav.main a:hover{background:var(--sunken)}
-nav.main a[aria-current="page"]{background:var(--sunken);color:var(--ink);font-weight:600}
-nav.main a.login{border:1px solid var(--line);background:var(--raised)}
+nav.main a[aria-current="page"]{background:var(--ds-accent-soft);color:var(--ink);font-weight:600}
+nav.main a.login{border:1px solid var(--ds-ink-2);background:var(--raised)}
 nav.main .s{display:none}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--brand);color:var(--on-brand);font-size:14px;line-height:18px;font-weight:600;padding:12px 22px;border-radius:var(--r-md);text-decoration:none;text-align:center}
-.btn:hover{background:var(--brand-strong)}
-.btn.accent{background:var(--accent);color:var(--on-accent)}
-.btn.accent:hover{filter:brightness(.92)}
-.btn.ghost{background:transparent;color:var(--brand-strong);border:1px solid var(--line)}
+.btn:hover{opacity:.88}
+.btn.accent{background:var(--brand);color:var(--on-brand)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--ds-ctrl)}
 .btn.ghost:hover{background:var(--sunken)}
 .eyebrow{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
 .lead{margin-top:14px;max-width:36em;color:var(--muted);font-size:16px;line-height:26px}
 section{padding-block:48px}
 section+section{border-top:1px solid var(--line)}
-h2.rule{font-size:26px;line-height:32px;font-weight:600}
+h2.rule{font-size:26px;line-height:32px;font-weight:800}
 .intro{padding-block:48px 24px}
-.intro h1{font-size:42px;line-height:48px;font-weight:700;max-width:18em}
+.intro h1{font-size:42px;line-height:48px;font-weight:800;max-width:18em}
 /* два направления */
 .dirs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;padding-bottom:48px}
-.dir{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;gap:16px;min-width:0}
-.dir h2{font-size:28px;line-height:34px;font-weight:700}
+.dir{background:var(--raised);border:1px solid transparent;border-radius:var(--r-lg);padding:28px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.dir .eyebrow{color:var(--accent-ink)}
+.dir h2{font-size:28px;line-height:34px;font-weight:800}
 .dir .one{color:var(--muted)}
 .dir dl{margin:0;display:grid;gap:12px}
 .dir dt{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
@@ -108,30 +133,30 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 .steps b{display:block;font-weight:600}
 .steps span{color:var(--muted)}
 .incl{margin:20px 0 0;padding-left:18px;display:grid;gap:6px}
-.panel{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
+.panel{background:var(--raised);border:1px solid transparent;border-radius:var(--r-lg);padding:24px}
 .panel p+p{margin-top:10px}
 .panel .muted,.muted{color:var(--muted)}
 .after-title{margin-top:16px}
 .closing .after-title{margin-top:8px}
 .closing{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 /* каталог */
-.pagetitle{font-size:40px;line-height:46px;font-weight:700;margin-top:8px}
+.pagetitle{font-size:40px;line-height:46px;font-weight:800;margin-top:8px}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:24px}
-.chip{background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:9px 14px;font:500 14px/18px var(--sans);color:var(--ink);cursor:pointer;min-height:40px}
+.chip{background:var(--raised);border:1px solid var(--ds-ink-2);border-radius:var(--r-sm);padding:9px 14px;font:500 14px/18px var(--sans);color:var(--ink);cursor:pointer;min-height:40px}
 .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
 .filters{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:end}
 .filters label{display:grid;gap:4px;font-size:13px;line-height:18px;color:var(--muted)}
-.filters select{font:500 14px/18px var(--sans);color:var(--ink);background:var(--raised);border:1px solid var(--line);border-radius:var(--r-sm);padding:9px 10px;min-height:40px}
+.filters select{font:500 14px/18px var(--sans);color:var(--ink);background:var(--raised);border:1px solid var(--ds-ink-2);border-radius:var(--r-sm);padding:9px 10px;min-height:40px}
 .found{margin-top:16px;color:var(--muted);font-size:13px}
 .grp{margin-top:32px}
 .grp[hidden]{display:none}
-.grp h2{font-size:22px;line-height:28px;font-weight:600}
+.grp h2{font-size:22px;line-height:28px;font-weight:800}
 .grp>p{color:var(--muted);margin-top:4px}
 .cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:16px}
-.card{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);text-decoration:none;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
-.card:hover{border-color:var(--brand);background:var(--surface)}
+.card{background:var(--raised);border:1px solid transparent;border-radius:var(--r-lg);text-decoration:none;padding:22px;display:flex;flex-direction:column;gap:10px;min-width:0}
+.card:hover{background:var(--ds-surface-2)}
 .card[hidden]{display:none}
-.card h3{font-size:19px;line-height:24px;font-weight:600}
+.card h3{font-size:19px;line-height:24px;font-weight:800}
 .card .one{color:var(--muted)}
 .spec{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;font-size:13px;line-height:18px;margin:0}
 .spec dt{color:var(--muted)}
@@ -144,13 +169,13 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 /* страница программы */
 .pagehead{padding-top:24px}
 .crumbs{display:flex;flex-wrap:wrap;gap:4px 8px;font-size:13px;line-height:18px;color:var(--muted)}
-.crumbs a{color:var(--brand-strong);font-weight:500}
+.crumbs a{color:var(--brand-strong);font-weight:500;display:inline-block;padding-block:3px}
 .crumbs a:hover{color:var(--ink)}
 .proghead{padding-top:16px}
-.proghead h1{font-size:40px;line-height:46px;font-weight:700;margin-top:8px;overflow-wrap:break-word}
+.proghead h1{font-size:40px;line-height:46px;font-weight:800;margin-top:8px;overflow-wrap:break-word}
 .prog{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:24px;align-items:start;padding-block:24px 48px}
 .prog>*{min-width:0}
-.prog>div:first-child{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:24px}
+.prog>div:first-child{background:var(--raised);border:1px solid transparent;border-radius:var(--r-lg);padding:24px}
 .block{display:grid;gap:10px}
 .block+.block{margin-top:28px}
 .block h2.rule{font-size:19px;line-height:24px}
@@ -166,7 +191,7 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 .place dd{margin:2px 0 0}
 .place a{color:var(--brand-strong);font-weight:600}
 .place a:hover{color:var(--ink)}
-.buy{position:sticky;top:76px;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:20px;display:grid;gap:14px}
+.buy{position:sticky;top:76px;background:var(--raised);border:1px solid transparent;border-radius:var(--r-lg);padding:20px;display:grid;gap:14px}
 .buy dl{margin:0;display:grid;gap:9px}
 .buy dt{color:var(--muted);font-size:13px;line-height:18px}
 .buy dd{margin:0;font-weight:500}
@@ -175,14 +200,15 @@ h2.rule{font-size:26px;line-height:32px;font-weight:600}
 .buy small a{color:var(--brand-strong)}
 footer{border-top:1px solid var(--line);color:var(--muted);font-size:13px;line-height:20px}
 footer .wrap{padding-block:24px;display:flex;justify-content:space-between;gap:8px 24px;flex-wrap:wrap}
-footer a{color:var(--brand-strong);font-weight:500}
+footer a{color:var(--brand-strong);font-weight:500;display:inline-block;padding-block:4px}
 footer a:hover{color:var(--ink)}
 @media (max-width:860px){
   .dirs,.split,.prog{grid-template-columns:minmax(0,1fr);gap:16px}
   .split{gap:32px}
   .intro{padding-block:32px 20px}
   .intro h1,.pagetitle,.proghead h1{font-size:30px;line-height:36px}
-  .dir{padding:20px}.dir h2{font-size:24px;line-height:30px}
+  .dir{padding:20px}.dir .eyebrow{color:var(--accent-ink)}
+.dir h2{font-size:24px;line-height:30px}
   .cards{grid-template-columns:minmax(0,1fr)}
   .buy{position:static;order:-1}
   section{padding-block:36px}

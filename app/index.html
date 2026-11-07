@@ -89,7 +89,7 @@ details.sec > .inner{padding-bottom:16px;display:flex;flex-direction:column;gap:
 .list{list-style:none;margin:0;padding:0}
 .item{display:grid;grid-template-columns:22px 1fr auto;gap:14px;align-items:start;padding:12px 0;border-top:1px solid var(--line)}
 .list > .item:first-child{border-top:0}
-.item > input{width:20px;height:20px;margin:0;accent-color:var(--done);cursor:pointer}
+.item > input{width:24px;height:24px;margin:0;accent-color:var(--done);cursor:pointer}
 .txt{min-width:0;display:flex;flex-direction:column}
 .item label{min-width:0;display:flex;flex-direction:column;gap:1px;cursor:pointer}
 .item .n{font-weight:500}
@@ -159,80 +159,107 @@ table.dose th{color:var(--muted);font-weight:500}
 @media (max-width:420px){h1{font-size:26px}.val{font-size:26px}}
 @media (prefers-reduced-motion:reduce){.chev,.savebar{transition:none}}
 </style>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
 <style>
-/* Дизайн-система AL Leone, связка «Залив + Ночь» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j, tokens.json).
-   Шрифт сайта остаётся прежним (Montserrat): гарнитуры Unbounded/Onest из системы сознательно не подключаем.
-   Подключается первым на всех страницах; старые имена переменных в storefront, learn и cabinet ссылаются сюда. */
+/* Дизайн-система «Больше чем качалка» (claude.ai/artifact/RzNZbZFbooDDb1qJhgsHrD, tokens.json): светлая и «Вечер».
+   Цвет в две роли: малина = «где ты» (шкала s1–s5: этап, тип дня, текущее место), голубой = «что делать» (ссылки, инструкция).
+   Нейтральный холодный холст, белые карточки отделяются тоном, без рамок и теней. Главная кнопка графитовая.
+   Подключается первым на всех страницах. Имена --ds-* сохранены, чтобы стили страниц не переписывать:
+   --ds-brand = главная кнопка, --ds-brand-strong = ссылка, --ds-accent = малина «где ты». */
 :root{
-  --ds-bg:#f5f1ea; --ds-surface:#fffcf7; --ds-surface-2:#ebe5da; --ds-line:#dad2c4;
-  --ds-ink:#1b201e; --ds-ink-2:#525853; --ds-ink-3:#878a84;
-  --ds-brand:#1d6b79; --ds-brand-strong:#124650; --ds-brand-soft:#d9e8e5; --ds-on-brand:#ffffff;
-  --ds-accent:#b0473a; --ds-accent-ink:#9a3c30; --ds-accent-soft:#f3ddd7; --ds-on-accent:#ffffff;
-  --ds-deep:#15333a; --ds-on-deep:#ffffff; --ds-up:#1d7348; --ds-down:#b8322a;
-  --ds-shadow-card:0 0 0 1px rgba(24,32,31,.09),0 1px 2px rgba(24,32,31,.04); --ds-shadow-pop:0 8px 24px rgba(24,32,31,.12);
-  /* шкала фаз программы: светлее → темнее */
-  --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
-  --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
-  /* линия ссылки в тексте: цвет ссылки с прозрачностью 35 % */
+  /* нейтральные */
+  --ds-bg:#CED6DD; --ds-surface:#FFFFFF; --ds-surface-2:#EEF1F4; --ds-line:#C9D1D8; --ds-ctrl:#7D8894; --ds-rest:#E3E8EC;
+  --ds-ink:#20252B; --ds-ink-2:#535E69; --ds-ink-3:#7D8894;
+  /* главная кнопка и ссылки */
+  --ds-brand:#20252B; --ds-on-brand:#FFFFFF; --ds-brand-strong:#2F567B; --ds-brand-soft:#EBF0F6;
+  --ds-info:#7FA8CC; --ds-instr-k:#2F567B;
+  /* малина: шкала s1–s5 и текст на ней */
+  --ds-s1:#F4E1E8; --ds-s2:#E9BFCF; --ds-s3:#D995AF; --ds-s4:#CA7196; --ds-s5:#A5466D; --ds-on-s:#0E1521;
+  --ds-accent:#E9BFCF; --ds-on-accent:#0E1521; --ds-accent-ink:#A5466D; --ds-accent-soft:#F4E1E8;
+  /* тёмная плашка (основная работа в дневнике, шапка кабинета владельца): графит, как главная кнопка */
+  --ds-deep:#20252B; --ds-on-deep:#FFFFFF;
+  /* статусы: в системе их нет, оставлены прежние значения, всегда со словом или значком */
+  --ds-up:#1d7348; --ds-down:#b8322a;
+  --ds-shadow-card:none; --ds-shadow-pop:0 8px 24px rgba(14,21,33,.14);
+  --ds-ph1:#F4E1E8; --ds-ph2:#E9BFCF; --ds-ph3:#D995AF; --ds-ph4:#CA7196;
+  --ds-r-sm:8px; --ds-r-md:10px; --ds-r-lg:14px;
   --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
+  --ds-sans:"Inter","Inter Display",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}
+
+/* Шрифт: одна гарнитура Inter; заголовки 800 с отрицательным трекингом, цифры табличные */
+body{font-family:var(--ds-sans)}
+h1{letter-spacing:-0.04em}
+h2,h3{letter-spacing:-0.02em}
+.num, td, .stat b, .phases span{font-variant-numeric:tabular-nums}
 
 /* Ссылки (правила L1–L2). Ссылки интерфейса без подчёркивания: место, вес, цвет, фон при наведении.
    Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
 a{text-decoration:none}
-:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
 :is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
 :where(a, button, summary, [role="button"]){cursor:pointer}
-:where(a, button, summary, input, select, textarea):focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px}
-/* Кабинет по дизайн-системе AL Leone (src/al-leone.css): панель deep слева, плитки с тонкой линией, кирпичный только для текущего места. Поверх стилей template.html. */
-:root{
-  --bg:var(--ds-bg); --panel:var(--ds-surface); --sunk:var(--ds-surface-2); --night:var(--ds-deep); --on-night:var(--ds-on-deep); --on-night-muted:rgba(255,255,255,.74); --night-line:rgba(255,255,255,.14);
-  --ink:var(--ds-ink); --muted:var(--ds-ink-2); --soft:var(--ds-ink-3); --line:var(--ds-line);
+:where(a, button, summary, input, select, textarea, video):focus-visible{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* флажки и плеер видео: браузер не всегда считает их фокус «видимым», поэтому обводка по обычному фокусу */
+input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focus-within, video:focus-within{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* ссылка «К содержанию»: видна только при фокусе с клавиатуры (2.4.1) */
+.skip{position:absolute;left:-9999px;top:8px}
+.skip:focus{left:16px;z-index:40;min-height:32px;display:inline-flex;align-items:center;background:var(--ds-surface);color:var(--ds-ink);padding:8px 12px;border-radius:var(--ds-r-sm)}
+/* Кабинет по дизайн-системе «Больше чем качалка» (src/bchk.css): светлая панель слева, белые плитки без рамок, малина только для текущего места. Поверх стилей template.html. */
+/* те же селекторы, что у тёмной темы template.html, и позже по порядку: токены системы действуют в обеих темах */
+:root, :root:not([data-theme="light"]), :root[data-theme="dark"]{
+  --bg:var(--ds-bg); --panel:var(--ds-surface); --sunk:var(--ds-surface-2); --night:var(--ds-surface-2); --on-night:var(--ds-ink); --on-night-muted:var(--ds-ink-2); --night-line:var(--ds-rest);
+  --ink:var(--ds-ink); --muted:var(--ds-ink-2); --soft:var(--ds-ink-2); --line:var(--ds-line);
   --accent:var(--ds-brand-strong); --brand:var(--ds-brand); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand); --done:var(--ds-ink); --good:var(--ds-up); --ok-soft:var(--ds-brand-soft);
   --card:var(--ds-deep); --card-ink:var(--ds-on-deep); --card-muted:rgba(255,255,255,.74); --card-line:rgba(255,255,255,.14);
   --shadow-card:none; /* B1: статичные плитки отделяет одна рамка, тени только у всплывающего */
-  --sans:"Montserrat","Helvetica Neue",Arial,sans-serif; --display:"Montserrat","Helvetica Neue",Arial,sans-serif;
+  --sans:var(--ds-sans); --display:var(--ds-sans);
 }
 body{font-size:15px;line-height:22px}
 
 /* панель */
 .shell{display:grid;grid-template-columns:248px minmax(0,1fr);min-height:100vh}
 .side{background:var(--night);color:var(--on-night);padding:20px 16px;display:flex;flex-direction:column;gap:22px;position:sticky;top:0;height:100vh;overflow-y:auto}
-.side .brand{font-size:13px;line-height:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;color:inherit;padding-inline:10px}
+.side .brand{font-size:16px;line-height:20px;font-weight:800;letter-spacing:-0.02em;text-decoration:none;color:inherit;padding-inline:10px}
 .side .slogan{display:block;font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--on-night-muted);margin-top:6px}
-.topnav{display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:18px;font-weight:500;margin-top:auto;border-top:1px solid var(--card-line);padding-top:12px}
-.topnav a,.topnav button{background:none;border:0;padding:8px 10px;color:var(--on-night);cursor:pointer;text-decoration:none;font:inherit;text-align:left;border-radius:8px}
-.topnav a:hover,.topnav button:hover{background:var(--card-line)}
+.topnav{display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:18px;font-weight:500;margin-top:auto;border-top:1px solid var(--line);padding-top:12px}
+.topnav a,.topnav button{background:none;border:0;padding:11px 10px;color:var(--on-night);cursor:pointer;text-decoration:none;font:inherit;text-align:left;border-radius:8px}
+.topnav a:hover,.topnav button:hover{background:var(--night-line)}
 .side .chips{display:flex;flex-direction:column;gap:2px;overflow:visible;margin:0;padding:0}
-.side .chip{border:0;background:none;color:var(--on-night-muted);font:500 13px/18px var(--sans);padding:8px 10px;border-radius:8px;text-align:left;flex:none}
-.side .chip:hover{background:var(--card-line);color:var(--on-night)}
+.side .chip{border:0;background:none;color:var(--on-night-muted);font:500 13px/18px var(--sans);padding:11px 10px;border-radius:8px;text-align:left;flex:none}
+.side .chip:hover{background:var(--night-line);color:var(--on-night)}
 .side .chip[aria-pressed="true"]{background:var(--ds-accent);color:var(--ds-on-accent);font-weight:600}
 #plans:empty{display:none}
 #plans:has(.chip:only-child){display:none}
 
 /* основная часть */
 .wrap{max-width:820px;width:100%;margin-inline:0; /* P6: колонка у левой линии рядом с панелью */padding-left:max(24px,env(safe-area-inset-left,0px));padding-right:max(24px,env(safe-area-inset-right,0px));padding-block:32px 56px;gap:14px;min-width:0}
-h1{font-size:40px;line-height:44px;letter-spacing:0;font-weight:700}
-h1 b{font-weight:700}
+h1{font-size:40px;line-height:44px;letter-spacing:-0.04em;font-weight:800}
+h1 b{font-weight:800}
 #planview{display:flex;flex-direction:column;gap:12px}
-.about,.weekline,.form,.rest,.empty,#day > .note,#day details.sec{background:var(--panel);border:1px solid var(--line);border-radius:var(--ds-r-lg);box-shadow:var(--shadow-card)}
+.about,.weekline,.form,.rest,.empty,#day > .note,#day details.sec{background:var(--panel);border:1px solid transparent;border-radius:var(--ds-r-lg);box-shadow:var(--shadow-card)}
 .about{padding:20px;gap:12px}
 .about .who{font-size:15px;line-height:22px;color:var(--muted)}
 .about .spec{margin:0;display:grid;border-top:1px solid var(--line)}
@@ -332,12 +359,17 @@ details.sec .form{background:none;border:0;border-radius:0;box-shadow:none;paddi
 a.tbtn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;justify-self:start;background:var(--brand);color:var(--on-brand);border:0;font:600 13px/18px var(--sans);padding:12px 22px;border-radius:var(--ds-r-md);min-height:44px}
 .link{color:var(--ds-brand-strong);font-weight:600}
 .link:hover{color:var(--ink)}
+
+/* «Больше чем качалка»: текущая неделя — малина «где ты»; поля ввода с границей ctrl */
+.wk[aria-pressed="true"]{background:var(--ds-accent-soft);color:var(--ds-ink);border-color:var(--ds-accent)}
+.wts input,.times input,.field input,.field textarea,.search,#em{border-color:var(--ds-ctrl)}
 </style>
 </head>
 <body>
+<a class="skip" href="#content">К содержанию</a>
 <div class="shell">
 <aside class="side"><a class="brand" href="../">Больше чем качалка<span class="slogan">Личный кабинет</span></a><div class="chips" id="plans" role="group" aria-label="Планы"></div><nav class="topnav" aria-label="Кабинет"><a href="../learn/">Моё обучение</a><button type="button" id="libbtn">Библиотека</button><a href="../programs/">Все программы</a><a href="../admin/" id="adminlink" hidden>Кабинет владельца</a><button type="button" id="logout" hidden>Выйти</button></nav></aside>
-<div class="wrap">
+<div class="wrap" id="content" tabindex="-1">
   <header>
     <h1 id="ptitle"></h1>
   </header>
@@ -455,7 +487,7 @@ function render(){
   document.getElementById("planview").hidden = false; document.getElementById("days").hidden = false;
   const P = document.getElementById("plans"), D = document.getElementById("days"), H = document.getElementById("dayhead"), Mn = document.getElementById("day");
   P.innerHTML = PLANS.map(p => `<button class="chip" type="button" data-plan="${p.id}" aria-pressed="${view === "plan" && p.id === plan.id}">${esc(p.short)}</button>`).join("");
-  document.getElementById("libbtn").textContent = view === "lib" ? "← К планам" : "Библиотека";
+  document.getElementById("libbtn").textContent = view === "lib" ? "К программам" : "Библиотека";
   if (view === "lib") { document.getElementById("planview").hidden = true; D.hidden = true; H.innerHTML = ""; document.getElementById("ptitle").innerHTML = "<b>Библиотека</b> упражнений"; Mn.innerHTML = libHtml(); bindLib(); return; }
   document.getElementById("planview").hidden = false; D.hidden = false;
   document.getElementById("ptitle").innerHTML = esc(plan.title).replace(/^([^:]+)/, "<b>$1</b>");
@@ -474,7 +506,7 @@ function render(){
   const act = wk.days.map((d,i) => d.rest ? -1 : i).filter(i => i >= 0);
   if (dIdx === null || !act.includes(dIdx)) dIdx = act[0];
   D.style.gridTemplateColumns = wk.days.map(d => d.rest ? "20px" : "minmax(0,1fr)").join(" ");
-  D.innerHTML = wk.days.map((d,i) => { if (d.rest) return `<span class="off" aria-label="День ${i+1}: ${esc(d.label)}">${esc(d.label)}</span>`;
+  D.innerHTML = wk.days.map((d,i) => { if (d.rest) return `<span class="off" role="tab" aria-disabled="true" aria-selected="false" aria-label="День ${i+1}: ${esc(d.label)}">${esc(d.label)}</span>`;
     ids(d); const [dn, all] = countDone(d, dayId(wIdx, i)), full = all && dn === all, bar = full ? "full" : dn ? "part" : "";
     return `<button role="tab" type="button" data-day="${i}" aria-selected="${i === dIdx}">День ${i+1}<small class="${full ? "ok" : ""}">${full ? "✓ " : ""}${esc(d.title)}</small><span class="bar ${bar}" style="--p:${all ? Math.round(dn/all*100) : 0}%"></span></button>`; }).join("");
   const day = ids(wk.days[dIdx]), id = dayId(wIdx, dIdx), [dn, all] = countDone(day, id);

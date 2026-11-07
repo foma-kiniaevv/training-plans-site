@@ -6,83 +6,109 @@
 <meta name="robots" content="noindex">
 <title>Кабинет владельца · Больше чем качалка</title>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231d6b79'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap">
-<style>/* Дизайн-система AL Leone, связка «Залив + Ночь» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j, tokens.json).
-   Шрифт сайта остаётся прежним (Montserrat): гарнитуры Unbounded/Onest из системы сознательно не подключаем.
-   Подключается первым на всех страницах; старые имена переменных в storefront, learn и cabinet ссылаются сюда. */
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
+<style>/* Дизайн-система «Больше чем качалка» (claude.ai/artifact/RzNZbZFbooDDb1qJhgsHrD, tokens.json): светлая и «Вечер».
+   Цвет в две роли: малина = «где ты» (шкала s1–s5: этап, тип дня, текущее место), голубой = «что делать» (ссылки, инструкция).
+   Нейтральный холодный холст, белые карточки отделяются тоном, без рамок и теней. Главная кнопка графитовая.
+   Подключается первым на всех страницах. Имена --ds-* сохранены, чтобы стили страниц не переписывать:
+   --ds-brand = главная кнопка, --ds-brand-strong = ссылка, --ds-accent = малина «где ты». */
 :root{
-  --ds-bg:#f5f1ea; --ds-surface:#fffcf7; --ds-surface-2:#ebe5da; --ds-line:#dad2c4;
-  --ds-ink:#1b201e; --ds-ink-2:#525853; --ds-ink-3:#878a84;
-  --ds-brand:#1d6b79; --ds-brand-strong:#124650; --ds-brand-soft:#d9e8e5; --ds-on-brand:#ffffff;
-  --ds-accent:#b0473a; --ds-accent-ink:#9a3c30; --ds-accent-soft:#f3ddd7; --ds-on-accent:#ffffff;
-  --ds-deep:#15333a; --ds-on-deep:#ffffff; --ds-up:#1d7348; --ds-down:#b8322a;
-  --ds-shadow-card:0 0 0 1px rgba(24,32,31,.09),0 1px 2px rgba(24,32,31,.04); --ds-shadow-pop:0 8px 24px rgba(24,32,31,.12);
-  /* шкала фаз программы: светлее → темнее */
-  --ds-ph1:#d9e8e5; --ds-ph2:#7fb0b8; --ds-ph3:#1d6b79; --ds-ph4:#15333a;
-  --ds-r-sm:6px; --ds-r-md:12px; --ds-r-lg:18px;
-  /* линия ссылки в тексте: цвет ссылки с прозрачностью 35 % */
+  /* нейтральные */
+  --ds-bg:#CED6DD; --ds-surface:#FFFFFF; --ds-surface-2:#EEF1F4; --ds-line:#C9D1D8; --ds-ctrl:#7D8894; --ds-rest:#E3E8EC;
+  --ds-ink:#20252B; --ds-ink-2:#535E69; --ds-ink-3:#7D8894;
+  /* главная кнопка и ссылки */
+  --ds-brand:#20252B; --ds-on-brand:#FFFFFF; --ds-brand-strong:#2F567B; --ds-brand-soft:#EBF0F6;
+  --ds-info:#7FA8CC; --ds-instr-k:#2F567B;
+  /* малина: шкала s1–s5 и текст на ней */
+  --ds-s1:#F4E1E8; --ds-s2:#E9BFCF; --ds-s3:#D995AF; --ds-s4:#CA7196; --ds-s5:#A5466D; --ds-on-s:#0E1521;
+  --ds-accent:#E9BFCF; --ds-on-accent:#0E1521; --ds-accent-ink:#A5466D; --ds-accent-soft:#F4E1E8;
+  /* тёмная плашка (основная работа в дневнике, шапка кабинета владельца): графит, как главная кнопка */
+  --ds-deep:#20252B; --ds-on-deep:#FFFFFF;
+  /* статусы: в системе их нет, оставлены прежние значения, всегда со словом или значком */
+  --ds-up:#1d7348; --ds-down:#b8322a;
+  --ds-shadow-card:none; --ds-shadow-pop:0 8px 24px rgba(14,21,33,.14);
+  --ds-ph1:#F4E1E8; --ds-ph2:#E9BFCF; --ds-ph3:#D995AF; --ds-ph4:#CA7196;
+  --ds-r-sm:8px; --ds-r-md:10px; --ds-r-lg:14px;
   --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
+  --ds-sans:"Inter","Inter Display",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}}
 :root[data-theme="dark"]{
-  --ds-bg:#18191a; --ds-surface:#212224; --ds-surface-2:#2b2d2f; --ds-line:#3a3d40;
-  --ds-ink:#f2f1ee; --ds-ink-2:#b4b5b3; --ds-ink-3:#878a8b;
-  --ds-brand:#5bb5c2; --ds-brand-strong:#a3dbe2; --ds-brand-soft:#1f3a3f; --ds-on-brand:#0b1a1d;
-  --ds-accent:#b0473a; --ds-accent-ink:#e8917f; --ds-accent-soft:#3d2622; --ds-on-accent:#ffffff;
-  --ds-deep:#2c4448; --ds-on-deep:#ffffff; --ds-up:#57c48f; --ds-down:#ff7a6b;
-  --ds-shadow-card:0 0 0 1px rgba(255,255,255,.06); --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#1f3a3f; --ds-ph2:#2f6770; --ds-ph3:#5bb5c2; --ds-ph4:#a3dbe2; color-scheme:dark}
+  --ds-bg:#0E1521; --ds-surface:#1F2A3B; --ds-surface-2:#161F2D; --ds-line:#2A3648; --ds-ctrl:#6E7A8A; --ds-rest:#1A2433;
+  --ds-ink:#F2F4F7; --ds-ink-2:#A7B2C2; --ds-ink-3:#6E7A8A;
+  --ds-brand:#F2F4F7; --ds-on-brand:#0E1521; --ds-brand-strong:#8CC4F0; --ds-brand-soft:#161F2D;
+  --ds-info:#8CC4F0; --ds-instr-k:#A7B2C2;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
+  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#161F2D; --ds-on-deep:#F2F4F7;
+  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; color-scheme:dark}
+
+/* Шрифт: одна гарнитура Inter; заголовки 800 с отрицательным трекингом, цифры табличные */
+body{font-family:var(--ds-sans)}
+h1{letter-spacing:-0.04em}
+h2,h3{letter-spacing:-0.02em}
+.num, td, .stat b, .phases span{font-variant-numeric:tabular-nums}
 
 /* Ссылки (правила L1–L2). Ссылки интерфейса без подчёркивания: место, вес, цвет, фон при наведении.
    Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
 a{text-decoration:none}
-:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:500;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
 :is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
 :where(a, button, summary, [role="button"]){cursor:pointer}
-:where(a, button, summary, input, select, textarea):focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px}
+:where(a, button, summary, input, select, textarea, video):focus-visible{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* флажки и плеер видео: браузер не всегда считает их фокус «видимым», поэтому обводка по обычному фокусу */
+input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focus-within, video:focus-within{outline:2px solid var(--ds-ink);outline-offset:2px}
+/* ссылка «К содержанию»: видна только при фокусе с клавиатуры (2.4.1) */
+.skip{position:absolute;left:-9999px;top:8px}
+.skip:focus{left:16px;z-index:40;min-height:32px;display:inline-flex;align-items:center;background:var(--ds-surface);color:var(--ds-ink);padding:8px 12px;border-radius:var(--ds-r-sm)}
 
-:root{--sans:"Montserrat","Helvetica Neue",Arial,sans-serif}
+:root{--sans:var(--ds-sans)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--ds-bg);color:var(--ds-ink);font:400 15px/22px var(--sans);-webkit-font-smoothing:antialiased}
 a{color:var(--ds-brand-strong)}
 h1,h2,h3,p{margin:0}
 :focus-visible{outline:2px solid var(--ds-brand);outline-offset:2px;border-radius:4px}
-.top{background:var(--ds-deep);color:var(--ds-on-deep)}
+.top{background:var(--ds-surface-2);color:var(--ds-ink)}
 .top .in{max-width:1120px;margin:0 auto;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:8px 16px;flex-wrap:wrap}
 .top a{color:inherit;text-decoration:none;font-size:14px}
-.top .brand{font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:13px}
-.top .brand span{display:block;font-size:11px;letter-spacing:.08em;opacity:.74}
+.top .brand{font-weight:800;letter-spacing:-0.02em;font-size:16px}
+.top .brand span{display:block;font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--ds-ink-2)}
 .top nav{display:flex;gap:4px;flex-wrap:wrap}
 .top nav a,.top nav button{padding:8px 10px;border-radius:var(--ds-r-md);background:none;border:0;color:inherit;font:500 14px/18px var(--sans);cursor:pointer}
-.top nav a:hover,.top nav button:hover{background:rgba(255,255,255,.12)}
+.top nav a:hover,.top nav button:hover{background:var(--ds-rest)}
 main{max-width:1120px;margin:0 auto;padding:24px 16px 64px;display:grid;gap:16px}
-h1{font-size:32px;line-height:38px;font-weight:700}
-.tile{background:var(--ds-surface);border:1px solid var(--ds-line);border-radius:var(--ds-r-lg);padding:20px;display:grid;gap:12px;min-width:0}
+h1{font-size:32px;line-height:38px;font-weight:800}
+.tile{background:var(--ds-surface);border:1px solid transparent;border-radius:var(--ds-r-lg);padding:20px;display:grid;gap:12px;min-width:0}
 .tile h2{font-size:19px;line-height:24px;font-weight:600}
 .muted{color:var(--ds-ink-2);font-size:13px;line-height:18px}
 .grow{flex:1}
 .check{display:flex;flex-direction:row;gap:8px;align-items:center}
-.check input{min-height:0}
+.check input{min-height:0;width:24px;height:24px;margin:0}
 .row{display:flex;gap:8px;flex-wrap:wrap;align-items:end}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--ds-brand);color:var(--ds-on-brand);border:0;border-radius:var(--ds-r-md);padding:10px 18px;font:600 14px/18px var(--sans);text-decoration:none;cursor:pointer}
-.btn.accent{background:var(--ds-accent);color:var(--ds-on-accent)}
-.btn.ghost{background:transparent;color:var(--ds-brand-strong);border:1px solid var(--ds-line)}
+.btn.accent{background:var(--ds-brand);color:var(--ds-on-brand)}
+.btn.ghost{background:transparent;color:var(--ds-ink);border:1px solid var(--ds-ctrl)}
 .btn:disabled{opacity:.6}
 label{display:grid;gap:4px;font-size:13px;color:var(--ds-ink-2)}
-input,select{font:500 14px/18px var(--sans);color:var(--ds-ink);background:var(--ds-surface);border:1px solid var(--ds-line);border-radius:var(--ds-r-sm);padding:10px;min-height:44px;min-width:0}
+input,select{font:500 14px/18px var(--sans);color:var(--ds-ink);background:var(--ds-surface);border:1px solid var(--ds-ctrl);border-radius:var(--ds-r-sm);padding:10px;min-height:44px;min-width:0}
 .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
 .stat b{display:block;font-size:28px;line-height:34px;font-weight:300;font-variant-numeric:tabular-nums}
 .stat span{font-size:13px;color:var(--ds-ink-2)}
 .users{display:grid;gap:10px}
-.user{border:1px solid var(--ds-line);border-radius:var(--ds-r-md);padding:14px;display:grid;gap:10px;background:var(--ds-bg)}
+.user{border:0;border-radius:var(--ds-r-md);padding:14px;display:grid;gap:10px;background:var(--ds-surface-2)}
 .user .h{display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap;align-items:baseline}
 .user .h b{overflow-wrap:anywhere}
 .user dl{margin:0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px 12px;font-size:13px;line-height:18px}
@@ -102,9 +128,10 @@ th{color:var(--ds-ink-2);font-weight:500}
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
+<a class="skip" href="#main">К содержанию</a>
 <header class="top"><div class="in"><a class="brand" href="../">Больше чем качалка<span>Кабинет владельца</span></a>
 <nav aria-label="Разделы"><a href="../learn/?preview#/">Курс как ученик</a><a href="../app/">Программы и дневники</a><a href="../">Сайт</a><button type="button" id="logout" hidden>Выйти</button></nav></div></header>
-<main id="main"><p class="note">Загружаем…</p></main>
+<main id="main" tabindex="-1"><p class="note">Загружаем…</p></main>
 <script>window.OUTLINE = [{"slug": "anatomy", "title": "Анатомия и физиология"}, {"slug": "biomechanics", "title": "Биомеханика движений"}];</script>
 <script>
 const SUPABASE_URL = "https://selgcdicdtjpcsrfrqdq.supabase.co", SUPABASE_KEY = "sb_publishable_wLlkgxHctEZyUzB0TSlUmQ_R_m-t4ca";
