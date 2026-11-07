@@ -84,6 +84,19 @@ input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focu
 /* Знак: контур названия, цвет ink в обеих темах */
 .wordmark{display:block;height:20px;width:auto;color:var(--ds-ink)}
 
+/* Текст только для экранных дикторов */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+/* E2: заготовка загрузки той же формы, что контент: заголовок, карточка, строка; без анимации */
+.skel{display:grid;gap:12px;padding-block:16px}
+.skel i{display:block;height:16px;border-radius:var(--ds-r-sm);background:var(--ds-surface-2)}
+.skel i:nth-of-type(1){width:40%;height:32px}
+.skel i:nth-of-type(2){height:120px;border-radius:var(--ds-r-lg)}
+.skel i:nth-of-type(3){width:70%}
+/* DD2, DD9: выпадающий список как остальные поля, один шеврон 16 px цвета вторичного текста */
+select:not([multiple]){appearance:none;-webkit-appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23535E69%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px 16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23A8ADB5%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E")}}
+:root[data-theme="dark"] select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23A8ADB5%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E")}
+
 :root{
   --surface:var(--ds-bg); --raised:var(--ds-surface); --sunken:var(--ds-surface-2); --line:var(--ds-line);
   --ink:var(--ds-ink); --muted:var(--ds-ink-2); --brand:var(--ds-brand); --brand-strong:var(--ds-brand-strong); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand);
@@ -150,9 +163,13 @@ h2.rule{font-size:26px;line-height:32px;font-weight:800}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:24px}
 .chip{background:var(--raised);border:1px solid var(--ds-ink-2);border-radius:var(--r-sm);padding:9px 14px;font:500 14px/18px var(--sans);color:var(--ink);cursor:pointer;min-height:40px}
 .chip[aria-pressed="true"]{background:var(--brand);border-color:var(--brand);color:var(--on-brand)}
-.filters{display:flex;gap:12px;flex-wrap:wrap;margin-top:12px;align-items:end}
-.filters label{display:grid;gap:4px;font-size:13px;line-height:18px;color:var(--muted)}
-.filters select{font:500 14px/18px var(--sans);color:var(--ink);background:var(--raised);border:1px solid var(--ds-ink-2);border-radius:var(--r-sm);padding:9px 10px;min-height:40px}
+.filters{display:grid;gap:16px;margin-top:24px}
+.seg{display:grid;gap:8px}
+.seg-l{font-size:13px;line-height:18px;color:var(--muted)}
+.seg .chips{margin-top:0}
+.reset{background:var(--ds-btn2);border:0;border-radius:var(--r-sm);padding:6px 10px;font:600 13px/18px var(--sans);color:var(--ink);margin-left:8px;min-height:32px}
+.reset:hover{background:color-mix(in srgb, var(--ink) 12%, transparent)}
+.reset[hidden]{display:none}
 .found{margin-top:16px;color:var(--muted);font-size:13px}
 .grp{margin-top:32px}
 .grp[hidden]{display:none}

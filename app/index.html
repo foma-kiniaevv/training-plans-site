@@ -14,19 +14,6 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <style>
 /* Layout: plan catalog in the athlete-diary manner. Plan chips → phase strip → week pills → sticky day tabs → collapsible sections; the main-work card is dark and carries the athlete's entries. */
-:root{
-  --card:#141414; --card-ink:#ffffff; --card-muted:#9a9aa0; --card-line:#2c2c2e;
-  --bg:#ffffff; --sunk:#f1f1f2; --ink:#141414; --muted:#86868b; --soft:#c7c7cc; --line:#e5e5e7;
-  --accent:#c2611f; --done:#141414; --good:#2f8f5b;
-  --sans:-apple-system,BlinkMacSystemFont,"SF Pro Text","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --display:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-}
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#0c0c0d; --sunk:#1c1c1e; --ink:#f2f2f3; --muted:#8e8e93; --soft:#48484a; --line:#2a2a2d;
-  --accent:#e8873f; --done:#f2f2f3; --good:#4cc283; --card:#1c1c1e; --card-line:#2f2f33; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#0c0c0d; --sunk:#1c1c1e; --ink:#f2f2f3; --muted:#8e8e93; --soft:#48484a; --line:#2a2a2d;
-  --accent:#e8873f; --done:#f2f2f3; --good:#4cc283; --card:#1c1c1e; --card-line:#2f2f33; color-scheme:dark}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased}
@@ -233,12 +220,25 @@ input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focu
 
 /* Знак: контур названия, цвет ink в обеих темах */
 .wordmark{display:block;height:20px;width:auto;color:var(--ds-ink)}
+
+/* Текст только для экранных дикторов */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+/* E2: заготовка загрузки той же формы, что контент: заголовок, карточка, строка; без анимации */
+.skel{display:grid;gap:12px;padding-block:16px}
+.skel i{display:block;height:16px;border-radius:var(--ds-r-sm);background:var(--ds-surface-2)}
+.skel i:nth-of-type(1){width:40%;height:32px}
+.skel i:nth-of-type(2){height:120px;border-radius:var(--ds-r-lg)}
+.skel i:nth-of-type(3){width:70%}
+/* DD2, DD9: выпадающий список как остальные поля, один шеврон 16 px цвета вторичного текста */
+select:not([multiple]){appearance:none;-webkit-appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23535E69%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px 16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23A8ADB5%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E")}}
+:root[data-theme="dark"] select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23A8ADB5%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E")}
 /* Кабинет по дизайн-системе «Больше чем качалка» (src/bchk.css): светлая панель слева, белые плитки без рамок, малина только для текущего места. Поверх стилей template.html. */
 /* те же селекторы, что у тёмной темы template.html, и позже по порядку: токены системы действуют в обеих темах */
 :root, :root:not([data-theme="light"]), :root[data-theme="dark"]{
   --bg:var(--ds-bg); --panel:var(--ds-surface); --sunk:var(--ds-surface-2); --night:var(--ds-surface-2); --on-night:var(--ds-ink); --on-night-muted:var(--ds-ink-2); --night-line:var(--ds-rest);
   --ink:var(--ds-ink); --muted:var(--ds-ink-2); --soft:var(--ds-ink-2); --line:var(--ds-line);
-  --accent:var(--ds-brand-strong); --brand:var(--ds-brand); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand); --done:var(--ds-ink); --good:var(--ds-up); --ok-soft:var(--ds-brand-soft);
+  --accent:var(--ds-ink); /* AC7: в дневнике акцент не голубой; голубой только у ссылок (.note a — общее правило ссылок в тексте) */ --brand:var(--ds-brand); --brand-soft:var(--ds-brand-soft); --on-brand:var(--ds-on-brand); --done:var(--ds-ink); --good:var(--ds-up); --ok-soft:var(--ds-brand-soft);
   --card:var(--ds-deep); --card-ink:var(--ds-on-deep); --card-muted:rgba(255,255,255,.74); --card-line:rgba(255,255,255,.14);
   --shadow-card:none; /* B1: статичные плитки отделяет одна рамка, тени только у всплывающего */
   --sans:var(--ds-sans); --display:var(--ds-sans);
@@ -278,7 +278,7 @@ h1 b{font-weight:800}
 .about details.sec > summary h3{font-size:15px;font-weight:600}
 
 /* фазы и недели */
-.weekline{padding:20px;gap:12px;margin-top:0!important}
+.weekline{padding:20px;gap:12px}
 .strip{height:28px;gap:2px;background:var(--sunk);border-radius:8px;padding:2px}
 .strip button{border-radius:6px;background:none;color:var(--muted);font:500 11px var(--sans)}
 .strip button.on{background:var(--panel);color:var(--ink);font-weight:600}
@@ -382,7 +382,7 @@ a.tbtn{display:inline-flex;align-items:center;justify-content:center;text-decora
   </header>
   <div id="planview">
     <div class="about" id="about"></div>
-    <div class="weekline" style="margin-top:16px"><div class="strip" id="strip"></div><div class="weeks" id="weeks"></div><div class="focus" id="focus"></div></div>
+    <div class="weekline"><div class="strip" id="strip"></div><div class="weeks" id="weeks"></div><div class="focus" id="focus"></div></div>
   </div>
   <nav class="seg" lang="ru" role="tablist" aria-label="Дни недели" id="days"></nav>
   <div class="dayhead" id="dayhead"></div>
@@ -678,7 +678,7 @@ async function load(){
 }
 document.getElementById("logout").onclick = () => sb.auth.signOut().then(() => location.reload());
 sb.auth.onAuthStateChange((ev) => { if (ev === "SIGNED_IN" && !me) boot(); });
-document.getElementById("day").innerHTML = '<div class="empty">Загружаю…</div>';
+document.getElementById("day").innerHTML = '<div class="skel" aria-busy="true"><span class="sr">Загружаем…</span><i></i><i></i><i></i></div>';
 boot();
 </script>
 </body>

@@ -80,6 +80,19 @@ input[type="checkbox"]:focus, input[type="radio"]:focus, input[type="date"]:focu
 /* Знак: контур названия, цвет ink в обеих темах */
 .wordmark{display:block;height:20px;width:auto;color:var(--ds-ink)}
 
+/* Текст только для экранных дикторов */
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap}
+/* E2: заготовка загрузки той же формы, что контент: заголовок, карточка, строка; без анимации */
+.skel{display:grid;gap:12px;padding-block:16px}
+.skel i{display:block;height:16px;border-radius:var(--ds-r-sm);background:var(--ds-surface-2)}
+.skel i:nth-of-type(1){width:40%;height:32px}
+.skel i:nth-of-type(2){height:120px;border-radius:var(--ds-r-lg)}
+.skel i:nth-of-type(3){width:70%}
+/* DD2, DD9: выпадающий список как остальные поля, один шеврон 16 px цвета вторичного текста */
+select:not([multiple]){appearance:none;-webkit-appearance:none;padding-right:36px;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23535E69%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 12px center;background-size:16px 16px}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23A8ADB5%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E")}}
+:root[data-theme="dark"] select:not([multiple]){background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2016%2016%22%3E%3Cpath%20d%3D%22M4%206l4%204%204-4%22%20fill%3D%22none%22%20stroke%3D%22%23A8ADB5%22%20stroke-width%3D%221.75%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22/%3E%3C/svg%3E")}
+
 :root{--sans:var(--ds-sans)}
 *{box-sizing:border-box}
 body{margin:0;background:var(--ds-bg);color:var(--ds-ink);font:400 15px/22px var(--sans);-webkit-font-smoothing:antialiased}
@@ -107,7 +120,11 @@ h1{font-size:32px;line-height:38px;font-weight:800}
 .btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;background:var(--ds-brand);color:var(--ds-on-brand);border:0;border-radius:var(--ds-r-md);padding:10px 18px;font:600 14px/18px var(--sans);text-decoration:none;cursor:pointer}
 .btn.accent{background:var(--ds-brand);color:var(--ds-on-brand)}
 .btn.ghost{background:var(--ds-btn2);color:var(--ds-ink);border:0}
-.btn:disabled{opacity:.6}
+.btn:disabled{opacity:.6;cursor:progress}
+.toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:50;display:flex;gap:12px;align-items:center;max-width:calc(100vw - 32px);background:var(--ds-ink);color:var(--ds-surface);padding:12px 16px;border-radius:var(--ds-r-md);box-shadow:var(--ds-shadow-pop);font-size:14px;line-height:20px}
+.toast[hidden]{display:none}
+.toast button{background:none;border:0;color:inherit;font:600 14px/20px var(--sans);text-decoration:none;padding:4px 8px;border-radius:var(--ds-r-sm);min-height:32px}
+.toast button:hover{background:color-mix(in srgb, var(--ds-surface) 15%, transparent)}
 label{display:grid;gap:4px;font-size:13px;color:var(--ds-ink-2)}
 input,select{font:500 14px/18px var(--sans);color:var(--ds-ink);background:var(--ds-surface);border:1px solid var(--ds-ctrl);border-radius:var(--ds-r-sm);padding:10px;min-height:44px;min-width:0}
 .grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px}
@@ -138,7 +155,7 @@ th{color:var(--ds-ink-2);font-weight:500}
 <a class="skip" href="#main">К содержанию</a>
 <header class="top"><div class="in"><a class="brand" href="../" aria-label="Больше чем качалка, на главную. Кабинет владельца"><svg class="wordmark" viewBox="-4 0 815 76" role="img" aria-label="Больше чем качалка" focusable="false"><path fill="currentColor" d="M4.53125 58.4H30.3515625C41.9921875 58.4 49.2578125 51.4078125 49.2578125 40.275C49.2578125 29.5328125 41.9921875 23.7515625 30.3515625 23.7515625H18.3203125V11.251562499999999H44.21875V0.19687499999999858H4.53125ZM18.3203125 47.8140625V33.3609375H28.0078125C32.890625 33.3609375 36.0546875 36.3296875 36.0546875 40.509375C36.0546875 44.80625 32.890625 47.8140625 28.0078125 47.8140625Z M74.1234375 59.2203125C87.75625 59.2203125 96.0375 50.1578125 96.0375 36.7203125C96.0375 23.24375 87.75625 14.181249999999999 74.1234375 14.181249999999999C60.4515625 14.181249999999999 52.1703125 23.24375 52.1703125 36.7203125C52.1703125 50.1578125 60.4515625 59.2203125 74.1234375 59.2203125ZM74.1234375 48.790625C68.8890625 48.790625 66.0765625 43.9078125 66.0765625 36.6421875C66.0765625 29.3375 68.8890625 24.6109375 74.1234375 24.6109375C79.3578125 24.6109375 82.1703125 29.3375 82.1703125 36.6421875C82.1703125 43.9078125 79.3578125 48.790625 74.1234375 48.790625Z M97.2703125 58.4H101.7625C110.903125 58.4 117.075 53.0875 117.778125 36.915625L118.325 25.196875H127.5828125V58.4H141.215625V14.728124999999999H105.278125L104.5359375 35.11875C104.2234375 44.6109375 102.3875 47.8921875 98.5984375 47.8921875H97.2703125Z M161.471875 27.5015625V14.728124999999999H147.8390625V58.4H169.4015625C181.39375 58.4 188.7375 52.30625 188.7375 43.0875C188.7375 33.634375 181.39375 27.5015625 169.4015625 27.5015625ZM161.471875 37.9703125H169.4015625C173.190625 37.9703125 175.4953125 39.884375 175.4953125 43.0875C175.4953125 46.134375 173.190625 47.93125 169.4015625 47.93125H161.471875Z M193.6421875 14.728124999999999V58.4H254.61875V14.728124999999999H241.025V47.93125H230.5953125V14.728124999999999H217.7046875V47.93125H207.275V14.728124999999999Z M281.59375 59.2203125C292.1796875 59.2203125 299.328125 54.415625 301.515625 46.8375L289.3671875 44.8453125C288.2734375 47.775 285.5 49.3375 281.828125 49.3375C276.671875 49.3375 273.1953125 46.2125 272.9609375 39.884375H302.140625V36.446875C302.140625 22.0328125 293.3515625 14.181249999999999 281.0859375 14.181249999999999C267.9609375 14.181249999999999 259.5625 23.24375 259.5625 36.7203125C259.5625 50.7046875 267.8828125 59.2203125 281.59375 59.2203125ZM273.0390625 31.9546875C273.546875 27.15 276.3984375 24.0640625 281.203125 24.0640625C285.96875 24.0640625 288.6640625 26.99375 289.2109375 31.9546875Z M343.27812500000005 46.2125C344.72343750000005 46.2125 346.48125000000005 46.0171875 348.20000000000005 45.7046875V58.4H361.83281250000005V14.728124999999999H348.20000000000005V35.2359375C346.52031250000005 35.5875 344.87968750000005 35.74375 343.27812500000005 35.74375C337.57500000000005 35.74375 335.62187500000005 34.3765625 335.62187500000005 29.8453125V14.728124999999999H321.98906250000005V29.8453125C321.98906250000005 40.8609375 329.21562500000005 46.2125 343.27812500000005 46.2125Z M388.80781250000007 59.2203125C399.39375000000007 59.2203125 406.54218750000007 54.415625 408.72968750000007 46.8375L396.58125000000007 44.8453125C395.48750000000007 47.775 392.71406250000007 49.3375 389.04218750000007 49.3375C383.88593750000007 49.3375 380.40937500000007 46.2125 380.17500000000007 39.884375H409.35468750000007V36.446875C409.35468750000007 22.0328125 400.56562500000007 14.181249999999999 388.30000000000007 14.181249999999999C375.17500000000007 14.181249999999999 366.77656250000007 23.24375 366.77656250000007 36.7203125C366.77656250000007 50.7046875 375.09687500000007 59.2203125 388.80781250000007 59.2203125ZM380.25312500000007 31.9546875C380.76093750000007 27.15 383.61250000000007 24.0640625 388.41718750000007 24.0640625C393.18281250000007 24.0640625 395.87812500000007 26.99375 396.42500000000007 31.9546875Z M414.1031250000001 58.4H427.3062500000001V43.4390625C427.3062500000001 39.6890625 426.9546875000001 31.5640625 426.7984375000001 24.80625C428.3218750000001 31.68125 430.4703125000001 38.86875 431.9937500000001 43.4390625L437.1109375000001 58.4H448.4390625000001L453.4781250000001 43.4390625C454.9234375000001 39.025 457.1890625000001 31.68125 458.7125000000001 24.4546875C458.5953125000001 31.36875 458.2828125000001 39.6109375 458.2828125000001 43.4390625V58.4H471.4078125000001V14.728124999999999H450.4703125000001L446.2125000000001 29.103125C445.1187500000001 33.165625 443.7515625000001 40.74375 442.8140625000001 47.15C441.9546875000001 40.7046875 440.6656250000001 33.165625 439.4937500000001 29.103125L435.0015625000001 14.728124999999999H414.1031250000001Z M493.13125000000014 58.4H506.76406250000014V42.540625H510.67031250000014L520.6312500000001 58.4H536.6078125000001L521.6859375000001 36.603125L536.4906250000001 14.728124999999999H520.7093750000001L509.65468750000014 32.071875H506.76406250000014V14.728124999999999H493.13125000000014Z M550.9656250000002 59.18125C557.0203125000002 59.18125 561.2390625000002 56.759375 563.6218750000002 52.2671875H563.9734375000002V58.4H576.7859375000002V28.7515625C576.7859375000002 19.3765625 568.2312500000002 14.181249999999999 557.3718750000002 14.181249999999999C546.4343750000002 14.181249999999999 539.5593750000002 19.2984375 537.8406250000002 26.759375L550.1843750000002 28.3609375C550.9265625000002 25.6265625 553.4656250000002 23.86875 557.2546875000002 23.86875C560.9656250000002 23.86875 563.1921875000002 25.5875 563.1921875000002 28.5953125V28.7515625C563.1921875000002 31.446875 560.2234375000002 31.99375 552.8406250000002 32.61875C544.0125000000002 33.3609375 536.5906250000002 36.603125 536.5906250000002 46.290625C536.5906250000002 54.9234375 542.5671875000002 59.18125 550.9656250000002 59.18125ZM555.1062500000002 50.1578125C551.8250000000002 50.1578125 549.4812500000002 48.5953125 549.4812500000002 45.665625C549.4812500000002 42.775 551.7468750000002 41.05625 555.7703125000002 40.4703125C558.3093750000002 40.0796875 561.7468750000002 39.49375 563.3093750000002 38.6734375V42.853125C563.3093750000002 47.15 559.6765625000002 50.1578125 555.1062500000002 50.1578125Z M604.6984375000002 46.2125C606.1437500000002 46.2125 607.9015625000002 46.0171875 609.6203125000002 45.7046875V58.4H623.2531250000002V14.728124999999999H609.6203125000002V35.2359375C607.9406250000002 35.5875 606.3000000000002 35.74375 604.6984375000002 35.74375C598.9953125000002 35.74375 597.0421875000002 34.3765625 597.0421875000002 29.8453125V14.728124999999999H583.4093750000002V29.8453125C583.4093750000002 40.8609375 590.6359375000002 46.2125 604.6984375000002 46.2125Z M642.1031250000002 59.18125C648.1578125000002 59.18125 652.3765625000002 56.759375 654.7593750000002 52.2671875H655.1109375000002V58.4H667.9234375000002V28.7515625C667.9234375000002 19.3765625 659.3687500000002 14.181249999999999 648.5093750000002 14.181249999999999C637.5718750000002 14.181249999999999 630.6968750000002 19.2984375 628.9781250000002 26.759375L641.3218750000002 28.3609375C642.0640625000002 25.6265625 644.6031250000002 23.86875 648.3921875000002 23.86875C652.1031250000002 23.86875 654.3296875000002 25.5875 654.3296875000002 28.5953125V28.7515625C654.3296875000002 31.446875 651.3609375000002 31.99375 643.9781250000002 32.61875C635.1500000000002 33.3609375 627.7281250000002 36.603125 627.7281250000002 46.290625C627.7281250000002 54.9234375 633.7046875000002 59.18125 642.1031250000002 59.18125ZM646.2437500000002 50.1578125C642.9625000000002 50.1578125 640.6187500000002 48.5953125 640.6187500000002 45.665625C640.6187500000002 42.775 642.8843750000002 41.05625 646.9078125000002 40.4703125C649.4468750000002 40.0796875 652.8843750000002 39.49375 654.4468750000002 38.6734375V42.853125C654.4468750000002 47.15 650.8140625000002 50.1578125 646.2437500000002 50.1578125Z M670.8359375000002 58.4H675.3281250000002C684.4687500000002 58.4 690.6406250000002 53.0875 691.3437500000002 36.915625L691.8906250000002 25.196875H701.1484375000002V58.4H714.7812500000002V14.728124999999999H678.8437500000002L678.1015625000002 35.11875C677.7890625000002 44.6109375 675.9531250000002 47.8921875 672.1640625000002 47.8921875H670.8359375000002Z M721.4046875000003 58.4H735.0375000000003V42.540625H738.9437500000003L748.9046875000003 58.4H764.8812500000003L749.9593750000003 36.603125L764.7640625000003 14.728124999999999H748.9828125000003L737.9281250000003 32.071875H735.0375000000003V14.728124999999999H721.4046875000003Z M779.2390625000003 59.18125C785.2937500000003 59.18125 789.5125000000003 56.759375 791.8953125000003 52.2671875H792.2468750000003V58.4H805.0593750000003V28.7515625C805.0593750000003 19.3765625 796.5046875000003 14.181249999999999 785.6453125000003 14.181249999999999C774.7078125000003 14.181249999999999 767.8328125000003 19.2984375 766.1140625000003 26.759375L778.4578125000003 28.3609375C779.2000000000003 25.6265625 781.7390625000003 23.86875 785.5281250000003 23.86875C789.2390625000003 23.86875 791.4656250000003 25.5875 791.4656250000003 28.5953125V28.7515625C791.4656250000003 31.446875 788.4968750000003 31.99375 781.1140625000003 32.61875C772.2859375000003 33.3609375 764.8640625000003 36.603125 764.8640625000003 46.290625C764.8640625000003 54.9234375 770.8406250000003 59.18125 779.2390625000003 59.18125ZM783.3796875000003 50.1578125C780.0984375000003 50.1578125 777.7546875000003 48.5953125 777.7546875000003 45.665625C777.7546875000003 42.775 780.0203125000003 41.05625 784.0437500000003 40.4703125C786.5828125000003 40.0796875 790.0203125000003 39.49375 791.5828125000003 38.6734375V42.853125C791.5828125000003 47.15 787.9500000000003 50.1578125 783.3796875000003 50.1578125Z"/></svg><span>Кабинет владельца</span></a>
 <nav aria-label="Разделы"><a href="../learn/?preview#/">Курс как ученик</a><a href="../app/">Программы и дневники</a><a href="../">Сайт</a><button type="button" id="logout" hidden>Выйти</button></nav></div></header>
-<main id="main" tabindex="-1"><p class="note">Загружаем…</p></main>
+<main id="main" tabindex="-1"><div class="skel" aria-busy="true"><span class="sr">Загружаем…</span><i></i><i></i><i></i></div></main>
 <script>window.OUTLINE = [{"slug": "anatomy", "title": "Анатомия и физиология"}, {"slug": "biomechanics", "title": "Биомеханика движений"}];</script>
 <script>
 const SUPABASE_URL = "https://selgcdicdtjpcsrfrqdq.supabase.co", SUPABASE_KEY = "sb_publishable_wLlkgxHctEZyUzB0TSlUmQ_R_m-t4ca";
@@ -196,33 +213,72 @@ function view() {
       <div class="row">${x.course_access ? `<button class="btn ghost" type="button" data-revoke="${esc(x.email)}">Закрыть курс</button>` : `<button class="btn ghost" type="button" data-grant="${esc(x.email)}">Открыть курс</button>`}</div></div>`).join("") || `<p class="note">Пока никого.</p>`}</div></div>
   <div class="tile"><h2>Доступ выдан, но ещё не входили</h2>${PENDING.length ? `<div class="scroll"><table><tr><th>Почта</th><th>Основание</th><th>Выдан</th><th></th></tr>${PENDING.map(x => `<tr><td>${esc(x.email)}</td><td>${esc(x.note || "")}</td><td>${d0(x.granted_at)}</td><td><button class="btn ghost" type="button" data-revoke="${esc(x.email)}">Отозвать</button></td></tr>`).join("")}</table></div>` : `<p class="note">Нет.</p>`}</div>
   <div class="tile"><h2>Последние попытки самопроверки</h2><p class="note">Показано число верных ответов. Критерия «сдал» в курсе нет, ручной проверки нет.</p>${ATTEMPTS.length ? `<div class="scroll"><table><tr><th>Когда</th><th>Кто</th><th>Модуль</th><th>Глава</th><th>Результат</th></tr>${ATTEMPTS.map(a => `<tr><td>${dt(a.created_at)}</td><td>${esc(email(a.user_id))}</td><td>${esc(modTitle(a.slug))}</td><td>${a.chapter || "весь модуль"}</td><td>${a.correct} из ${a.total}</td></tr>`).join("")}</table></div>` : `<p class="note">Попыток пока нет.</p>`}</div>`;
-  $("#ga").onclick = () => grant($("#ga-em").value, $("#ga-note").value, $("#ga-lib").checked, "#ga-msg");
+  $("#ga").onclick = () => grant($("#ga-em").value, $("#ga-note").value, $("#ga-lib").checked, "#ga-msg", $("#ga"));
   $("#ap").onclick = assign;
-  main.querySelectorAll("[data-grant]").forEach(b => b.onclick = () => grant(b.dataset.grant, "", false, null));
-  main.querySelectorAll("[data-revoke]").forEach(b => b.onclick = () => revoke(b.dataset.revoke));
+  main.querySelectorAll("[data-grant]").forEach(b => b.onclick = () => grant(b.dataset.grant, "", false, null, b));
+  main.querySelectorAll("[data-revoke]").forEach(b => b.onclick = () => revoke(b.dataset.revoke, b));
 }
 
 async function refresh() { const e = await load(); if (e) return denied(e); view(); }
-async function grant(em, note, lib, msgSel) {
-  em = em.trim().toLowerCase(); const msg = t => { if (msgSel) $(msgSel).textContent = t; };
-  if (!/^[^@\s]+@[^@\s]+$/.test(em)) return msg("Проверьте адрес почты.");
-  const { error } = await sb.from("course_access").upsert({ email: em, note: note.trim() || null });
-  if (error) return msg("Не сохранилось: " + error.message);
-  if (lib) { const r = await sb.from("library_access").upsert({ email: em, note: note.trim() || null }); if (r.error) return msg("Курс открыт, библиотека не сохранилась: " + r.error.message); }
-  await refresh(); $("#ga-msg").textContent = `Курс открыт для ${em}.`;
+// W3: что случилось и что делать; технический текст ошибки только в консоль
+function why(e) {
+  console.warn(e);
+  const m = (e && (e.message || "")) + "";
+  if (e && (e.status === 0 || /fetch|network/i.test(m))) return "нет связи с сервером. Проверьте интернет и повторите.";
+  if (e && e.code === "42501") return "нет прав. Войдите учётной записью тренера.";
+  if (e && e.code === "23505") return "такая запись уже есть.";
+  return "сервер не принял данные. Повторите через минуту; если не получится, напишите разработчику.";
 }
-async function revoke(em) {
-  if (!confirm(`Закрыть доступ к курсу для ${em}? Уже выданные ссылки на файлы работают до истечения срока (до 1 часа).`)) return;
-  const { error } = await sb.from("course_access").delete().eq("email", em);
-  if (error) { alert("Не получилось: " + error.message); return; }
-  await refresh();
+// X4: кнопка блокируется и показывает ход действия, пока запрос не завершится
+async function busy(btn, label, fn) {
+  if (!btn || btn.disabled) return;
+  const old = btn.textContent; btn.disabled = true; btn.setAttribute("aria-busy", "true"); btn.textContent = label;
+  try { return await fn(); } finally { if (btn.isConnected) { btn.disabled = false; btn.removeAttribute("aria-busy"); btn.textContent = old; } }
+}
+// IX4, IX6: уведомление внизу экрана, одно место и один стиль; с действием «Вернуть» не исчезает 8 секунд
+function toast(text, action) {
+  let t = document.getElementById("toast");
+  if (!t) { t = document.createElement("div"); t.id = "toast"; t.className = "toast"; t.setAttribute("role", "status"); document.body.append(t); }
+  t.innerHTML = ""; const sp = document.createElement("span"); sp.textContent = text; t.append(sp);
+  if (action) { const b = document.createElement("button"); b.type = "button"; b.textContent = action.label; b.onclick = () => { t.hidden = true; action.run(); }; t.append(b); }
+  t.hidden = false; clearTimeout(toast.h); toast.h = setTimeout(() => { t.hidden = true; }, action ? 8000 : 5000);
+}
+async function grant(em, note, lib, msgSel, btn) {
+  em = em.trim().toLowerCase(); const msg = t => { if (msgSel) $(msgSel).textContent = t; };
+  if (!/^[^@\s]+@[^@\s]+$/.test(em)) return msg("Проверьте адрес почты: нужен вид name@mail.ru.");
+  await busy(btn, "Открываю…", async () => {
+    const { error } = await sb.from("course_access").upsert({ email: em, note: note.trim() || null });
+    if (error) return msg("Курс не открыт: " + why(error));
+    if (lib) { const r = await sb.from("library_access").upsert({ email: em, note: note.trim() || null }); if (r.error) return msg("Курс открыт, а библиотека нет: " + why(r.error)); }
+    await refresh(); toast(`Курс открыт для ${em}.`);
+  });
+}
+async function revoke(em, btn) {
+  // обратимое действие: выполняется сразу, в уведомлении 8 секунд можно вернуть доступ с тем же основанием
+  const was = USERS.find(x => x.email === em && x.course_access), pend = PENDING.find(x => x.email === em);
+  const back = { email: em, note: (was && was.course_note) || (pend && pend.note) || null, granted_at: (was && was.course_granted_at) || (pend && pend.granted_at) || undefined };
+  await busy(btn, "Закрываю…", async () => {
+    const { error } = await sb.from("course_access").delete().eq("email", em);
+    if (error) return toast(`Доступ для ${em} не закрыт: ${why(error)}`);
+    await refresh();
+    toast(`Курс закрыт для ${em}. Уже выданные ссылки на файлы работают до часа.`, { label: "Вернуть", run: async () => {
+      const r = await sb.from("course_access").upsert(back);
+      if (r.error) return toast(`Не удалось вернуть доступ: ${why(r.error)}`);
+      await refresh(); toast(`Доступ для ${em} возвращён.`);
+    } });
+  });
 }
 async function assign() {
-  const row = { profile_id: $("#ap-u").value, program_id: +$("#ap-p").value, start_date: $("#ap-d").value };
-  if (!row.profile_id) { $("#ap-msg").textContent = "Нет пользователей."; return; }
-  const { error } = await sb.from("client_program").insert(row);
-  $("#ap-msg").textContent = error ? "Не сохранилось: " + error.message : "Программа назначена.";
-  if (!error) await refresh();
+  const btn = $("#ap"), row = { profile_id: $("#ap-u").value, program_id: +$("#ap-p").value, start_date: $("#ap-d").value };
+  if (!row.profile_id) { $("#ap-msg").textContent = "Назначать некому: никто ещё не входил на сайт."; return; }
+  if (!row.start_date) { $("#ap-msg").textContent = "Укажите дату старта."; return; }
+  const u = USERS.find(x => x.user_id === row.profile_id), pr = PROGRAMS.find(x => x.id === row.program_id);
+  if (u && pr && u.programs.some(x => x.slug === pr.slug && x.status !== "finished")) { $("#ap-msg").textContent = `Программа «${pr.title}» уже назначена этому человеку.`; return; }
+  await busy(btn, "Назначаю…", async () => {
+    const { error } = await sb.from("client_program").insert(row);
+    if (error) { $("#ap-msg").textContent = "Программа не назначена: " + why(error); return; }
+    await refresh(); toast(`Программа «${pr ? pr.title : ""}» назначена ${u ? u.email : ""}.`);
+  });
 }
 function denied(e) {
   const forbidden = e.code === "42501" || /forbidden/.test(e.message || "");
@@ -234,7 +290,7 @@ $("#logout").onclick = () => sb.auth.signOut({ scope: "local" }).then(() => loca
   $("#logout").hidden = !me;
   if (!me) { const h = new URLSearchParams(location.hash.slice(1)); loginView(h.get("error_code") ? "Ссылка устарела или уже использована. Запросите новую." : ""); return; }
   if (location.hash) history.replaceState(null, "", location.pathname);
-  main.innerHTML = `<p class="note">Загружаем…</p>`;
+  main.innerHTML = `<div class="skel" aria-busy="true"><span class="sr">Загружаем…</span><i></i><i></i><i></i></div>`;
   await refresh();
 })();
 sb.auth.onAuthStateChange(ev => { if (ev === "SIGNED_IN" && !me) location.reload(); });
