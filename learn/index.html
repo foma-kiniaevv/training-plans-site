@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Обучение тренеров · Больше чем качалка</title>
+<meta name="description" content="Курс для тренеров: анатомия, физиология и биомеханика силовых упражнений. Главы, схемы, карточки и самопроверка.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="ru_RU">
+<meta property="og:title" content="Обучение тренеров">
+<meta property="og:description" content="Курс для тренеров: анатомия, физиология и биомеханика силовых упражнений. Главы, схемы, карточки и самопроверка.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23c2611f'/%3E%3Ctext x='16' y='23' font-family='Arial,sans-serif' font-size='21' font-weight='700' text-anchor='middle' fill='%23fff'%3E%D0%91%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap">
+<style>/* Раздел «Обучение». Те же токены, что у витрины и кабинета: чёрная панель слева, светлые плитки, оранжевый только для главного. */
+:root{
+  --surface:#f2f2f2; --raised:#ffffff; --sunken:#e8e8e8; --night:#111111; --on-night:#f2efe8; --on-night-muted:#9a978f; --night-line:#2c2c2e;
+  --ink:#212121; --muted:#6b6b6b; --soft:#b0b0b0; --line:#dedede; --brand:#f06428; --brand-strong:#b8440f; --brand-soft:#fbe6dc; --on-brand:#1a1a1a;
+  --good:#2a7046; --good-soft:#e6f2ea; --bad:#a3361b; --bad-soft:#f8e3dc;
+  --shadow-card:0 1px 2px rgba(0,0,0,.04),0 6px 20px rgba(0,0,0,.05);
+  --r-sm:8px; --r-md:14px; --r-lg:22px;
+  --sans:"Montserrat","Helvetica Neue",Arial,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root{
+  --surface:#121214; --raised:#1c1d20; --sunken:#0b0b0d; --night:#000000; --on-night-muted:#a1a1a6; --night-line:#2c2d31;
+  --ink:#f2f2f2; --muted:#a1a1a6; --soft:#5c5c60; --line:#2c2d31; --brand:#f27540; --brand-strong:#f27540; --brand-soft:#2c1d14; --on-brand:#121214;
+  --good:#5cc98a; --good-soft:#17291e; --bad:#f08a6c; --bad-soft:#2e1a14; --shadow-card:0 0 0 transparent; color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-padding-top:16px}
+body{margin:0;background:var(--surface);color:var(--ink);font:400 15px/24px var(--sans);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--brand);outline-offset:2px}
+[hidden]{display:none!important}
+
+/* каркас */
+.shell{display:grid;grid-template-columns:264px minmax(0,1fr);min-height:100vh}
+.side{background:var(--night);color:var(--on-night);padding:20px 14px;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.brand{font-size:13px;line-height:18px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;padding-inline:10px}
+.brand span{display:block;font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;color:var(--on-night-muted);margin-top:6px}
+.nav{display:flex;flex-direction:column;gap:2px}
+.nav .lbl{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--on-night-muted);padding:12px 10px 6px}
+.nav a{display:flex;gap:8px;align-items:baseline;padding:8px 10px;border-radius:var(--r-sm);text-decoration:none;color:var(--on-night-muted);font-size:13px;line-height:18px;font-weight:500}
+.nav a:hover{background:var(--night-line);color:var(--on-night)}
+.nav a[aria-current="page"]{background:var(--brand);color:var(--on-brand);font-weight:600}
+.nav a.mod{color:var(--on-night);font-weight:600}
+.nav a.ch{padding-left:16px}
+.nav a .n{flex:none;width:20px;font-variant-numeric:tabular-nums;opacity:.7}
+.nav a .ok{margin-left:auto;flex:none}
+.foot{margin-top:auto;border-top:1px solid var(--night-line);padding-top:12px;display:flex;flex-direction:column;gap:2px}
+.foot a,.foot button{background:none;border:0;padding:8px 10px;border-radius:var(--r-sm);text-align:left;text-decoration:none;color:var(--on-night);font-size:13px;line-height:18px;font-weight:500}
+.foot a:hover,.foot button:hover{background:var(--night-line)}
+.foot .who{font-size:12px;line-height:16px;color:var(--on-night-muted);padding:4px 10px;overflow-wrap:anywhere}
+.mbar{display:none}
+.main{min-width:0;padding:32px max(24px,env(safe-area-inset-right,0px)) 64px max(24px,env(safe-area-inset-left,0px))}
+.page{max-width:860px;margin-inline:auto;display:flex;flex-direction:column;gap:16px}
+
+/* общие элементы */
+.eyebrow{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.head{display:flex;flex-direction:column;gap:10px;padding-bottom:4px}
+.head h1{font-size:40px;line-height:44px;font-weight:700}
+.lead{color:var(--muted);max-width:40em}
+.meta{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;line-height:18px;color:var(--muted)}
+.tile{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--brand);color:var(--on-brand);font-size:13px;line-height:18px;font-weight:600;padding:12px 24px;border-radius:999px;border:0;text-decoration:none;text-align:center}
+.btn:hover{filter:brightness(1.05)}
+.btn:disabled{opacity:.45;cursor:default;filter:none}
+.btn.ghost{background:var(--raised);color:var(--ink);border:1px solid var(--line)}
+.btn.ghost:hover{border-color:var(--soft)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.note{font-size:13px;line-height:18px;color:var(--muted)}
+.note a,.link{color:var(--brand-strong);font-weight:600}
+.link{background:none;border:0;padding:0;font-size:inherit;text-decoration:underline;text-underline-offset:2px}
+.loading{color:var(--muted);padding:40px 0;text-align:center}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chip{background:var(--raised);border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:13px;line-height:18px;font-weight:500;color:var(--muted);text-decoration:none}
+.chip:hover{border-color:var(--soft)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--raised)}
+
+/* вход и доступ */
+.gate{display:flex;flex-direction:column;gap:14px;max-width:560px}
+.gate h2{font-size:24px;line-height:30px;font-weight:600}
+.gate form{display:flex;gap:8px;flex-wrap:wrap}
+.gate input{flex:1 1 220px;min-width:0;font:inherit;padding:11px 14px;border:1px solid var(--line);border-radius:999px;background:var(--surface);color:var(--ink)}
+.gate .ok{color:var(--good);font-weight:500}
+.gate .err{color:var(--bad);font-weight:500}
+.status{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:space-between}
+.status b{font-weight:600}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:3px 10px;font-size:13px;line-height:18px;font-weight:500;background:var(--sunken);color:var(--muted)}
+.pill.on{background:var(--good-soft);color:var(--good)}
+
+/* модули и главы */
+.mods{display:grid;gap:16px}
+.mod-card{display:flex;flex-direction:column;gap:14px}
+.mod-card h2{font-size:24px;line-height:30px;font-weight:600}
+.chs{list-style:none;margin:0;padding:0;display:grid;border-top:1px solid var(--line)}
+.chs a{display:grid;grid-template-columns:32px minmax(0,1fr) auto;gap:12px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.chs a:hover b{color:var(--brand-strong)}
+.chs .n{color:var(--muted);font-variant-numeric:tabular-nums;font-weight:600}
+.chs b{display:block;font-weight:600}
+.chs small{display:block;color:var(--muted);font-size:13px;line-height:18px}
+.chs .t{font-size:13px;color:var(--muted);white-space:nowrap}
+.tools{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.tools a{display:flex;flex-direction:column;gap:4px;padding:16px;text-decoration:none;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card)}
+.tools a:hover{border-color:var(--soft)}
+.tools b{font-weight:600}
+.tools span{font-size:13px;line-height:18px;color:var(--muted)}
+.obj{margin:0;padding-left:20px;display:grid;gap:4px;color:var(--muted);font-size:13px;line-height:20px}
+
+/* глава */
+.lesson{display:flex;flex-direction:column;gap:16px}
+.lesson .goals h2,.wrapup h2{font-size:18px;line-height:24px;font-weight:600;margin-bottom:10px}
+.lesson .goals ul,.wrapup ul{margin:0;padding-left:20px;display:grid;gap:6px}
+.sec{display:flex;flex-direction:column;gap:16px}
+.sec>.num{font-size:13px;line-height:18px;font-weight:600;color:var(--brand-strong);font-variant-numeric:tabular-nums}
+.sec>h2{font-size:24px;line-height:30px;font-weight:600;margin-top:-10px}
+.sec>.lead{font-size:16px;line-height:26px;color:var(--ink);font-weight:500}
+.sec p{max-width:44em}
+.sec strong{font-weight:600}
+.key,.callout{border-radius:var(--r-sm);padding:14px 16px;display:flex;flex-direction:column;gap:4px}
+.key{background:var(--brand-soft);border-left:3px solid var(--brand)}
+.key .lbl,.callout .lbl{font-size:11px;line-height:14px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--brand-strong)}
+.callout{background:var(--sunken)}
+.callout .lbl{color:var(--muted)}
+.def{border-top:1px solid var(--line);padding-top:12px}
+.def h3{font-size:15px;line-height:22px;font-weight:600;margin-bottom:2px}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:10px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;counter-increment:s}
+.steps li::before{content:counter(s);width:26px;height:26px;border-radius:50%;background:var(--sunken);display:grid;place-items:center;font-size:13px;font-weight:600}
+.steps h3{font-size:15px;line-height:22px;font-weight:600}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:10px}
+.compare>div{border:1px solid var(--line);border-radius:var(--r-sm);padding:14px}
+.compare h3{font-size:15px;line-height:22px;font-weight:600;margin-bottom:4px}
+.bul{margin:0;padding-left:20px;display:grid;gap:6px}
+details.more{border:1px solid var(--line);border-radius:var(--r-sm)}
+details.more>summary{cursor:pointer;padding:12px 16px;font-weight:600;list-style:none;display:flex;justify-content:space-between;gap:12px}
+details.more>summary::after{content:"+";color:var(--muted);font-weight:500}
+details.more[open]>summary::after{content:"−"}
+details.more>summary::-webkit-details-marker{display:none}
+details.more>.body{padding:0 16px 16px;display:flex;flex-direction:column;gap:12px}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:var(--r-sm)}
+.tbl table{border-collapse:collapse;width:100%;font-size:13px;line-height:20px}
+.tbl th{text-align:left;font-weight:600;background:var(--sunken);padding:10px 12px;white-space:nowrap}
+.tbl td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top;min-width:120px}
+.figref{font-size:13px;line-height:20px;color:var(--muted)}
+.fig{margin:0;display:flex;flex-direction:column;gap:8px}
+.fig .zoom{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:var(--r-sm);background:#fff;overflow:hidden;cursor:zoom-in}
+.fig img{display:block;width:100%;height:auto;max-height:560px;object-fit:contain}
+.fig video{display:block;width:100%;border-radius:var(--r-sm);background:#000}
+.fig figcaption{font-size:13px;line-height:20px;color:var(--muted)}
+.fig figcaption b{color:var(--ink);font-weight:600}
+.fig .credit{display:block;font-size:12px;line-height:18px}
+.fig .credit a{color:inherit}
+.fig .miss{padding:28px 16px;text-align:center;font-size:13px;color:var(--muted);background:var(--sunken);border-radius:var(--r-sm)}
+.wrapup{background:var(--sunken);border-radius:var(--r-md);padding:20px}
+.practice{display:flex;flex-direction:column;gap:10px}
+.practice h2{font-size:18px;line-height:24px;font-weight:600}
+.practice details>summary{cursor:pointer;color:var(--brand-strong);font-weight:600}
+.practice details>div{margin-top:10px;padding:14px 16px;background:var(--sunken);border-radius:var(--r-sm)}
+.pager{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pager a{display:flex;flex-direction:column;gap:2px;padding:14px 16px;border:1px solid var(--line);border-radius:var(--r-md);background:var(--raised);text-decoration:none}
+.pager a:hover{border-color:var(--soft)}
+.pager a.next{grid-column:2;text-align:right}
+.pager span{font-size:12px;line-height:16px;color:var(--muted)}
+.pager b{font-weight:600}
+dialog.zoomed{border:0;padding:0;background:transparent;max-width:min(1200px,96vw);max-height:94vh}
+dialog.zoomed::backdrop{background:rgba(0,0,0,.82)}
+dialog.zoomed img{display:block;max-width:100%;max-height:84vh;margin:0 auto;background:#fff;border-radius:var(--r-sm)}
+dialog.zoomed p{color:#f2f2f2;font-size:13px;line-height:20px;margin-top:10px;text-align:center}
+dialog.zoomed button{position:fixed;top:12px;right:16px;background:rgba(255,255,255,.12);border:0;color:#fff;border-radius:999px;padding:8px 14px;font-size:13px;font-weight:600}
+
+/* карточки */
+.card{min-height:260px;width:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;text-align:center;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);box-shadow:var(--shadow-card);padding:32px 24px}
+.card h2{font-size:30px;line-height:36px;font-weight:700}
+.card p{font-size:17px;line-height:28px;max-width:34em}
+.card .hint{font-size:13px;color:var(--muted)}
+.card.flipped{background:var(--brand-soft);border-color:var(--brand-soft)}
+.cardnav{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.round{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:var(--raised);font-size:18px}
+
+/* самопроверка */
+.qtop{display:flex;justify-content:space-between;font-size:13px;color:var(--muted)}
+.bar{height:4px;background:var(--sunken);border-radius:2px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--brand)}
+.q h2{font-size:20px;line-height:28px;font-weight:600;margin:6px 0 14px}
+.opts{display:grid;gap:8px}
+.opt{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;align-items:start;text-align:left;background:var(--raised);border:1px solid var(--line);border-radius:var(--r-sm);padding:12px 14px;line-height:22px}
+.opt .l{width:26px;height:26px;border-radius:50%;background:var(--sunken);display:grid;place-items:center;font-size:13px;font-weight:600}
+.opt[aria-pressed="true"]{border-color:var(--brand);background:var(--brand-soft)}
+.opt.right{border-color:var(--good);background:var(--good-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt:disabled{cursor:default;color:var(--ink)}
+.expl{margin-top:12px;padding:14px 16px;border-radius:var(--r-sm);background:var(--good-soft)}
+.expl.wrong{background:var(--bad-soft)}
+.expl strong{display:block;font-weight:600;margin-bottom:2px}
+.score{font-size:56px;line-height:60px;font-weight:700}
+.score span{font-size:24px;color:var(--muted);font-weight:500}
+.review details{border-top:1px solid var(--line);padding:10px 0}
+.review summary{cursor:pointer;font-weight:500}
+.review p{margin-top:8px;font-size:14px;line-height:22px}
+
+/* словарь, материалы */
+.search{width:100%;font:inherit;padding:12px 16px;border:1px solid var(--line);border-radius:999px;background:var(--raised);color:var(--ink)}
+.terms{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.terms article{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);padding:16px}
+.terms h2{font-size:15px;line-height:22px;font-weight:600;margin-bottom:4px}
+.terms p{font-size:14px;line-height:22px;color:var(--muted)}
+.srcs{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.srcs li{border-bottom:1px solid var(--line);padding:10px 0;font-size:14px;line-height:22px}
+.srcs a{text-decoration-color:var(--soft);text-underline-offset:3px}
+.vids{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+h2.rule{font-size:20px;line-height:28px;font-weight:600}
+
+/* интерактивные схемы: всегда на тёмной плитке */
+.diagram{--panel:#1c1d20;--ink:#f2f2f2;--muted:#a1a1a6;--dim:#8d8e96;--line:#2f3035;--accent:#f27540;--soft:#2c1d14;--font:var(--sans);
+  background:#151618;color:#f2f2f2;border-radius:var(--r-md);padding:22px;overflow:hidden}
+.diagram .diagram-heading{font-size:14px;line-height:20px;font-weight:600;margin-bottom:16px}
+.diagram-note{font-size:12px;line-height:19px;color:var(--dim);margin-top:14px}
+.diagram svg{max-width:100%;height:auto;display:block}
+.diagram button{font-family:var(--sans)}
+.hierarchy{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:7px}
+.hierarchy button{border:1px solid #3a3b41;background:transparent;border-radius:7px;min-width:0;padding:14px 4px 12px;color:var(--muted);font-size:12px;line-height:18px}
+.hierarchy button svg{height:38px;margin:0 auto 10px;max-width:52px}
+.diagram-detail{margin-top:16px;border-top:1px solid var(--line);padding-top:14px;font-size:14px;line-height:23px;color:#d2d3da;min-height:76px}
+.diagram-detail strong{color:#f29a6e;font-weight:600}
+.signal-flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px}
+.signal-node{padding:12px 10px;border:1px solid #35363b;background:transparent;border-radius:8px;text-align:left;font-size:12px;color:var(--muted);line-height:18px}
+.signal-node span{display:block;font-size:11px;color:var(--accent);margin-bottom:4px}
+.diagram-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.diagram-tab{background:transparent;border:1px solid var(--line);border-radius:7px;color:var(--muted);font-size:12px;padding:7px 12px}
+.hierarchy button.selected,.signal-node.selected,.diagram-tab.selected{border-color:var(--accent);background:var(--soft);color:var(--ink)}
+.energy-bands{display:grid;gap:14px}
+.energy-band{display:grid;grid-template-columns:120px 1fr;gap:16px;align-items:center;font-size:12px;color:var(--muted)}
+.energy-ribbon{height:26px;border-radius:4px;display:flex;align-items:center;padding:0 12px;font-size:11px;color:#eee;position:relative;overflow:hidden}
+.energy-ribbon:after{content:'';position:absolute;right:0;top:0;bottom:0;width:30%;background:linear-gradient(90deg,transparent,#151618)}
+.mechanics-diagram{--mechanics-accent:var(--accent);--mechanics-muted:var(--muted);--mechanics-ink:var(--ink)}
+.mechanics-intro{color:var(--mechanics-muted);font-size:13px;line-height:21px;margin:0 0 18px}
+.mechanics-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(210px,.9fr);gap:24px;align-items:center}
+.mechanics-canvas{min-width:0}
+.mechanics-svg{display:block;width:100%;height:auto;overflow:visible;font-family:var(--sans);font-size:12px}
+.mechanics-lever-svg{max-width:360px;margin:0 auto}
+.mechanics-profile-svg{max-width:680px;margin:0 auto 22px}
+.mechanics-profile-svg .mechanics-svg-muted{font-size:13px}
+.mechanics-svg-label{fill:var(--mechanics-ink);font-size:12px}
+.mechanics-svg-muted{fill:var(--mechanics-muted);font-size:11px}
+.mechanics-svg-small{font-size:10px}
+.mechanics-reference{stroke:#51535b;stroke-width:1.5;stroke-dasharray:4 5}
+.mechanics-force-line{stroke:var(--mechanics-accent);stroke-width:1;stroke-opacity:.35;stroke-dasharray:4 5}
+.mechanics-dimension{fill:none;stroke:var(--mechanics-accent);stroke-width:1.5}
+.mechanics-upper-arm{fill:none;stroke:#656771;stroke-width:12;stroke-linecap:round}
+.mechanics-forearm{stroke:#c0c1c6;stroke-width:12;stroke-linecap:round}
+.mechanics-pivot{fill:var(--panel);stroke:var(--mechanics-ink);stroke-width:2}
+.mechanics-angle{fill:none;stroke:var(--mechanics-accent);stroke-width:1.6}
+.mechanics-load{fill:#3b2b22;stroke:var(--mechanics-accent);stroke-width:2}
+.mechanics-gravity{color:var(--mechanics-accent);stroke:currentColor;stroke-width:2.5}
+.mechanics-controls{display:grid;gap:22px}
+.mechanics-control label{display:flex;justify-content:space-between;align-items:baseline;gap:15px;font-size:13px;font-weight:600;color:var(--mechanics-ink);line-height:20px}
+.mechanics-control label span{flex-shrink:0;color:var(--mechanics-accent);font-variant-numeric:tabular-nums}
+.mechanics-control input[type=range]{display:block;width:100%;min-height:32px;margin:6px 0 0;accent-color:var(--mechanics-accent);cursor:pointer}
+.mechanics-control p{font-size:12px;color:var(--mechanics-muted);line-height:18px;margin-top:6px}
+.mechanics-range-ends{display:flex;justify-content:space-between;gap:14px;font-size:12px;color:var(--mechanics-muted);line-height:18px}
+.mechanics-range-ends span:last-child{text-align:right}
+.mechanics-results{display:grid;grid-template-columns:1fr 1fr;gap:14px;border-top:1px solid var(--line);padding-top:16px;font-variant-numeric:tabular-nums}
+.mechanics-results>span{display:flex;flex-direction:column;gap:6px}
+.mechanics-results>span>span{color:var(--mechanics-muted);font-size:12px;line-height:16px}
+.mechanics-results strong{font-size:19px;line-height:26px;color:var(--mechanics-ink);font-weight:600;white-space:nowrap}
+.mechanics-formula{font-size:13px;line-height:21px;color:var(--mechanics-muted);padding:14px 0 0;margin-top:18px;border-top:1px solid var(--line)}
+.mechanics-formula span{color:var(--mechanics-ink);white-space:nowrap}
+.mechanics-grid{stroke:var(--line);stroke-width:1}
+.mechanics-axis{fill:none;stroke:#777982;stroke-width:1.2}
+.mechanics-curve{fill:none;stroke:var(--mechanics-accent);stroke-width:3;stroke-linecap:round;stroke-linejoin:round}
+.mechanics-selection-line{stroke:var(--mechanics-muted);stroke-width:1.2;stroke-dasharray:4 4}
+.mechanics-point{fill:var(--mechanics-accent);stroke:var(--panel);stroke-width:3}
+.mechanics-profile-controls{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(200px,1fr);gap:26px;align-items:start}
+.mechanics-profile-controls .mechanics-results{border:0;padding-top:0}
+
+@media (max-width:860px){
+  .shell{grid-template-columns:minmax(0,1fr)}
+  .mbar{display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;z-index:20;background:var(--night);color:var(--on-night);padding:12px max(16px,env(safe-area-inset-right,0px)) 12px max(16px,env(safe-area-inset-left,0px))}
+  .mbar .brand{padding:0}
+  .mbar button{background:var(--night-line);border:0;color:var(--on-night);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600}
+  .side{display:none;position:fixed;inset:56px 0 0 0;height:auto;z-index:19;padding-bottom:max(20px,env(safe-area-inset-bottom,0px))}
+  .side>.brand{display:none}
+  .side.open{display:flex}
+  .main{padding:20px max(16px,env(safe-area-inset-right,0px)) 48px max(16px,env(safe-area-inset-left,0px))}
+  .head h1{font-size:30px;line-height:34px}
+  .tile{padding:18px}
+  .tools{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .terms,.vids{grid-template-columns:minmax(0,1fr)}
+  .card h2{font-size:24px;line-height:30px}
+  .mechanics-layout,.mechanics-profile-controls{grid-template-columns:1fr;gap:20px}
+  .mechanics-profile-controls .mechanics-results{border-top:1px solid var(--line);padding-top:16px}
+}
+@media (max-width:480px){
+  .diagram{padding:18px 12px}
+  .hierarchy{gap:4px}.hierarchy button{font-size:10px;padding:12px 2px}.hierarchy button svg{height:30px}
+  .signal-flow{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .energy-band{grid-template-columns:92px 1fr;gap:9px;font-size:11px}
+  .pager{grid-template-columns:1fr}.pager a.next{grid-column:1}
+  .chs a{grid-template-columns:26px minmax(0,1fr)}.chs .t{display:none}
+}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div class="mbar"><a class="brand" href="../">Больше чем качалка</a><button type="button" id="menu" aria-controls="side" aria-expanded="false">Меню</button></div>
+<div class="shell">
+<aside class="side" id="side"></aside>
+<main class="main" id="main"><div class="page"><p class="loading">Загружаем…</p></div></main>
+</div>
+<noscript><p style="padding:24px">Для курса нужен включённый JavaScript.</p></noscript>
+<script>window.OUTLINE = [{"slug":"anatomy","position":1,"title":"Анатомия и физиология","fullTitle":"Функциональная анатомия и физиология мышечной деятельности","author":"А. А. Игнатов","summary":"Строение мышц, нервная регуляция, движения, энергообеспечение и адаптация к нагрузке.","pdf":"anatomy/lecture.pdf","textUrl":"https://docs.google.com/document/d/1IQJeB9QrQAq_xn9sqsCflobHmDQgx8fU/edit","counts":{"cards":36,"quiz":50,"glossary":36},"chapters":[{"id":1,"title":"Опорно-двигательный аппарат и мышечная система","shortTitle":"Строение и опора","kicker":"От органа к саркомеру","summary":"Как кости, суставы, мышцы и сухожилия создают единую систему движения.","minutes":18,"objectives":["Различать функции костей, суставов, связок и сухожилий.","Проследить строение мышцы от органа до белковых нитей.","Связать устройство мышечно-сухожильного комплекса с передачей усилия."],"sections":["Опора, соединения и движение","Мышца как орган","От мышцы к мышечному волокну","Саркомер: где возникает усилие"]},{"id":2,"title":"Нервная регуляция и мышечное сокращение","shortTitle":"Сигнал и сокращение","kicker":"От команды к усилию","summary":"Путь нервного сигнала, роль натрия, кальция и АТФ, регулирование силы и режимы мышечной работы.","minutes":22,"objectives":["Объяснить путь возбуждения от мотонейрона к сократительным белкам.","Различать роль кальция и АТФ в сокращении и расслаблении.","Описать рекрутирование двигательных единиц и три режима работы мышцы."],"sections":["Двигательная единица и нервный сигнал","Как сигнал достигает сократительных нитей","Актин, миозин и участие АТФ","Как регулируется сила","Координация и режимы работы"]},{"id":3,"title":"Функциональная анатомия движений","shortTitle":"Мышцы и движения","kicker":"От плоскости к упражнению","summary":"Общий язык движений, крупные суставы, классификации мышц и разбор мышечных областей с примерами упражнений.","minutes":38,"objectives":["Определять плоскость, сустав и направление движения.","Различать топографию мышцы, число пересекаемых суставов и её роль в действии.","Связывать мышцы туловища, верхней и нижней конечностей с тренировочными упражнениями."],"sections":["Анатомические плоскости и общие движения","Движения верхней конечности","Позвоночник и суставы нижней конечности","Основания классификации и мышечные роли","Мышцы туловища: спина, грудь и живот","Мышцы верхней конечности","Мышцы нижней конечности"]},{"id":4,"title":"Энергообеспечение мышечной деятельности","shortTitle":"Энергия и нагрузка","kicker":"От АТФ к паузам отдыха","summary":"Как пополняется АТФ, почему энергетические системы работают одновременно и как эти знания помогают дозировать нагрузку.","minutes":22,"objectives":["Различать мощность и ёмкость путей ресинтеза АТФ.","Объяснять совместную работу фосфагенной, гликолитической и окислительной систем.","Подбирать начальные ориентиры отдыха по задаче и фактической работоспособности."],"sections":["Расход и ресинтез АТФ","Три взаимодействующих пути","Силовой подход и типы мышечных волокон","Параметры нагрузки и отдых между подходами"]},{"id":5,"title":"Стимул, утомление, восстановление и адаптация","shortTitle":"Восстановление и адаптация","kicker":"От нагрузки к результату","summary":"Чем отличаются утомление, восстановление и устойчивое развитие возможностей. Модель SRA и контроль нагрузки в практике тренера.","minutes":20,"objectives":["Различать стимул, утомление, восстановление и долговременную адаптацию.","Объяснить неодинаковые сроки восстановления разных функций и тканей.","Использовать модель SRA как схему и оценивать готовность по совокупности наблюдений."],"sections":["Стимул и утомление","Неодновременность восстановления","Как регулируется ответ на нагрузку","Специфика адаптации и сочетание нагрузок","Модель SRA и контроль тренировочного цикла"]}]},{"slug":"biomechanics","position":2,"title":"Биомеханика движений","fullTitle":"Биомеханика движений. Профили нагрузки и эффективность силовых упражнений","author":"А. А. Игнатов","summary":"Как анатомия, положение тела и направление сопротивления помогают выбирать и настраивать силовые упражнения.","pdf":"","textUrl":"","counts":{"cards":26,"quiz":28,"glossary":26},"chapters":[{"id":1,"title":"От анатомии к анализу упражнения","shortTitle":"Движение и мышцы","kicker":"Сначала движение — затем сопротивление","summary":"Определяем работающий сустав, функции мышц и изменение их длины.","minutes":12,"objectives":["Различать движение сегмента и перемещение рукояти.","Учитывать оба сустава при анализе двусуставной мышцы.","Отделять направление мышечных волокон от линии внешнего сопротивления."],"sections":["Какую задачу решает упражнение","Одна мышца — один или два сустава"]},{"id":2,"title":"Силы, плечи и моменты","shortTitle":"Сила и момент","kicker":"Одинаковая масса — разные требования","summary":"Учимся видеть линию силы и вычислять её вращательное действие.","minutes":22,"objectives":["Находить ось, линию действия силы и перпендикулярное плечо.","Различать массу снаряда, силу тяжести и момент силы.","Объяснять, почему по весу гантели нельзя узнать силу бицепса."],"sections":["Какие силы действуют в упражнении","Плечо силы — это перпендикуляр","Внешний момент и мышечная тяга"]},{"id":3,"title":"Профили сопротивления и устройство оборудования","shortTitle":"Профили нагрузки","kicker":"Где возникает сопротивление","summary":"Отделяем требования снаряда от возможностей человека и сравниваем оборудование.","minutes":22,"objectives":["Различать профиль внешнего сопротивления и профиль силы в движении.","Предсказывать изменение момента свободного веса и троса.","Не назначать профиль тренажёру по названию или фотографии."],"sections":["Профиль сопротивления и профиль силы","Почему блок и гантель ощущаются по-разному","Соответствие профилей — инструмент выбора"]},{"id":4,"title":"Длина мышцы, амплитуда и результаты исследований","shortTitle":"Длина и амплитуда","kicker":"Удлинить и нагрузить — две задачи","summary":"Разбираем удлинённые позиции, полную амплитуду и частичные повторения.","minutes":24,"objectives":["Различать длину мышцы и внешний момент.","Корректно применять данные о тренировке при большей длине.","Объяснять назначение и ограничения lengthened partials."],"sections":["Что такое удлинённая позиция","Что показали тренировочные исследования","Полная амплитуда и lengthened partials"]},{"id":5,"title":"Практикум: 11 разборов упражнений","shortTitle":"Выбор упражнения","kicker":"От схемы — к решению в зале","summary":"Для каждого случая связываем задачу, механику и конкретную рекомендацию.","minutes":40,"objectives":["Объяснять выбор упражнения через целевое движение и распределение сопротивления.","Предлагать понятную замену, если упражнение не подходит задаче.","Отделять расчётную модель от доказанного превосходства по гипертрофии."],"sections":["1–2. Сгибание с гантелью стоя и на Скотте","3. Сгибание рук с верхних блоков","4. Сгибание голени стоя на нижнем блоке","5. Сгибание голени сидя и лёжа","6–7. Разгибание назад и разгибание над головой","8. Разгибание голени: что меняет спинка","9. Скручивание и подъём ног","10. Разведения с гантелями и кроссовер","11. Тяга нижнего блока и наклон корпуса","Алгоритм выбора за семь шагов"]}]}]; window.CONTACT_EMAIL = "ignatooov@mail.ru";</script>
+<script>/* Интерактивные схемы курса (строение мышцы, сигнал, плоскости, энергия, SRA, рычаг, профиль момента).
+   Перенесены без изменений логики из версии курса, сделанной в ChatGPT. Рисуются на тёмной плитке. */
+(function () {
+  'use strict';
+  const colors = { ink: '#f2f2f2', muted: '#a1a1a6', accent: '#f27540', line: '#3b3c42', panel: '#1c1d20', soft: '#30231c' };
+  const svg = (body, label, viewBox = '0 0 420 220') => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${viewBox}" role="img" aria-label="${label}" style="font-family:Montserrat,Arial,sans-serif">${body}</svg>`;
+  const text = (x, y, value, fill = colors.muted, size = 12, anchor = 'start') => `<text x="${x}" y="${y}" fill="${fill}" font-size="${size}" text-anchor="${anchor}">${value}</text>`;
+  const line = (x1, y1, x2, y2, color = colors.line, width = 2, extra = '') => `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${color}" stroke-width="${width}" ${extra}/>`;
+  const hierarchy = [
+    { title: 'Мышца', detail: 'Мышца — орган. В ней соединительная ткань объединяет пучки волокон, проходят сосуды и нервы. Усилие передаётся к кости через сухожилие.' },
+    { title: 'Пучок', detail: 'Пучок объединяет множество мышечных волокон и окружён соединительнотканной оболочкой. Таких пучков в мышце много.' },
+    { title: 'Волокно', detail: 'Мышечное волокно — одна длинная многоядерная клетка. Снаружи его окружает сарколемма; внутри находятся миофибриллы, митохондрии и другие структуры.' },
+    { title: 'Миофибрилла', detail: 'Миофибрилла — сократительная структура внутри волокна. Она состоит из множества последовательно расположенных саркомеров.' },
+    { title: 'Саркомер', detail: 'Саркомер — участок миофибриллы между двумя Z-дисками. В нём головки миозина взаимодействуют с актином, создавая усилие.' }
+  ];
+  function muscleIcon(i) {
+    const a = colors.accent, m = '#77787e';
+    const shapes = [
+      `<path d="M3 23C13 23 12 9 27 9S42 23 51 23C42 23 41 37 27 37S13 23 3 23Z" fill="${colors.soft}" stroke="${a}"/><path d="M12 23C21 13 33 13 43 23M12 23C22 33 33 33 43 23M12 23H43" fill="none" stroke="${a}" stroke-width="1.4"/>`,
+      `<rect x="9" y="7" width="36" height="32" rx="15" fill="none" stroke="${a}"/><path d="M17 12V34M24 9V37M31 9V37M38 12V34" stroke="${a}" stroke-width="3"/>`,
+      `<rect x="6" y="10" width="42" height="27" rx="13" fill="none" stroke="${a}"/><path d="M12 18H43M12 24H43M12 30H43" stroke="${a}"/><ellipse cx="13" cy="14" rx="3" ry="2" fill="${m}"/><ellipse cx="39" cy="33" rx="3" ry="2" fill="${m}"/>`,
+      `<path d="M3 15H51M3 31H51" stroke="${m}"/><path d="M7 11V35M20 11V35M34 11V35M47 11V35" stroke="${a}" stroke-width="2"/><path d="M7 23H47" stroke="${a}" stroke-width="5"/>`,
+      `<path d="M7 7V39M47 7V39" stroke="${m}" stroke-width="2"/><path d="M8 15H30M8 31H30M25 15H47M25 31H47" stroke="${a}" stroke-width="2"/><path d="M18 23H36" stroke="${a}" stroke-width="5"/>`
+    ];
+    return svg(shapes[i], hierarchy[i].title, '0 0 54 46');
+  }
+  const signal = [
+    { title: 'Возбуждение', small: '01 · НЕРВНЫЙ СИГНАЛ', detail: 'Импульс приходит к нервно-мышечному соединению. Ацетилхолин активирует рецепторы мембраны волокна; движение ионов, включая вход Na⁺, вызывает возбуждение. Электрический сигнал распространяется по сарколемме и Т-трубочкам.' },
+    { title: 'Кальций', small: '02 · РЕГУЛЯЦИЯ', detail: 'Сигнал в Т-трубочках вызывает высвобождение Ca²⁺ из саркоплазматического ретикулума. Кальций связывается с тропонином, тропомиозин смещается, и участки актина становятся доступными для миозина.' },
+    { title: 'Создание усилия', small: '03 · ПОПЕРЕЧНЫЕ МОСТИКИ', detail: 'Головки миозина взаимодействуют с актином и создают тяговое усилие. Связывание новой АТФ разъединяет мостик; гидролиз АТФ подготавливает головку к следующему циклу. Множество мостиков работают несинхронно.' },
+    { title: 'Расслабление', small: '04 · ВОЗВРАТ КАЛЬЦИЯ', detail: 'Когда возбуждение прекращается, новое высвобождение кальция уменьшается. Кальциевые насосы с затратой АТФ возвращают Ca²⁺ в ретикулум. Доступ к актину ограничивается, активное усилие снижается.' }
+  ];
+  const planes = {
+    sagittal: { title: 'Сагиттальная', detail: 'Сагиттальная плоскость делит тело на правую и левую части. Сгибание и разгибание обычно происходят вокруг поперечной оси. Примеры: сгибание предплечья, сгибание и разгибание бедра.' },
+    frontal: { title: 'Фронтальная', detail: 'Фронтальная плоскость делит тело на переднюю и заднюю части. Отведение и приведение обычно происходят вокруг переднезадней оси. Примеры: подъём рук через стороны, отведение бедра.' },
+    horizontal: { title: 'Горизонтальная', detail: 'Горизонтальная плоскость делит тело на верхнюю и нижнюю части. Вращение происходит вокруг продольной оси сегмента. Примеры: поворот туловища, внутреннее и наружное вращение плеча.' }
+  };
+  function movementSvg(key) {
+    const a = colors.accent, gray = '#999aa0';
+    const arrow = `<defs><marker id="plane-arrow-${key}" markerWidth="7" markerHeight="7" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="${a}" stroke-width="1.5"/></marker></defs>`;
+    let body = '';
+    if (key === 'sagittal') {
+      body = `<path d="M146 34L239 52V195L146 178Z" fill="${a}" fill-opacity=".09" stroke="${a}" stroke-opacity=".45"/><circle cx="184" cy="51" r="14" fill="none" stroke="${gray}" stroke-width="3"/><path d="M184 67L184 129L170 186M184 129L206 186M184 81L195 116L220 117" fill="none" stroke="${gray}" stroke-width="5" stroke-linecap="round"/><path d="M195 116L220 88" fill="none" stroke="${a}" stroke-width="5" stroke-linecap="round"/><circle cx="195" cy="116" r="5" fill="${colors.panel}" stroke="${a}" stroke-width="2"/><path d="M232 118Q245 97 228 80" fill="none" stroke="${a}" stroke-width="2" marker-end="url(#plane-arrow-${key})"/>${text(255, 92, 'Сгибание', a)}${text(255, 110, 'предплечья')}${text(22, 172, 'Вид сбоку', gray, 11)}`;
+    } else if (key === 'frontal') {
+      body = `<path d="M102 27H285V197H102Z" fill="${a}" fill-opacity=".07" stroke="${a}" stroke-opacity=".4"/><circle cx="193" cy="51" r="14" fill="none" stroke="${gray}" stroke-width="3"/><path d="M193 67V128M193 80L173 125M193 80L213 125M193 128L174 186M193 128L212 186" fill="none" stroke="${gray}" stroke-width="5" stroke-linecap="round"/><path d="M193 80L244 82M193 80L144 82" fill="none" stroke="${a}" stroke-width="5" stroke-linecap="round"/><path d="M227 119Q249 110 255 91M159 119Q138 108 132 91" fill="none" stroke="${a}" stroke-width="2" marker-end="url(#plane-arrow-${key})"/>${text(300, 82, 'Отведение', a)}${text(300, 101, 'плеча')}${text(22, 172, 'Вид спереди', gray, 11)}`;
+    } else {
+      body = `<path d="M89 105L216 69L318 114L191 150Z" fill="${a}" fill-opacity=".09" stroke="${a}" stroke-opacity=".45"/><path d="M193 39V184" fill="none" stroke="${gray}" stroke-dasharray="4 5"/><ellipse cx="193" cy="102" rx="18" ry="10" fill="${colors.panel}" stroke="${gray}" stroke-width="3"/><path d="M146 105L240 105" stroke="${gray}" stroke-width="6" stroke-linecap="round"/><path d="M153 128L232 81" stroke="${a}" stroke-width="6" stroke-linecap="round"/><path d="M249 132C277 112 265 82 241 74" fill="none" stroke="${a}" stroke-width="2" marker-end="url(#plane-arrow-${key})"/>${text(283, 164, 'Вращение', a)}${text(22, 187, 'Условный вид сверху', gray, 11)}${text(208, 40, 'Ось', gray, 11)}`;
+    }
+    return svg(`${arrow}${body}`, `Условная схема: ${planes[key].title.toLowerCase()} плоскость и пример движения`);
+  }
+  const energy = {
+    power: { title: 'Короткое мощное усилие', detail: 'При резком росте энергозатрат фосфагенная система быстро помогает поддерживать АТФ. Гликолиз и окислительные процессы также участвуют. Для повторения высокой силы или скорости важны восстановление и сохранение качества попыток.', labels: ['Быстрый ответ на запрос мощности', 'Поддерживает ресинтез АТФ', 'Участие в работе и восстановлении'] },
+    duration: { title: 'Продолжительная работа', detail: 'С увеличением длительности и при умеренной относительной интенсивности возрастает значение окислительного обмена. Вклад зависит также от темпа, повторных усилий и доступных ресурсов. Системы продолжают взаимодействовать, а не сменяют друг друга по таймеру.', labels: ['Участие в изменениях мощности', 'Вклад зависит от интенсивности', 'Высокая ёмкость, длительная работа'] }
+  };
+  function energyBands(key) {
+    const labels = ['Фосфагенная', 'Гликолитическая', 'Окислительная'];
+    const backgrounds = key === 'power' ? ['linear-gradient(90deg,#a94c28,#6b3a28)', 'linear-gradient(90deg,#76513e,#544038)', 'linear-gradient(90deg,#505552,#39423e)'] : ['linear-gradient(90deg,#76513e,#544038)', 'linear-gradient(90deg,#775441,#5d493c)', 'linear-gradient(90deg,#5f776b,#354b3e)'];
+    return `<div class="energy-bands">${labels.map((label,i) => `<div class="energy-band"><span>${label}</span><div class="energy-ribbon" style="background:${backgrounds[i]}">${energy[key].labels[i]}</div></div>`).join('')}</div>`;
+  }
+  function sraSvg() {
+    return svg(`<defs><marker id="sra-arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0 0L6 3L0 6" fill="none" stroke="${colors.muted}" stroke-width="1.4"/></marker></defs><path d="M49 35V174H392" fill="none" stroke="${colors.muted}" stroke-width="1.2" marker-end="url(#sra-arrow)"/><path d="M49 100H391" stroke="${colors.line}" stroke-dasharray="4 5"/><path d="M77 99C92 100 94 145 117 150S163 125 187 103S231 64 262 64S317 82 376 82" fill="none" stroke="${colors.accent}" stroke-width="3" stroke-linecap="round"/><path d="M77 65V93" stroke="${colors.accent}" stroke-width="2"/><path d="M73 87L77 94L81 87" fill="none" stroke="${colors.accent}" stroke-width="2"/>${text(77,49,'Стимул',colors.ink,11,'middle')}${text(128,204,'Утомление',colors.muted,11,'middle')}${text(218,150,'Восстановление',colors.muted,11,'middle')}${text(300,44,'Адаптация',colors.ink,11,'middle')}${text(387,198,'Время',colors.muted,11,'end')}<text x="17" y="130" transform="rotate(-90 17 130)" fill="${colors.muted}" font-size="11">Работоспособность</text>`, 'Условная кривая SRA: после стимула работоспособность снижается, восстанавливается и может увеличиваться при подходящей последовательности нагрузок');
+  }
+  const detail = (title, content) => `<strong>${title}.</strong> ${content}`;
+  function render(kind) {
+    if (kind === 'muscle') return `<div class="diagram" data-diagram="muscle" role="group" aria-label="Уровни строения мышцы"><h3 class="diagram-heading">Пять уровней строения мышцы</h3><div class="hierarchy">${hierarchy.map((item,i) => `<button type="button" data-hierarchy="${i}" class="${i===0?'selected':''}" aria-pressed="${i===0}">${muscleIcon(i)}${item.title}</button>`).join('')}</div><div class="diagram-detail" aria-live="polite">${detail(hierarchy[0].title,hierarchy[0].detail)}</div><p class="diagram-note">Выберите уровень, чтобы раскрыть его устройство. Схема показывает вложенность структур, без соблюдения масштаба.</p></div>`;
+    if (kind === 'signal') return `<div class="diagram" data-diagram="signal" role="group" aria-label="От нервного сигнала к мышечному усилию"><h3 class="diagram-heading">От сигнала к усилию и расслаблению</h3><div class="signal-flow">${signal.map((item,i) => `<button type="button" data-signal="${i}" class="signal-node ${i===0?'selected':''}" aria-pressed="${i===0}"><span>${item.small}</span>${item.title}</button>`).join('')}</div><div class="diagram-detail" aria-live="polite">${detail(signal[0].title,signal[0].detail)}</div><p class="diagram-note">Кальций регулирует активацию; АТФ участвует в работе мостиков и возврате кальция. Выберите этап для объяснения.</p></div>`;
+    if (kind === 'movement') return `<div class="diagram" data-diagram="movement" role="group" aria-label="Плоскости и движения"><h3 class="diagram-heading">Три плоскости описания движения</h3><div class="diagram-tabs">${Object.keys(planes).map((key,i) => `<button type="button" data-plane="${key}" class="diagram-tab ${i===0?'selected':''}" aria-pressed="${i===0}">${planes[key].title}</button>`).join('')}</div><div data-plane-canvas>${movementSvg('sagittal')}</div><div class="diagram-detail" aria-live="polite">${detail(planes.sagittal.title+' плоскость',planes.sagittal.detail)}</div><p class="diagram-note">Условные схемы направлений. Положение оси связано с рассматриваемым сегментом; реальные упражнения могут сочетать несколько плоскостей.</p></div>`;
+    if (kind === 'energy') return `<div class="diagram" data-diagram="energy" role="group" aria-label="Совместная работа энергетических систем"><h3 class="diagram-heading">Работают вместе — вклад меняется</h3><div class="diagram-tabs">${Object.keys(energy).map((key,i) => `<button type="button" data-energy="${key}" class="diagram-tab ${i===0?'selected':''}" aria-pressed="${i===0}">${energy[key].title}</button>`).join('')}</div><div data-energy-bands>${energyBands('power')}</div><div class="diagram-detail" aria-live="polite">${energy.power.detail}</div><p class="diagram-note">Полосы обозначают одновременное участие систем, а не количественные доли. Точных границ включения и выключения по времени нет.</p></div>`;
+    if (kind === 'sra') return `<div class="diagram" data-diagram="sra" role="group" aria-label="Стимул, восстановление и адаптация"><h3 class="diagram-heading">SRA: связь нагрузки и адаптации</h3>${sraSvg()}<p class="diagram-note">Учебная схема, без численных прогнозов. Энергетические ресурсы, нервно-мышечная функция и ткани изменяются с разной скоростью. Кривая не задаёт универсальный срок следующей тренировки.</p></div>`;
+    return '';
+  }
+  function setSelected(diagram, attribute, value) {
+    diagram.querySelectorAll(`button[${attribute}]`).forEach(button => {
+      const selected = button.getAttribute(attribute) === String(value);
+      button.classList.toggle('selected', selected);
+      button.setAttribute('aria-pressed', String(selected));
+    });
+  }
+  function init(container) {
+    if (!container || !container.querySelectorAll) return;
+    container.querySelectorAll('[data-diagram]').forEach(diagram => {
+      if (diagram.dataset.diagramReady) return;
+      diagram.dataset.diagramReady = 'true';
+      diagram.addEventListener('click', event => {
+        const target = event.target instanceof Element ? event.target.closest('button') : null;
+        if (!target || !diagram.contains(target)) return;
+        const output = diagram.querySelector('.diagram-detail');
+        if (target.hasAttribute('data-hierarchy')) {
+          const value = Number(target.dataset.hierarchy); if (!hierarchy[value]) return;
+          setSelected(diagram, 'data-hierarchy', value); output.innerHTML = detail(hierarchy[value].title, hierarchy[value].detail);
+        } else if (target.hasAttribute('data-signal')) {
+          const value = Number(target.dataset.signal); if (!signal[value]) return;
+          setSelected(diagram, 'data-signal', value); output.innerHTML = detail(signal[value].title, signal[value].detail);
+        } else if (target.hasAttribute('data-plane')) {
+          const value = target.dataset.plane; if (!planes[value]) return;
+          setSelected(diagram, 'data-plane', value); diagram.querySelector('[data-plane-canvas]').innerHTML = movementSvg(value); output.innerHTML = detail(planes[value].title+' плоскость', planes[value].detail);
+        } else if (target.hasAttribute('data-energy')) {
+          const value = target.dataset.energy; if (!energy[value]) return;
+          setSelected(diagram, 'data-energy', value); diagram.querySelector('[data-energy-bands]').innerHTML = energyBands(value); output.textContent = energy[value].detail;
+        }
+      });
+    });
+  }
+  function hero() {
+    const a = colors.accent;
+    return svg(`<defs><linearGradient id="hero-muscle" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#7c4933" stop-opacity=".7"/><stop offset="1" stop-color="#2c2420" stop-opacity=".7"/></linearGradient></defs><path d="M35 74H280M114 90L147 151M245 167L254 216" fill="none" stroke="#67503f" stroke-width="1.2" stroke-dasharray="3 5"/><rect x="24" y="28" width="221" height="83" rx="11" fill="#1c1d20" stroke="#45413d"/><path d="M48 70C71 70 72 44 132 44S196 70 221 70C196 70 196 95 132 95S71 70 48 70Z" fill="url(#hero-muscle)" stroke="${a}" stroke-width="1.2"/><path d="M67 70C100 47 164 47 204 70M67 70C100 91 165 91 204 70M67 70H204" fill="none" stroke="${a}" stroke-opacity=".65" stroke-width="1.1"/>${text(36,19,'МЫШЦА',colors.muted,10)}<rect x="109" y="125" width="211" height="73" rx="10" fill="#1b1c1f" stroke="#574438"/><rect x="128" y="145" width="169" height="32" rx="16" fill="#33251e" stroke="${a}" stroke-width="1.2"/><path d="M140 154H285M140 162H285M140 170H285" stroke="${a}" stroke-opacity=".65"/><ellipse cx="143" cy="147" rx="5" ry="2" fill="#a1a1a6"/>${text(122,117,'МЫШЕЧНОЕ ВОЛОКНО',colors.muted,10)}<rect x="191" y="212" width="132" height="46" rx="8" fill="#1c1d20" stroke="#66513f"/><path d="M205 222V248M309 222V248" stroke="#9a9a9e" stroke-width="2"/><path d="M205 227H260M255 227H309M205 243H260M255 243H309" stroke="${a}" stroke-width="1.5"/><path d="M232 235H281" stroke="${a}" stroke-width="5"/>${text(200,206,'САРКОМЕР',colors.muted,10)}`, 'Схема уровней строения: мышца, мышечное волокно, саркомер. Условное изображение без соблюдения масштаба', '0 0 350 270');
+  }
+  window.DIAGRAMS = { render, hero, init };
+})();
+
+(function () {
+  'use strict';
+
+  const previous = window.DIAGRAMS;
+  if (!previous || previous.mechanicsReady) return;
+
+  const GRAVITY = 9.81;
+  const LENGTH = 0.32;
+  const FIXED_MASS = 5;
+  let instance = 0;
+  const number = (value, digits = 1) => value.toLocaleString('ru-RU', { minimumFractionDigits: digits, maximumFractionDigits: digits });
+  const radians = degrees => degrees * Math.PI / 180;
+  const moment = (mass, degrees) => mass * GRAVITY * LENGTH * Math.sin(radians(degrees));
+  const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+  const svgText = (x, y, text, extra = '') => `<text x="${x}" y="${y}" ${extra}>${text}</text>`;
+
+  function leverSvg(id, mass, angle) {
+    const theta = radians(angle);
+    const x = 80 + 130 * Math.sin(theta);
+    const y = 160 + 130 * Math.cos(theta);
+    const arcX = 80 + 34 * Math.sin(theta);
+    const arcY = 160 + 34 * Math.cos(theta);
+    const angleX = 80 + 52 * Math.sin(theta / 2);
+    const angleY = 160 + 52 * Math.cos(theta / 2);
+    const distance = LENGTH * Math.sin(theta);
+    return `<svg class="mechanics-svg mechanics-lever-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 375" role="img" aria-label="Предплечье под углом ${angle} градусов от вертикали вниз. Плечо силы тяжести ${number(distance, 3)} метра; внешний момент ${number(moment(mass, angle))} ньютон-метра.">
+      <defs><marker id="${id}-gravity" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10Z" fill="currentColor"/></marker></defs>
+      <line x1="80" y1="34" x2="80" y2="312" class="mechanics-reference"/>
+      <line x1="${x.toFixed(2)}" y1="34" x2="${x.toFixed(2)}" y2="354" class="mechanics-force-line"/>
+      <path d="M80 49V41H${x.toFixed(2)}V49" class="mechanics-dimension"/>
+      ${svgText(80 + (x - 80) / 2, 23, `d = ${number(distance, 3)} м`, 'class="mechanics-svg-label" text-anchor="middle"')}
+      <path d="M80 96V160" class="mechanics-upper-arm"/>
+      <line x1="80" y1="160" x2="${x.toFixed(2)}" y2="${y.toFixed(2)}" class="mechanics-forearm"/>
+      <circle cx="80" cy="160" r="9" class="mechanics-pivot"/>
+      ${angle > 0 ? `<path d="M80 194A34 34 0 0 0 ${arcX.toFixed(2)} ${arcY.toFixed(2)}" class="mechanics-angle"/>` : ''}
+      ${svgText(angleX.toFixed(2), (angleY + 5).toFixed(2), 'θ', 'class="mechanics-svg-label" text-anchor="middle"')}
+      <circle cx="${x.toFixed(2)}" cy="${y.toFixed(2)}" r="15" class="mechanics-load"/>
+      <line x1="${x.toFixed(2)}" y1="${(y + 18).toFixed(2)}" x2="${x.toFixed(2)}" y2="${(y + 68).toFixed(2)}" class="mechanics-gravity" marker-end="url(#${id}-gravity)"/>
+      ${svgText((x + 14).toFixed(2), (y + 57).toFixed(2), 'mg', 'class="mechanics-svg-label"')}
+      ${svgText(20, 141, 'Локоть', 'class="mechanics-svg-muted"')}
+      ${svgText(250, 111, 'L = 0,32 м', 'class="mechanics-svg-label"')}
+      ${svgText(250, 133, 'Длина сегмента', 'class="mechanics-svg-muted mechanics-svg-small"')}
+      ${svgText(250, 173, `m = ${number(mass)} кг`, 'class="mechanics-svg-label"')}
+      ${svgText(250, 195, 'Масса груза', 'class="mechanics-svg-muted mechanics-svg-small"')}
+      ${svgText(20, 373, 'θ — угол от вертикали вниз', 'class="mechanics-svg-muted"')}
+    </svg>`;
+  }
+
+  function lever() {
+    const id = `mechanics-${++instance}`;
+    return `<div class="diagram mechanics-diagram" data-mechanics="lever" data-mechanics-id="${id}" role="group" aria-labelledby="${id}-heading">
+      <h3 class="diagram-heading" id="${id}-heading">Почему один и тот же груз создаёт разный момент</h3>
+      <p class="mechanics-intro">Измените угол предплечья и массу груза. Длина сегмента остаётся постоянной; плечо силы — расстояние от оси локтя до вертикальной линии действия силы тяжести.</p>
+      <div class="mechanics-layout">
+        <div class="mechanics-canvas" data-mechanics-canvas>${leverSvg(id, 5, 90)}</div>
+        <div class="mechanics-controls">
+          <div class="mechanics-control"><label for="${id}-angle">Угол от вертикали вниз <span data-mechanics-angle>90°</span></label><input id="${id}-angle" type="range" min="0" max="150" step="1" value="90" data-mechanics-input="angle" aria-describedby="${id}-angle-help"><div class="mechanics-range-ends"><span>0°</span><span>150°</span></div><p id="${id}-angle-help">При 0° сегмент направлен вниз; при 90° — горизонтально.</p></div>
+          <div class="mechanics-control"><label for="${id}-mass">Масса груза <span data-mechanics-mass>5,0 кг</span></label><input id="${id}-mass" type="range" min="1" max="20" step="0.5" value="5" data-mechanics-input="mass"><div class="mechanics-range-ends"><span>1 кг</span><span>20 кг</span></div></div>
+          <output class="mechanics-results" aria-live="polite" aria-atomic="true" for="${id}-angle ${id}-mass" data-mechanics-result>${leverResult(5, 90)}</output>
+        </div>
+      </div>
+      <p class="mechanics-formula">Плечо силы: <span>d = L · sin θ</span><br>Внешний момент: <span>M = m · g · d</span>, где g = 9,81 м/с².</p>
+      <p class="diagram-note">Учебная модель: неподвижный сегмент, груз приложен к его концу, масса предплечья и кисти, а также инерционные эффекты не учтены. Стрелка показывает направление силы без масштаба. Это момент силы тяжести груза относительно локтя; сила мышцы здесь не измеряется. θ не равен углу сгибания локтя при любом положении плеча.</p>
+    </div>`;
+  }
+
+  function leverResult(mass, angle) {
+    return `<span><span>Плечо силы d</span><strong>${number(LENGTH * Math.sin(radians(angle)), 3)} м</strong></span><span><span>Внешний момент M</span><strong>${number(moment(mass, angle))} Н·м</strong></span>`;
+  }
+
+  function profileSvg(id, angle) {
+    const left = 52, right = 438, top = 34, bottom = 234;
+    const peak = moment(FIXED_MASS, 90);
+    const x = theta => left + theta / 180 * (right - left);
+    const y = torque => bottom - torque / 18 * (bottom - top);
+    const ticks = [0, 45, 90, 135, 180];
+    const values = [0, 4, 8, 12, 16];
+    const curve = Array.from({ length: 91 }, (_, index) => `${index ? 'L' : 'M'}${x(index * 2).toFixed(2)} ${y(moment(FIXED_MASS, index * 2)).toFixed(2)}`).join(' ');
+    const torque = moment(FIXED_MASS, angle);
+    return `<svg class="mechanics-svg mechanics-profile-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 295" role="img" aria-label="График внешнего момента силы тяжести груза 5 килограммов при длине сегмента 0,32 метра. Момент равен нулю при 0 и 180 градусах, максимум ${number(peak)} ньютон-метра при 90 градусах. Выбрано ${angle} градусов: ${number(torque)} ньютон-метра.">
+      ${values.map(value => `<line x1="${left}" y1="${y(value).toFixed(2)}" x2="${right}" y2="${y(value).toFixed(2)}" class="mechanics-grid"/>${svgText(left - 10, y(value) + 4, value, 'class="mechanics-svg-muted" text-anchor="end"')}`).join('')}
+      <path d="M${left} ${top}V${bottom}H${right}" class="mechanics-axis"/>
+      ${ticks.map(value => `<line x1="${x(value)}" y1="${bottom}" x2="${x(value)}" y2="${bottom + 5}" class="mechanics-axis"/>${svgText(x(value), bottom + 24, `${value}°`, 'class="mechanics-svg-muted" text-anchor="middle"')}`).join('')}
+      ${svgText(left, 17, 'M, Н·м', 'class="mechanics-svg-label"')}
+      ${svgText((left + right) / 2, 286, 'θ — угол от вертикали вниз, градусы', 'class="mechanics-svg-muted" text-anchor="middle"')}
+      <path d="${curve}" class="mechanics-curve"/>
+      <line x1="${x(angle).toFixed(2)}" y1="${bottom}" x2="${x(angle).toFixed(2)}" y2="${y(torque).toFixed(2)}" class="mechanics-selection-line"/>
+      <circle cx="${x(angle).toFixed(2)}" cy="${y(torque).toFixed(2)}" r="6" class="mechanics-point"/>
+    </svg>`;
+  }
+
+  function profileResult(angle) {
+    return `<span><span>Угол θ</span><strong>${angle}°</strong></span><span><span>Внешний момент M</span><strong>${number(moment(FIXED_MASS, angle))} Н·м</strong></span>`;
+  }
+
+  function profile() {
+    const id = `mechanics-${++instance}`;
+    return `<div class="diagram mechanics-diagram" data-mechanics="profile" data-mechanics-id="${id}" role="group" aria-labelledby="${id}-heading">
+      <h3 class="diagram-heading" id="${id}-heading">Профиль внешнего сопротивления: гантель и сила тяжести</h3>
+      <p class="mechanics-intro">Груз 5 кг, сегмент 0,32 м. По горизонтали — его угол относительно вертикали вниз, по вертикали — внешний момент силы тяжести груза.</p>
+      <div class="mechanics-canvas" data-mechanics-canvas>${profileSvg(id, 90)}</div>
+      <div class="mechanics-profile-controls"><div class="mechanics-control"><label for="${id}-angle">Положение сегмента <span data-mechanics-angle>90°</span></label><input id="${id}-angle" type="range" min="0" max="180" step="1" value="90" data-mechanics-input="angle"><div class="mechanics-range-ends"><span>Вертикально вниз · 0°</span><span>Вертикально вверх · 180°</span></div></div><output class="mechanics-results" aria-live="polite" aria-atomic="true" for="${id}-angle" data-mechanics-result>${profileResult(90)}</output></div>
+      <p class="mechanics-formula">M(θ) = 5 · 9,81 · 0,32 · sin θ</p>
+      <p class="diagram-note">Теоретическая кривая для груза на конце неподвижного жёсткого сегмента: собственный вес сегмента и ускорение не учтены. 0–180° — диапазон модели, а не рекомендуемая амплитуда упражнения. Кривая описывает внешнее сопротивление; она не показывает силу мышцы, способность человека развить усилие или стимул к росту.</p>
+    </div>`;
+  }
+
+  function update(diagram) {
+    const angleInput = diagram.querySelector('[data-mechanics-input="angle"]');
+    const isLever = diagram.dataset.mechanics === 'lever';
+    const angle = clamp(Number(angleInput.value), 0, isLever ? 150 : 180);
+    const massInput = diagram.querySelector('[data-mechanics-input="mass"]');
+    const mass = massInput ? clamp(Number(massInput.value), 1, 20) : FIXED_MASS;
+    diagram.querySelector('[data-mechanics-angle]').textContent = `${angle}°`;
+    angleInput.setAttribute('aria-valuetext', `${angle} градусов от вертикали вниз`);
+    if (massInput) {
+      diagram.querySelector('[data-mechanics-mass]').textContent = `${number(mass)} кг`;
+      massInput.setAttribute('aria-valuetext', `Масса груза: ${number(mass)} кг`);
+    }
+    diagram.querySelector('[data-mechanics-canvas]').innerHTML = isLever ? leverSvg(diagram.dataset.mechanicsId, mass, angle) : profileSvg(diagram.dataset.mechanicsId, angle);
+    diagram.querySelector('[data-mechanics-result]').innerHTML = isLever ? leverResult(mass, angle) : profileResult(angle);
+  }
+
+  function init(container) {
+    previous.init(container);
+    if (!container || !container.querySelectorAll) return;
+    const diagrams = Array.from(container.querySelectorAll('[data-mechanics]'));
+    if (container.matches && container.matches('[data-mechanics]')) diagrams.unshift(container);
+    diagrams.forEach(diagram => {
+      if (diagram.dataset.mechanicsReady) return;
+      diagram.dataset.mechanicsReady = 'true';
+      update(diagram);
+      diagram.addEventListener('input', event => {
+        if (event.target && event.target.matches('[data-mechanics-input]')) update(diagram);
+      });
+    });
+  }
+
+  window.DIAGRAMS = Object.assign({}, previous, {
+    mechanicsReady: true,
+    render(kind) {
+      if (kind === 'lever') return lever();
+      if (kind === 'profile') return profile();
+      return previous.render(kind);
+    },
+    init
+  });
+})();
+</script>
+<script>/* Раздел «Обучение». Оглавление (OUTLINE) приходит со страницей и видно всем.
+   Тексты глав, карточки и тесты лежат в таблице course_part, картинки, видео и PDF в закрытой корзине «course».
+   Их отдают только тем, кому тренер выдал доступ (таблица course_access). */
+(() => {
+"use strict";
+const SUPABASE_URL = "https://selgcdicdtjpcsrfrqdq.supabase.co";
+const SUPABASE_KEY = "sb_publishable_wLlkgxHctEZyUzB0TSlUmQ_R_m-t4ca";
+const OUTLINE = window.OUTLINE, EMAIL = window.CONTACT_EMAIL;
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+const bucket = () => sb.storage.from("course");
+
+const $ = (s, r = document) => r.querySelector(s);
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const rich = v => esc(v).replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
+const pad = n => String(n).padStart(2, "0");
+const plural = (n, f) => { const a = n % 100, b = n % 10; return f[a > 10 && a < 20 ? 2 : b === 1 ? 0 : b >= 2 && b <= 4 ? 1 : 2]; };
+const minutes = n => `${n} мин`;
+const LETTERS = ["А", "Б", "В", "Г", "Д"];
+
+let session = null, access = false, ready = false, seq = 0;
+const content = {}, urls = {};
+let quiz = null, quizKey = "", card = { i: 0, flip: false, unknown: false };
+
+/* прогресс хранится в браузере: изученные главы, знакомые карточки, последний результат */
+const store = {
+  get(slug) { try { const v = JSON.parse(localStorage.getItem("bchk-learn-" + slug) || "{}"); return { done: v.done || [], known: v.known || [], last: v.last || null }; } catch { return { done: [], known: [], last: null }; } },
+  set(slug, v) { try { localStorage.setItem("bchk-learn-" + slug, JSON.stringify(v)); } catch {} },
+};
+
+/* адрес: #/  #/anatomy  #/anatomy/3  #/anatomy/cards[/3]  #/anatomy/quiz[/3]  #/anatomy/glossary  #/anatomy/materials */
+function route() {
+  const h = location.hash.startsWith("#/") ? location.hash.slice(2) : "";
+  const [slug, a, b] = h.split("/").filter(Boolean);
+  const mod = OUTLINE.find(m => m.slug === slug);
+  if (!slug) return { view: "home" };
+  if (!mod) return { view: "missing" };
+  if (!a) return { view: "module", mod };
+  if (/^\d+$/.test(a)) return mod.chapters.some(c => c.id === +a) ? { view: "chapter", mod, ch: +a } : { view: "missing", mod };
+  if (["cards", "quiz", "glossary", "materials"].includes(a)) return { view: a, mod, ch: b && /^\d+$/.test(b) ? +b : 0 };
+  return { view: "missing", mod };
+}
+const go = h => { if (location.hash === h) render(); else location.hash = h; };
+
+async function checkAccess() {
+  const { data } = await sb.auth.getSession();
+  session = data.session;
+  access = false;
+  if (session) { const r = await sb.rpc("has_course_access"); access = !r.error && r.data === true; }
+  ready = true;
+}
+
+async function loadModule(slug) {
+  if (content[slug]) return content[slug];
+  const { data, error } = await sb.from("course_part").select("part,data").eq("slug", slug);
+  if (error || !data || !data.length) throw error || new Error("нет текстов курса");
+  const p = Object.fromEntries(data.map(r => [r.part, r.data]));
+  const d = { ...p.info, cards: p.cards || [], quiz: p.quiz || [] };
+  d.chapters = Object.keys(p).filter(k => /^ch\d+$/.test(k)).map(k => p[k]).sort((a, b) => a.id - b.id);
+  d.glossary = d.cards.map(c => ({ term: c.term, definition: c.definition })); // словарь = карточки, хранится один раз
+  return (content[slug] = d);
+}
+/* ссылки на картинки, видео и PDF живут час */
+async function sign(paths) {
+  const need = [...new Set(paths.filter(p => p && !(urls[p] && urls[p].exp > Date.now())))];
+  if (!need.length) return;
+  const { data, error } = await bucket().createSignedUrls(need, 3600);
+  if (error) return;
+  data.forEach(x => { if (x.signedUrl) urls[x.path] = { url: x.signedUrl, exp: Date.now() + 50 * 60e3 }; });
+}
+const url = p => (urls[p] && urls[p].url) || "";
+
+/* ---------- боковая панель ---------- */
+function sidebar(r) {
+  const cur = (h, on) => `href="${h}"${on ? ' aria-current="page"' : ""}`;
+  let nav = `<a ${cur("#/", r.view === "home")}>Обзор курса</a>`;
+  for (const m of OUTLINE) {
+    nav += `<span class="lbl">${esc(m.title)}</span><a class="mod" ${cur("#/" + m.slug, r.view === "module" && r.mod === m)}>О модуле</a>`;
+    if (r.mod === m) {
+      const done = store.get(m.slug).done;
+      nav += m.chapters.map(c => `<a class="ch" ${cur(`#/${m.slug}/${c.id}`, r.view === "chapter" && r.ch === c.id)}><span class="n">${pad(c.id)}</span><span>${esc(c.shortTitle)}</span>${done.includes(c.id) ? '<span class="ok" aria-label="изучено">✓</span>' : ""}</a>`).join("");
+      nav += [["cards", "Карточки"], ["quiz", "Самопроверка"], ["glossary", "Словарь"], ["materials", "Материалы"]]
+        .map(([k, t]) => `<a class="ch" ${cur(`#/${m.slug}/${k}`, r.view === k)}><span class="n"></span><span>${t}</span></a>`).join("");
+    }
+  }
+  const who = session ? `<span class="who">${esc(session.user.email)}</span><button type="button" data-logout>Выйти</button>` : `<a href="#/" data-login-scroll>Войти</a>`;
+  $("#side").innerHTML = `<a class="brand" href="../">Больше чем качалка<span>Обучение тренеров</span></a><nav class="nav" aria-label="Курс">${nav}</nav><div class="foot"><a href="../programs/">Программы</a><a href="../app/">Личный кабинет</a>${who}</div>`;
+}
+
+/* ---------- вход и доступ ---------- */
+function gateBox(title) {
+  if (!ready) return `<div class="tile loading">Проверяем вход…</div>`;
+  if (!session) return `<div class="tile gate" id="gate">
+    <h2>${esc(title || "Войдите, чтобы открыть главы")}</h2>
+    <p class="note">Пришлём на почту ссылку для входа. Пароль не нужен. Главы, карточки и самопроверка открываются после того, как тренер выдаст доступ. Запросить доступ: <a href="mailto:${EMAIL}?subject=${encodeURIComponent("Доступ к курсу для тренеров")}">${EMAIL}</a></p>
+    <form data-login><input type="email" name="email" required autocomplete="email" placeholder="Ваша почта" aria-label="Почта"><button class="btn" type="submit">Получить ссылку</button></form>
+    <p class="note" data-login-msg aria-live="polite"></p></div>`;
+  if (!access) return `<div class="tile gate"><h2>Доступ к курсу пока не открыт</h2>
+    <p>Вы вошли как <b>${esc(session.user.email)}</b>. Курс открывает тренер. Напишите на <a class="link" href="mailto:${EMAIL}?subject=${encodeURIComponent("Доступ к курсу для тренеров")}&body=${encodeURIComponent("Почта для входа: " + session.user.email)}">${EMAIL}</a> с этой почты, и доступ появится после обновления страницы.</p></div>`;
+  return "";
+}
+
+/* ---------- обзор курса и модуля (открыты всем) ---------- */
+function home() {
+  const total = OUTLINE.reduce((s, m) => s + m.chapters.length, 0);
+  const mins = OUTLINE.reduce((s, m) => s + m.chapters.reduce((t, c) => t + c.minutes, 0), 0);
+  const status = access ? `<div class="tile status"><div><span class="pill on">Доступ открыт</span></div>${lastLink()}</div>` : gateBox();
+  const mods = OUTLINE.map(m => `<section class="tile mod-card"><div class="head"><span class="eyebrow">Модуль ${m.position}</span><h2>${esc(m.title)}</h2><p class="lead">${esc(m.summary)}</p>
+    <div class="meta"><span>${m.chapters.length} ${plural(m.chapters.length, ["глава", "главы", "глав"])}</span><span>≈ ${minutes(m.chapters.reduce((t, c) => t + c.minutes, 0))} чтения</span><span>${m.counts.cards} карточек</span><span>${m.counts.quiz} вопросов</span></div></div>
+    ${chapterList(m)}<div class="row"><a class="btn ghost" href="#/${m.slug}">О модуле</a></div></section>`).join("");
+  return `<div class="head"><span class="eyebrow">Обучение</span><h1>Курс для тренеров</h1>
+    <p class="lead">Анатомия, физиология и биомеханика силовых упражнений. Объяснения по главам, схемы, карточки терминов и самопроверка на ситуациях из зала.</p>
+    <div class="meta"><span>${OUTLINE.length} модуля</span><span>${total} глав</span><span>≈ ${Math.round(mins / 6) / 10} ч чтения</span><span>Автор курса: ${esc(OUTLINE[0].author)}</span></div></div>
+    ${status}<div class="mods">${mods}</div>`;
+}
+function lastLink() {
+  for (const m of OUTLINE) { const s = store.get(m.slug); const next = m.chapters.find(c => !s.done.includes(c.id)); if (next) return `<a class="btn" href="#/${m.slug}/${next.id}">Продолжить: ${esc(next.shortTitle)} →</a>`; }
+  return `<a class="btn" href="#/${OUTLINE[0].slug}/quiz">К самопроверке →</a>`;
+}
+function chapterList(m) {
+  const done = store.get(m.slug).done;
+  return `<ol class="chs">${m.chapters.map(c => `<li><a href="#/${m.slug}/${c.id}"><span class="n">${pad(c.id)}</span><span><b>${esc(c.title)}</b><small>${esc(c.summary)}</small></span><span class="t">${done.includes(c.id) ? "✓ " : ""}${minutes(c.minutes)}</span></a></li>`).join("")}</ol>`;
+}
+function moduleView(m) {
+  const tools = [["cards", "Карточки", `${m.counts.cards} терминов для повторения`], ["quiz", "Самопроверка", `${m.counts.quiz} вопросов с разбором`], ["glossary", "Словарь", `${m.counts.glossary} определений`], ["materials", "Материалы", "Видео и литература"]]
+    .map(([k, t, s]) => `<a href="#/${m.slug}/${k}"><b>${t}</b><span>${s}</span></a>`).join("");
+  const chapters = m.chapters.map(c => `<details class="more"><summary><span>${pad(c.id)}. ${esc(c.title)}</span></summary><div class="body"><p class="note">${esc(c.kicker)} · ${minutes(c.minutes)} · ${c.sections.length} ${plural(c.sections.length, ["раздел", "раздела", "разделов"])}</p><p>${esc(c.summary)}</p><p class="eyebrow">После главы вы сможете</p><ul class="obj">${c.objectives.map(o => `<li>${esc(o)}</li>`).join("")}</ul><p class="eyebrow">Разделы</p><ul class="obj">${c.sections.map(s => `<li>${esc(s)}</li>`).join("")}</ul><div class="row"><a class="btn ghost" href="#/${m.slug}/${c.id}">Открыть главу</a></div></div></details>`).join("");
+  return `<div class="head"><span class="eyebrow">Модуль ${m.position}</span><h1>${esc(m.title)}</h1><p class="lead">${esc(m.fullTitle)}. ${esc(m.summary)}</p><div class="meta"><span>Автор: ${esc(m.author)}</span></div></div>
+    ${access ? "" : gateBox()}<div class="tools">${tools}</div><div class="tile" style="display:flex;flex-direction:column;gap:10px"><h2 class="rule">Главы</h2>${chapters}</div>`;
+}
+
+/* ---------- глава ---------- */
+function figuresOf(ch) {
+  const out = [];
+  ch.sections.forEach(s => { (s.figures || []).forEach(f => out.push(f.file)); (s.videos || []).forEach(v => { out.push(v.file); out.push(v.poster); }); });
+  return out;
+}
+function chapterView(m, d, id) {
+  const ch = d.chapters.find(c => c.id === id), st = store.get(m.slug), done = st.done.includes(id);
+  let fig = 0;
+  const figure = f => {
+    const n = ++fig, src = url(f.file);
+    const credit = f.credit ? `<span class="credit">Источник: ${f.creditUrl ? `<a href="${esc(f.creditUrl)}" target="_blank" rel="noopener">${esc(f.credit)}</a>` : esc(f.credit)}</span>` : "";
+    return `<p class="figref">${esc(f.intro)} <button type="button" class="link" data-goto="fig-${n}">рис. ${n}</button>.</p><figure class="fig" id="fig-${n}">${src
+      ? `<button type="button" class="zoom" data-zoom="${esc(f.file)}" data-cap="Рис. ${n}. ${esc(f.caption)}" aria-label="Увеличить: ${esc(f.caption)}"><img src="${esc(src)}" alt="${esc(f.caption)}" loading="lazy" decoding="async"></button>`
+      : `<div class="miss">Картинка не загрузилась. Обновите страницу.</div>`}<figcaption><b>Рис. ${n}.</b> ${esc(f.caption)}${credit}</figcaption></figure>`;
+  };
+  const block = b => {
+    switch (b.type) {
+      case "text": return `<p>${rich(b.text)}</p>`;
+      case "key": return `<aside class="key"><span class="lbl">${esc(b.title || "Главная мысль")}</span><p>${rich(b.text)}</p></aside>`;
+      case "callout": return `<aside class="callout"><span class="lbl">${esc(b.title)}</span><p>${rich(b.text)}</p></aside>`;
+      case "definition": return `<div class="def"><h3>${esc(b.term || b.title)}</h3><p>${rich(b.text)}</p></div>`;
+      case "steps": return `<ol class="steps">${b.items.map(x => `<li><div>${typeof x === "string" ? rich(x) : `<h3>${esc(x.title)}</h3><p>${rich(x.text)}</p>`}</div></li>`).join("")}</ol>`;
+      case "compare": return `<div class="compare">${b.items.map(x => `<div><h3>${esc(x.title)}</h3><p>${rich(x.text)}</p></div>`).join("")}</div>`;
+      case "bullets": return `<ul class="bul">${b.items.map(x => `<li>${rich(x)}</li>`).join("")}</ul>`;
+      case "details": return `<details class="more"><summary><span>${esc(b.title)}</span></summary><div class="body">${(b.blocks || []).map(block).join("")}</div></details>`;
+      case "table": return `<div class="tbl"><table><thead><tr>${b.headers.map(x => `<th scope="col">${esc(x)}</th>`).join("")}</tr></thead><tbody>${b.rows.map(row => `<tr>${row.map(x => `<td>${rich(x)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+      case "diagram": {
+        const html = window.DIAGRAMS && window.DIAGRAMS.render(b.kind);
+        if (!html) return "";
+        const n = ++fig;
+        return `<p class="figref">Разберите связь элементов на интерактивной схеме, <button type="button" class="link" data-goto="fig-${n}">рис. ${n}</button>.</p><figure class="fig" id="fig-${n}">${html}<figcaption><b>Рис. ${n}.</b> ${esc((d.diagrams || {})[b.kind] || "Учебная схема")}</figcaption></figure>`;
+      }
+      default: return "";
+    }
+  };
+  const video = v => `<figure class="fig"><video controls preload="none" playsinline ${url(v.poster) ? `poster="${esc(url(v.poster))}"` : ""} src="${esc(url(v.file))}" aria-label="${esc(v.title)}"></video><figcaption><b>${esc(v.title)}</b>${v.duration ? " · " + esc(v.duration) : ""}${v.credit ? `<span class="credit">${esc(v.credit)}</span>` : ""}</figcaption></figure>`;
+  const section = (s, i) => {
+    let html = "";
+    s.blocks.forEach((b, k) => { html += block(b); (s.figures || []).filter(f => f.after === k).forEach(f => { html += figure(f); }); });
+    html += (s.videos || []).map(video).join("");
+    return `<section class="tile sec" id="sec-${esc(s.id)}"><span class="num">${id}.${i + 1}</span><h2>${esc(s.title)}</h2><p class="lead">${rich(s.lead)}</p>${html}</section>`;
+  };
+  const prev = d.chapters.find(c => c.id === id - 1), next = d.chapters.find(c => c.id === id + 1);
+  const pdf = m.pdf && url(m.pdf);
+  return `<article class="lesson"><div class="head"><span class="eyebrow">${esc(m.title)} · глава ${pad(id)} из ${pad(d.chapters.length)}</span><h1>${esc(ch.title)}</h1><p class="lead">${esc(ch.summary)}</p>
+    <div class="meta"><span>${esc(ch.kicker)}</span><span>${minutes(ch.minutes)}</span><span>${ch.sections.length} ${plural(ch.sections.length, ["раздел", "раздела", "разделов"])}</span>${done ? '<span class="pill on">Глава изучена</span>' : ""}</div></div>
+    <div class="tile goals"><h2>После главы вы сможете</h2><ul>${ch.objectives.map(o => `<li>${esc(o)}</li>`).join("")}</ul></div>
+    ${ch.sections.map(section).join("")}
+    <div class="wrapup"><h2>Главное из главы</h2><ul>${ch.takeaways.map(t => `<li>${rich(t)}</li>`).join("")}</ul></div>
+    ${ch.practice ? `<section class="tile practice"><span class="eyebrow">Ситуация из зала</span><h2>${esc(ch.practice.title)}</h2><p>${esc(ch.practice.prompt)}</p><details><summary>Сравнить с разбором</summary><div>${esc(ch.practice.answer)}</div></details></section>` : ""}
+    <div class="row"><button type="button" class="btn${done ? " ghost" : ""}" data-done="${id}">${done ? "✓ Глава изучена" : "Отметить главу изученной"}</button><a class="btn ghost" href="#/${m.slug}/quiz/${id}">Проверить себя</a><a class="btn ghost" href="#/${m.slug}/cards/${id}">Карточки главы</a>${pdf ? `<a class="btn ghost" href="${esc(pdf)}" target="_blank" rel="noopener">Презентация, PDF</a>` : ""}</div>
+    <nav class="pager" aria-label="Соседние главы">${prev ? `<a href="#/${m.slug}/${prev.id}"><span>← Предыдущая</span><b>${esc(prev.shortTitle)}</b></a>` : ""}${next ? `<a class="next" href="#/${m.slug}/${next.id}"><span>Следующая →</span><b>${esc(next.shortTitle)}</b></a>` : `<a class="next" href="#/${m.slug}/quiz"><span>Дальше →</span><b>Итоговая самопроверка</b></a>`}</nav></article>`;
+}
+
+/* ---------- карточки ---------- */
+function chapterChips(m, d, sel, kind) {
+  return `<div class="chips" role="group" aria-label="Глава"><a class="chip" href="#/${m.slug}/${kind}" aria-pressed="${!sel}">Все главы</a>${d.chapters.map(c => `<a class="chip" href="#/${m.slug}/${kind}/${c.id}" aria-pressed="${sel === c.id}">${pad(c.id)} ${esc(c.shortTitle)}</a>`).join("")}</div>`;
+}
+function cardsList(m, d, ch) {
+  const known = store.get(m.slug).known;
+  return d.cards.filter(c => (!ch || c.chapter === ch) && (!card.unknown || !known.includes(c.id)));
+}
+function cardsBody(m, d, ch) {
+  const list = cardsList(m, d, ch), known = store.get(m.slug).known;
+  if (!list.length) return `<div class="tile gate"><h2>Все карточки этой подборки знакомы</h2><div class="row"><button type="button" class="btn" data-card="all">Показать все снова</button></div></div>`;
+  card.i = Math.max(0, Math.min(card.i, list.length - 1));
+  const c = list[card.i], k = known.includes(c.id);
+  return `<div class="qtop"><span>Карточка ${card.i + 1} из ${list.length}</span><button type="button" class="link" data-card="unknown">${card.unknown ? "Показать все" : "Только незнакомые"}</button></div>
+    <button type="button" class="card${card.flip ? " flipped" : ""}" data-card="flip"><span class="eyebrow">Глава ${pad(c.chapter)} · ${card.flip ? "определение" : "вспомните определение"}</span>${card.flip ? `<p>${esc(c.definition)}</p>` : `<h2>${esc(c.term)}</h2>`}<span class="hint">Нажмите, чтобы ${card.flip ? "вернуться к термину" : "увидеть ответ"}</span></button>
+    <div class="cardnav"><button type="button" class="round" data-card="prev" aria-label="Предыдущая">←</button><button type="button" class="btn${k ? " ghost" : ""}" data-card="known" data-id="${c.id}">${k ? "✓ Знаю" : "Знаю это"}</button><button type="button" class="round" data-card="next" aria-label="Следующая">→</button></div>
+    <p class="note" style="text-align:center">Знакомо: ${known.length} из ${d.cards.length}</p>`;
+}
+function cardsView(m, d, ch) {
+  return `<div class="head"><span class="eyebrow">${esc(m.title)} · повторение</span><h1>Карточки</h1><p class="lead">Сначала вспомните определение своими словами, потом переверните карточку и сравните.</p></div>${chapterChips(m, d, ch, "cards")}<div id="cards" class="page" style="gap:12px">${cardsBody(m, d, ch)}</div>`;
+}
+
+/* ---------- самопроверка ---------- */
+function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function startQuiz(m, d, ch, size) {
+  let pool = d.quiz.filter(q => !ch || q.chapter === ch);
+  if (!ch && size !== "all") pool = d.chapters.flatMap(c => { const g = shuffle(pool.filter(q => q.chapter === c.id)); const a = g.find(q => q.kind !== "case") || g[0]; const b = g.find(q => q.kind === "case" && q !== a) || g.find(q => q !== a); return [a, b].filter(Boolean); }).slice(0, 10);
+  const items = pool.map(q => { const o = shuffle(q.options.map((t, i) => ({ t, ok: i === q.correct }))); return { ...q, options: o.map(x => x.t), correct: o.findIndex(x => x.ok) }; });
+  quiz = { items, i: 0, answers: [], sel: null, checked: false, done: false, ch };
+}
+function quizBody(m, d, ch) {
+  if (!quiz) {
+    const n = d.quiz.filter(q => !ch || q.chapter === ch).length, last = store.get(m.slug).last;
+    return `<div class="tile gate"><span class="eyebrow">${ch ? "Глава " + pad(ch) : "Весь модуль"}</span><h2>${ch ? esc(d.chapters.find(c => c.id === ch).title) : esc(m.title)}</h2>
+      <p>Выберите один ответ. После проверки появится разбор, даже если ответ верный. В конце можно вернуться к главам, где были ошибки.</p>
+      <div class="row">${ch ? `<button type="button" class="btn" data-quiz="start" data-size="all">Начать, ${n} ${plural(n, ["вопрос", "вопроса", "вопросов"])}</button>` : `<button type="button" class="btn" data-quiz="start" data-size="10">Короткая проверка, 10 вопросов</button><button type="button" class="btn ghost" data-quiz="start" data-size="all">Все ${n} ${plural(n, ["вопрос", "вопроса", "вопросов"])}</button>`}</div>
+      ${last && !ch ? `<p class="note">Последний результат по модулю: ${last.correct} из ${last.total}.</p>` : ""}</div>`;
+  }
+  if (quiz.done) {
+    const ok = quiz.answers.filter((a, i) => a === quiz.items[i].correct).length;
+    const wrong = [...new Set(quiz.items.filter((q, i) => quiz.answers[i] !== q.correct).map(q => q.chapter))];
+    return `<div class="tile gate"><span class="eyebrow">Самопроверка завершена</span><div class="score">${ok}<span> / ${quiz.items.length}</span></div>
+      <p>${wrong.length ? "Вернитесь к разборам и главам ниже, затем пройдите ещё раз." : "Все ответы верны."}</p>
+      ${wrong.length ? `<div class="row">${wrong.map(c => `<a class="btn ghost" href="#/${m.slug}/${c}">Глава ${pad(c)}: ${esc(d.chapters.find(x => x.id === c).shortTitle)}</a>`).join("")}</div>` : ""}
+      <div class="row"><button type="button" class="btn" data-quiz="again">Пройти ещё раз</button></div>
+      <div class="review">${quiz.items.map((q, i) => `<details><summary>${quiz.answers[i] === q.correct ? "✓" : "✗"} ${esc(q.question)}</summary><p><b>Ваш ответ:</b> ${esc(q.options[quiz.answers[i]])}<br><b>Верно:</b> ${esc(q.options[q.correct])}</p><p>${esc(q.explanation)}</p></details>`).join("")}</div></div>`;
+  }
+  const q = quiz.items[quiz.i];
+  return `<div class="qtop"><span>Вопрос ${quiz.i + 1} из ${quiz.items.length}</span><span>Глава ${pad(q.chapter)}</span></div><div class="bar"><i style="width:${quiz.i / quiz.items.length * 100}%"></i></div>
+    <div class="tile q"><span class="eyebrow">${esc(d.chapters.find(c => c.id === q.chapter).shortTitle)}</span><h2>${esc(q.question)}</h2>
+    <div class="opts" role="group" aria-label="Варианты ответа">${q.options.map((o, i) => `<button type="button" class="opt${quiz.checked && i === q.correct ? " right" : ""}${quiz.checked && quiz.sel === i && i !== q.correct ? " wrong" : ""}" data-quiz="pick" data-i="${i}" aria-pressed="${quiz.sel === i}" ${quiz.checked ? "disabled" : ""}><span class="l">${quiz.checked && i === q.correct ? "✓" : LETTERS[i]}</span><span>${esc(o)}</span></button>`).join("")}</div>
+    ${quiz.checked ? `<div class="expl${quiz.sel === q.correct ? "" : " wrong"}" role="status"><strong>${quiz.sel === q.correct ? "Верно" : "Верный ответ: " + LETTERS[q.correct]}</strong>${esc(q.explanation)}</div>` : ""}
+    <div class="row" style="margin-top:14px">${quiz.checked ? `<button type="button" class="btn" data-quiz="next">${quiz.i === quiz.items.length - 1 ? "Результат" : "Следующий вопрос"}</button>` : `<button type="button" class="btn" data-quiz="check" ${quiz.sel === null ? "disabled" : ""}>Проверить</button>`}</div></div>`;
+}
+function quizView(m, d, ch) {
+  return `<div class="head"><span class="eyebrow">${esc(m.title)} · понимание и применение</span><h1>Самопроверка</h1><p class="lead">Вопросы по главам и ситуации из тренерской практики.</p></div>${chapterChips(m, d, ch, "quiz")}<div id="quiz" class="page" style="gap:12px">${quizBody(m, d, ch)}</div>`;
+}
+
+/* ---------- словарь и материалы ---------- */
+function terms(list) {
+  return list.length ? list.slice().sort((a, b) => a.term.localeCompare(b.term, "ru")).map(t => `<article><h2>${esc(t.term)}</h2><p>${esc(t.definition)}</p></article>`).join("") : `<p class="note">Ничего не нашлось. Попробуйте часть слова.</p>`;
+}
+function glossaryView(m, d) {
+  return `<div class="head"><span class="eyebrow">${esc(m.title)} · основные понятия</span><h1>Словарь</h1><p class="lead">${d.glossary.length} определений, к которым удобно вернуться во время чтения.</p></div>
+    <input class="search" type="search" id="q" placeholder="Термин или слово из определения" aria-label="Найти термин" autocomplete="off"><div class="terms" id="terms">${terms(d.glossary)}</div>`;
+}
+function materialsView(m, d) {
+  const vids = d.chapters.flatMap(c => c.sections.flatMap(s => s.videos || []));
+  const pdf = m.pdf && url(m.pdf);
+  return `<div class="head"><span class="eyebrow">${esc(m.title)}</span><h1>Материалы</h1><p class="lead">Картинки и схемы стоят в главах. Здесь исходная лекция, видео и литература.</p></div>
+    ${pdf || m.textUrl ? `<div class="row">${pdf ? `<a class="btn" href="${esc(pdf)}" target="_blank" rel="noopener">Презентация лекции, PDF</a>` : ""}${m.textUrl ? `<a class="btn ghost" href="${esc(m.textUrl)}" target="_blank" rel="noopener">Полный текст лекции</a>` : ""}</div>` : ""}
+    ${vids.length ? `<h2 class="rule">Видео</h2><div class="vids">${vids.map(v => `<figure class="fig"><video controls preload="none" playsinline ${url(v.poster) ? `poster="${esc(url(v.poster))}"` : ""} src="${esc(url(v.file))}"></video><figcaption><b>${esc(v.title)}</b>${v.duration ? " · " + esc(v.duration) : ""}${v.credit ? `<span class="credit">${esc(v.credit)}</span>` : ""}</figcaption></figure>`).join("")}</div>` : ""}
+    <h2 class="rule">Литература и исследования</h2><ul class="srcs">${d.sources.map(s => `<li>${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a>` : esc(s.title)}</li>`).join("")}</ul>`;
+}
+
+/* ---------- отрисовка ---------- */
+const TITLES = { home: "Курс для тренеров", cards: "Карточки", quiz: "Самопроверка", glossary: "Словарь", materials: "Материалы" };
+async function render() {
+  const r = route(), t = ++seq, main = $("#main");
+  sidebar(r);
+  $("#side").classList.remove("open");
+  const put = (html, title) => { if (t !== seq) return; main.innerHTML = `<div class="page">${html}</div>`; document.title = (title ? title + " · " : "") + "Обучение · Больше чем качалка"; if (window.DIAGRAMS) window.DIAGRAMS.init(main); };
+  if (r.view === "home") return put(home(), "");
+  if (r.view === "missing") return put(`<div class="tile gate"><h2>Такой страницы нет</h2><div class="row"><a class="btn" href="#/">К обзору курса</a></div></div>`, "Нет страницы");
+  if (r.view === "module") return put(moduleView(r.mod), r.mod.title);
+  const m = r.mod, chOutline = r.ch && m.chapters.find(c => c.id === r.ch);
+  if (!session || !access) return put(`<div class="head"><span class="eyebrow">${esc(m.title)}</span><h1>${esc(chOutline && r.view === "chapter" ? chOutline.title : TITLES[r.view])}</h1></div>${gateBox()}`, TITLES[r.view] || m.title);
+  put(`<p class="loading">Загружаем материалы…</p>`, m.title);
+  let d;
+  try { d = await loadModule(m.slug); } catch (e) { return put(`<div class="tile gate"><h2>Материалы не загрузились</h2><p class="note">Проверьте интернет и обновите страницу. Если не поможет, напишите на <a href="mailto:${EMAIL}">${EMAIL}</a>.</p></div>`, m.title); }
+  if (r.view === "chapter") { await sign(figuresOf(d.chapters.find(c => c.id === r.ch)).concat(m.pdf || [])); put(chapterView(m, d, r.ch), chOutline.shortTitle); scrollTo(0, 0); return; }
+  if (r.view === "materials") await sign(d.chapters.flatMap(figuresOf).concat(m.pdf || []));
+  const key = m.slug + "/" + r.ch;
+  if (r.view === "quiz" && quizKey !== key) { quiz = null; quizKey = key; }
+  if (r.view === "cards") card = { i: 0, flip: false, unknown: card.unknown };
+  const view = { cards: cardsView, quiz: quizView, glossary: glossaryView, materials: materialsView }[r.view];
+  put(view(m, d, r.ch), TITLES[r.view]);
+  scrollTo(0, 0);
+}
+
+/* ---------- действия ---------- */
+document.addEventListener("click", async e => {
+  const el = e.target.closest("button,a");
+  if (!el) return;
+  const r = route(), m = r.mod, d = m && content[m.slug];
+  if (el.id === "menu") { $("#side").classList.toggle("open"); el.setAttribute("aria-expanded", $("#side").classList.contains("open")); return; }
+  if (el.hasAttribute("data-logout")) { await sb.auth.signOut({ scope: "local" }); session = null; access = false; render(); return; }
+  if (el.hasAttribute("data-login-scroll")) { e.preventDefault(); if (location.hash !== "#/" && location.hash !== "") location.hash = "#/"; else render(); setTimeout(() => { const i = $("#gate input"); if (i) i.focus(); }, 50); return; }
+  if (el.dataset.goto) { const f = document.getElementById(el.dataset.goto); if (f) f.scrollIntoView({ behavior: "smooth", block: "center" }); return; }
+  if (el.dataset.zoom) { zoom(url(el.dataset.zoom), el.dataset.cap); return; }
+  if (el.dataset.done && m) { const s = store.get(m.slug), id = +el.dataset.done; s.done = s.done.includes(id) ? s.done.filter(x => x !== id) : s.done.concat(id); store.set(m.slug, s); render(); return; }
+  if (el.dataset.card && d) {
+    const a = el.dataset.card, list = cardsList(m, d, r.ch);
+    if (a === "flip") card.flip = !card.flip;
+    if (a === "next") { card.i = (card.i + 1) % Math.max(list.length, 1); card.flip = false; }
+    if (a === "prev") { card.i = (card.i - 1 + list.length) % Math.max(list.length, 1); card.flip = false; }
+    if (a === "unknown") { card.unknown = !card.unknown; card.i = 0; card.flip = false; }
+    if (a === "all") { card.unknown = false; card.i = 0; }
+    if (a === "known") { const s = store.get(m.slug), id = +el.dataset.id; s.known = s.known.includes(id) ? s.known.filter(x => x !== id) : s.known.concat(id); store.set(m.slug, s); if (card.unknown && s.known.includes(id)) card.flip = false; else { card.i = (card.i + 1) % Math.max(list.length, 1); card.flip = false; } }
+    $("#cards").innerHTML = cardsBody(m, d, r.ch); return;
+  }
+  if (el.dataset.quiz && d) {
+    const a = el.dataset.quiz;
+    if (a === "start") startQuiz(m, d, r.ch, el.dataset.size);
+    if (a === "again") quiz = null;
+    if (a === "pick" && quiz && !quiz.checked) quiz.sel = +el.dataset.i;
+    if (a === "check" && quiz && quiz.sel !== null) { quiz.checked = true; quiz.answers[quiz.i] = quiz.sel; }
+    if (a === "next" && quiz) {
+      if (quiz.i === quiz.items.length - 1) { quiz.done = true; if (!quiz.ch) { const s = store.get(m.slug); s.last = { correct: quiz.answers.filter((x, i) => x === quiz.items[i].correct).length, total: quiz.items.length }; store.set(m.slug, s); } }
+      else { quiz.i++; quiz.sel = null; quiz.checked = false; }
+    }
+    $("#quiz").innerHTML = quizBody(m, d, r.ch);
+    if (a === "next" || a === "start") $("#quiz").scrollIntoView({ block: "start" });
+  }
+});
+document.addEventListener("submit", async e => {
+  if (!e.target.matches("[data-login]")) return;
+  e.preventDefault();
+  const f = e.target, msg = $("[data-login-msg]"), btn = f.querySelector("button"), email = f.email.value.trim().toLowerCase();
+  btn.disabled = true; msg.className = "note"; msg.textContent = "Отправляем…";
+  try { localStorage.setItem("bchk-learn-next", location.hash || "#/"); } catch {}
+  const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.href.split("#")[0] } });
+  btn.disabled = false;
+  if (error) { msg.className = "note err"; msg.textContent = /rate|seconds/i.test(error.message) ? "Письмо уже отправлено. Новое можно запросить через минуту." : "Не получилось отправить письмо. Проверьте адрес и попробуйте ещё раз."; return; }
+  msg.className = "note ok"; msg.textContent = `Ссылка для входа отправлена на ${email}. Откройте письмо на этом устройстве.`;
+});
+document.addEventListener("input", e => {
+  if (e.target.id !== "q") return;
+  const r = route(), d = r.mod && content[r.mod.slug]; if (!d) return;
+  const q = e.target.value.trim().toLowerCase();
+  $("#terms").innerHTML = terms(d.glossary.filter(t => (t.term + " " + t.definition).toLowerCase().includes(q)));
+});
+
+let dlg;
+function zoom(src, cap) {
+  if (!src) return;
+  if (!dlg) { dlg = document.createElement("dialog"); dlg.className = "zoomed"; dlg.addEventListener("click", e => { if (e.target === dlg || e.target.tagName === "BUTTON") dlg.close(); }); document.body.append(dlg); }
+  dlg.innerHTML = `<button type="button">Закрыть</button><img src="${esc(src)}" alt="${esc(cap)}"><p>${esc(cap)}</p>`;
+  dlg.showModal();
+}
+
+/* ошибка из письма со ссылкой для входа */
+function authError() {
+  const p = new URLSearchParams(location.hash.slice(1));
+  if (!p.get("error") && !p.get("error_code")) return "";
+  history.replaceState(null, "", location.pathname + location.search);
+  return p.get("error_code") === "otp_expired" ? "Ссылка для входа устарела или уже использована. Запросите новую." : "Войти по ссылке не получилось. Запросите новую.";
+}
+
+window.addEventListener("hashchange", render);
+sb.auth.onAuthStateChange((ev, s) => {
+  if (!ready) return;
+  if (ev === "SIGNED_IN" && !session) checkAccess().then(render);
+  if (ev === "SIGNED_OUT") { session = null; access = false; render(); }
+});
+(async () => {
+  const err = authError();
+  render();
+  await checkAccess();
+  let next = ""; try { next = localStorage.getItem("bchk-learn-next") || ""; localStorage.removeItem("bchk-learn-next"); } catch {}
+  if (session && next && next.startsWith("#/") && !location.hash.startsWith("#/")) location.replace(location.pathname + next);
+  else if (!location.hash.startsWith("#/") && location.hash) history.replaceState(null, "", location.pathname + location.search);
+  await render();
+  if (err) { const msg = $("[data-login-msg]"); if (msg) { msg.className = "note err"; msg.textContent = err; } }
+})();
+})();
+</script>
+</body>
+</html>
