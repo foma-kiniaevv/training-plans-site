@@ -8,33 +8,33 @@
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%22-4%200%2057%2076%22%3E%3Cstyle%3Epath%7Bfill%3A%2320252B%7D%40media%20%28prefers-color-scheme%3Adark%29%7Bpath%7Bfill%3A%23F2F4F7%7D%7D%3C/style%3E%3Cpath%20d%3D%22M4.53125%2058.4H30.3515625C41.9921875%2058.4%2049.2578125%2051.4078125%2049.2578125%2040.275C49.2578125%2029.5328125%2041.9921875%2023.7515625%2030.3515625%2023.7515625H18.3203125V11.251562499999999H44.21875V0.19687499999999858H4.53125ZM18.3203125%2047.8140625V33.3609375H28.0078125C32.890625%2033.3609375%2036.0546875%2036.3296875%2036.0546875%2040.509375C36.0546875%2044.80625%2032.890625%2047.8140625%2028.0078125%2047.8140625Z%22/%3E%3C/svg%3E">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..800&display=swap">
 <script>try{var t=localStorage.getItem("bchk-theme");if(t==="dark"||t==="light")document.documentElement.dataset.theme=t}catch(e){}</script>
-<style>/* Дизайн-система «Больше чем качалка» (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j («Холст · Сланец · Малина», в неё влита «Больше чем качалка»), tokens.json): светлая и «Сланец».
+<style>/* Дизайн-система «Холст · Сланец · Малина» (в неё влита «Больше чем качалка») (claude.ai/artifact/HpsP3UNzJYzCUSz1XukX4j («Холст · Сланец · Малина», в неё влита «Больше чем качалка»), tokens.json): светлая и «Сланец».
    Цвет в две роли: малина = «где ты» (шкала s1–s5: этап, тип дня, текущее место), голубой = «что делать» (ссылки, инструкция).
    Нейтральный холодный холст, белые карточки отделяются тоном, без рамок и теней. Главная кнопка графитовая.
    Подключается первым на всех страницах. Имена --ds-* сохранены, чтобы стили страниц не переписывать:
    --ds-brand = главная кнопка, --ds-brand-strong = ссылка, --ds-accent = малина «где ты». */
 :root{
-  /* нейтральные */
+  /* нейтральные: bg, surface, surface-2, line, ctrl, rest, ink, ink-2, ink-3 */
   --ds-bg:#CED6DD; --ds-surface:#FFFFFF; --ds-surface-2:#EEF1F4; --ds-line:#C9D1D8; --ds-ctrl:#66717D; --ds-rest:#E3E8EC;
   --ds-ink:#20252B; --ds-ink-2:#535E69; --ds-ink-3:#7D8894;
-  /* главная кнопка и ссылки */
-  --ds-brand:#20252B; --ds-on-brand:#FFFFFF; --ds-brand-strong:#2F567B; --ds-brand-soft:#EBF0F6;
+  /* главная кнопка btn / on-btn; голубой «что делать» brand (ссылки), brand-strong (наведение), brand-soft (инструкция) */
+  --ds-brand:#20252B; --ds-on-brand:#FFFFFF; --ds-brand-strong:#2F567B; --ds-link-hover:#22415E; --ds-brand-soft:#EBF0F6;
   --ds-info:#5F8DB8; --ds-instr-k:#2F567B;
-  /* малина: шкала s1–s5 и текст на ней */
-  --ds-s1:#F4E1E8; --ds-s2:#E9BFCF; --ds-s3:#D995AF; --ds-s4:#CA7196; --ds-s5:#A5466D; --ds-on-s:#0E1521;
-  --ds-accent:#E9BFCF; --ds-on-accent:#0E1521; --ds-accent-ink:#A5466D; --ds-accent-soft:#F4E1E8;
-  /* тёмная плашка (основная работа в дневнике, шапка кабинета владельца): графит, как главная кнопка */
+  /* малина: шкала scale-1…5, текст на ней on-scale / on-scale-4 */
+  --ds-s1:#F4E1E8; --ds-s2:#E9BFCF; --ds-s3:#D995AF; --ds-s4:#CA7196; --ds-s5:#A5466D; --ds-on-s:#0E1521; --ds-on-s4:#0E1521;
+  /* малина «где ты»: accent (заливка, полоса текущего пункта), accent-ink (мелкий текст), accent-soft (выбранное) */
+  --ds-accent:#A5466D; --ds-on-accent:#FFFFFF; --ds-accent-ink:#8F3B5E; --ds-accent-soft:#F4E1E8;
   --ds-deep:#20252B; --ds-on-deep:#FFFFFF;
-  /* статусы: в системе их нет, оставлены прежние значения, всегда со словом или значком */
-  --ds-up:#1d7348; --ds-down:#b8322a;
-  --ds-shadow-card:none; --ds-shadow-pop:0 8px 24px rgba(14,21,33,.14);
+  /* статусы, всегда со словом или значком: up, warn, down (ошибка темнее малины и другого оттенка) */
+  --ds-up:#2A7048; --ds-warn:#8A5A00; --ds-down:#8C2A10;
+  --ds-hover:rgba(32,37,43,.05); --ds-scrim:rgba(16,20,24,.45);
+  --ds-shadow-card:none; --ds-shadow-pop:0 8px 24px rgba(32,37,43,.14);
   --ds-ph1:#F4E1E8; --ds-ph2:#E9BFCF; --ds-ph3:#D995AF; --ds-ph4:#CA7196;
-  --ds-on-s4:#0E1521;
   --ds-r-xs:4px; --ds-r-sm:8px; --ds-r-md:10px; --ds-r-lg:14px;
-  /* переход малина → голубой: только полоса под превью на главной */
+  /* переход малина → голубой (scale-2 → g2 → band-end): полоса под превью на главной; знак в шапке accent-ink → brand */
   --ds-g1:#E9BFCF; --ds-g2:#BBD3EA; --ds-band-end:#A9C4DE;
-  --ds-link-line:color-mix(in srgb, var(--ds-brand-strong) 35%, transparent);
-  /* вторичная кнопка и фон ссылки при наведении: ink 7 % */
+  --ds-link-line:rgba(47,86,123,.35);
+  /* вторичная кнопка: ink 7 % (компонент Button) */
   --ds-btn2:color-mix(in srgb, var(--ds-ink) 7%, transparent);
   --ds-sans:"Inter","Inter Display",-apple-system,BlinkMacSystemFont,"Helvetica Neue",Arial,sans-serif;
 }
@@ -42,25 +42,31 @@
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   --ds-bg:#131619; --ds-surface:#22252B; --ds-surface-2:#1A1D21; --ds-line:#2F3239; --ds-ctrl:#6C7179; --ds-rest:#1E2125;
   --ds-ink:#F2F4F7; --ds-ink-2:#A8ADB5; --ds-ink-3:#6C7179;
-  --ds-brand:#F2F4F7; --ds-on-brand:#131619; --ds-brand-strong:#99C3E6; --ds-brand-soft:#1D2128;
+  --ds-brand:#F2F4F7; --ds-on-brand:#131619; --ds-brand-strong:#99C3E6; --ds-link-hover:#C4DCF0; --ds-brand-soft:#1D2128;
   --ds-info:#99C3E6; --ds-instr-k:#A8ADB5;
-  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
-  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
-  --ds-deep:#1A1D21; --ds-on-deep:#F2F4F7;
-  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF; --ds-on-s4:#131619;
+  --ds-accent:#D57FA2; --ds-on-accent:#131619; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#363C45; --ds-on-deep:#F2F4F7;
+  --ds-up:#57C48F; --ds-warn:#E8A24A; --ds-down:#FFA270;
+  --ds-hover:rgba(242,244,247,.05); --ds-scrim:rgba(0,0,0,.6);
   --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; --ds-g1:#6E3A54; --ds-g2:#374859; --ds-band-end:#374859; --ds-on-s4:#131619; color-scheme:dark}}
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2;
+  --ds-g1:#6E3A54; --ds-g2:#374859; --ds-band-end:#374859;
+  --ds-link-line:rgba(153,195,230,.35); color-scheme:dark}}
 :root[data-theme="dark"]{
   --ds-bg:#131619; --ds-surface:#22252B; --ds-surface-2:#1A1D21; --ds-line:#2F3239; --ds-ctrl:#6C7179; --ds-rest:#1E2125;
   --ds-ink:#F2F4F7; --ds-ink-2:#A8ADB5; --ds-ink-3:#6C7179;
-  --ds-brand:#F2F4F7; --ds-on-brand:#131619; --ds-brand-strong:#99C3E6; --ds-brand-soft:#1D2128;
+  --ds-brand:#F2F4F7; --ds-on-brand:#131619; --ds-brand-strong:#99C3E6; --ds-link-hover:#C4DCF0; --ds-brand-soft:#1D2128;
   --ds-info:#99C3E6; --ds-instr-k:#A8ADB5;
-  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF;
-  --ds-accent:#6E3A54; --ds-on-accent:#FFFFFF; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
-  --ds-deep:#1A1D21; --ds-on-deep:#F2F4F7;
-  --ds-up:#57c48f; --ds-down:#ff7a6b;
+  --ds-s1:#4A2A3A; --ds-s2:#6E3A54; --ds-s3:#9C5276; --ds-s4:#D57FA2; --ds-s5:#F0B3CB; --ds-on-s:#FFFFFF; --ds-on-s4:#131619;
+  --ds-accent:#D57FA2; --ds-on-accent:#131619; --ds-accent-ink:#F0B3CB; --ds-accent-soft:#4A2A3A;
+  --ds-deep:#363C45; --ds-on-deep:#F2F4F7;
+  --ds-up:#57C48F; --ds-warn:#E8A24A; --ds-down:#FFA270;
+  --ds-hover:rgba(242,244,247,.05); --ds-scrim:rgba(0,0,0,.6);
   --ds-shadow-pop:0 8px 24px rgba(0,0,0,.5);
-  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2; --ds-g1:#6E3A54; --ds-g2:#374859; --ds-band-end:#374859; --ds-on-s4:#131619; color-scheme:dark}
+  --ds-ph1:#4A2A3A; --ds-ph2:#6E3A54; --ds-ph3:#9C5276; --ds-ph4:#D57FA2;
+  --ds-g1:#6E3A54; --ds-g2:#374859; --ds-band-end:#374859;
+  --ds-link-line:rgba(153,195,230,.35); color-scheme:dark}
 
 /* Шрифт: одна гарнитура Inter; заголовки 800 с отрицательным трекингом, цифры табличные */
 body{font-family:var(--ds-sans)}
@@ -72,7 +78,7 @@ h2,h3{letter-spacing:-0.02em}
    Ссылка внутри предложения: цвет и тонкая полупрозрачная линия, при наведении линия полная. */
 a{text-decoration:none}
 :is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid){color:var(--ds-brand-strong);font-weight:600;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:3px;text-decoration-color:var(--ds-link-line)}
-:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor}
+:is(p, small, .note, .lead) a:not(.btn):not(.tbtn):not(.vid):hover{text-decoration-color:currentColor;color:var(--ds-link-hover)}
 :where(a, button, summary, [role="button"]){cursor:pointer}
 :where(a, button, summary, input, select, textarea, video):focus-visible{outline:2px solid var(--ds-ink);outline-offset:2px}
 /* флажки и плеер видео: браузер не всегда считает их фокус «видимым», поэтому обводка по обычному фокусу */
@@ -103,6 +109,10 @@ select:not([multiple]){appearance:none;-webkit-appearance:none;padding-right:36p
 .theme-btn:hover{background:var(--ds-btn2)}
 .theme-btn .ico{width:20px;height:20px;flex:none}
 .theme-btn[aria-pressed="true"] .ico path{fill:currentColor}
+
+/* в боковых меню кнопка темы выровнена, как остальные пункты */
+.side .theme-btn{justify-content:flex-start;width:100%;padding:8px 10px;min-height:40px;font-weight:500}
+.theme-btn:hover{background:var(--ds-hover)}
 
 :root{--sans:var(--ds-sans)}
 *{box-sizing:border-box}
